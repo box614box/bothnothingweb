@@ -3,53 +3,212 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>我的个人主页</title>
+    <title>海外华人互助网 - 拒绝欺骗，抱团取暖</title>
     <style>
-        /* 这里是 CSS：负责网页长什么样 (皮肤) */
-        body {
-            font-family: '微软雅黑', sans-serif;
-            background-color: #f0f2f5;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            height: 100vh;
-            margin: 0;
+        /* --- 基础设置 --- */
+        :root {
+            --primary-color: #0f4c81; /* 稳重的深蓝 */
+            --accent-color: #e74c3c;  /* 警示的红色 */
+            --text-color: #333;
+            --bg-color: #f9f9f9;
         }
+        
+        body {
+            font-family: 'Helvetica Neue', Helvetica, 'PingFang SC', 'Microsoft YaHei', sans-serif;
+            margin: 0;
+            padding: 0;
+            line-height: 1.6;
+            color: var(--text-color);
+            background-color: var(--bg-color);
+        }
+
+        /* --- 导航栏 --- */
+        header {
+            background-color: white;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+        .nav-container {
+            max-width: 1000px;
+            margin: 0 auto;
+            padding: 1rem 20px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        .logo {
+            font-size: 1.5rem;
+            font-weight: bold;
+            color: var(--primary-color);
+        }
+        .nav-links a {
+            text-decoration: none;
+            color: #666;
+            margin-left: 20px;
+            font-weight: 500;
+        }
+        .nav-links a:hover { color: var(--primary-color); }
+
+        /* --- 顶部大图 (Hero Section) --- */
+        .hero {
+            background: linear-gradient(135deg, var(--primary-color) 0%, #1e3c72 100%);
+            color: white;
+            padding: 80px 20px;
+            text-align: center;
+        }
+        .hero h1 { margin: 0 0 20px 0; font-size: 2.5rem; }
+        .hero p { font-size: 1.2rem; max-width: 600px; margin: 0 auto 30px auto; opacity: 0.9; }
+        .btn {
+            display: inline-block;
+            background-color: var(--accent-color);
+            color: white;
+            padding: 12px 30px;
+            border-radius: 30px;
+            text-decoration: none;
+            font-weight: bold;
+            transition: transform 0.2s;
+            cursor: pointer;
+            border: none;
+        }
+        .btn:hover { transform: scale(1.05); background-color: #c0392b; }
+
+        /* --- 内容板块 --- */
+        .container {
+            max-width: 1000px;
+            margin: 0 auto;
+            padding: 60px 20px;
+        }
+        
+        .section-title {
+            text-align: center;
+            font-size: 2rem;
+            margin-bottom: 50px;
+            color: var(--primary-color);
+        }
+
+        .grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 30px;
+        }
+
         .card {
             background: white;
-            padding: 40px;
-            border-radius: 15px;
-            box-shadow: 0 4px 15px rgba(0,0,0,0.1);
-            text-align: center;
-            width: 300px;
+            padding: 30px;
+            border-radius: 10px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.05);
+            transition: transform 0.3s;
         }
-        h1 { color: #333; margin-bottom: 10px; }
-        p { color: #666; }
-        button {
-            background-color: #007bff;
+        .card:hover { transform: translateY(-5px); }
+        .card-icon { font-size: 3rem; margin-bottom: 20px; display: block; }
+        .card h3 { color: var(--primary-color); margin-top: 0; }
+        
+        /* --- 城市列表 --- */
+        .city-list {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 15px;
+        }
+        .city-tag {
+            background: #eef2f7;
+            padding: 8px 20px;
+            border-radius: 20px;
+            color: var(--primary-color);
+            font-weight: bold;
+            border: 1px solid transparent;
+        }
+        .city-tag:hover {
+            border-color: var(--primary-color);
+            background: white;
+        }
+
+        /* --- 页脚 --- */
+        footer {
+            background-color: #333;
             color: white;
-            border: none;
-            padding: 10px 20px;
-            border-radius: 5px;
-            cursor: pointer;
-            margin-top: 20px;
-            font-size: 16px;
+            text-align: center;
+            padding: 40px 20px;
+            margin-top: 60px;
         }
-        button:hover { background-color: #0056b3; }
+        .contact-info { margin-top: 20px; font-size: 0.9rem; color: #aaa; }
+
     </style>
 </head>
 <body>
 
-    <div class="card">
-        <h1>你好，世界！</h1>
-        <p>这是我完全用代码写的第一个网站。</p>
-        <button onclick="sayHello()">点我一下</button>
+    <header>
+        <div class="nav-container">
+            <div class="logo">🌏 华人互助网</div>
+            <nav class="nav-links">
+                <a href="#anti-fraud">防骗曝光</a>
+                <a href="#cities">城市节点</a>
+                <a href="#join">加入我们</a>
+            </nav>
+        </div>
+    </header>
+
+    <div class="hero">
+        <h1>身在海外，不再孤单</h1>
+        <p>这里没有套路，只有真诚。我们致力于建立一个透明、互助的海外华人社区，曝光欺诈行为，连接每一个孤独的灵魂。</p>
+        <button class="btn" onclick="joinUs()">🤝 我要加入互助网络</button>
     </div>
 
+    <div class="container" id="anti-fraud">
+        <h2 class="section-title">我们做什么</h2>
+        <div class="grid">
+            <div class="card">
+                <span class="card-icon">🛡️</span>
+                <h3>防骗警示</h3>
+                <p>汇总最新的针对华人诈骗套路（换汇、租房、杀猪盘），建立黑名单数据库，让骗子无处遁形。</p>
+            </div>
+            <div class="card">
+                <span class="card-icon">⚖️</span>
+                <h3>法律援助指引</h3>
+                <p>在异国他乡遇到纠纷？我们整理了各国的免费法律援助渠道和报警流程，教你如何保护自己。</p>
+            </div>
+            <div class="card">
+                <span class="card-icon">🔥</span>
+                <h3>紧急互助</h3>
+                <p>突发疾病？遭遇意外？连接当地靠谱的同胞，提供力所能及的紧急协助和语言支持。</p>
+            </div>
+        </div>
+    </div>
+
+    <div style="background-color: white;">
+        <div class="container" id="cities">
+            <h2 class="section-title">已点亮的城市节点</h2>
+            <p style="text-align: center; margin-bottom: 30px;">我们在这些城市已有联络人或志愿者群（示例）：</p>
+            <div class="city-list">
+                <div class="city-tag">🇺🇸 纽约</div>
+                <div class="city-tag">🇺🇸 洛杉矶</div>
+                <div class="city-tag">🇨🇦 多伦多</div>
+                <div class="city-tag">🇨🇦 温哥华</div>
+                <div class="city-tag">🇬🇧 伦敦</div>
+                <div class="city-tag">🇦🇺 悉尼</div>
+                <div class="city-tag">🇯🇵 东京</div>
+                <div class="city-tag">🇸🇬 新加坡</div>
+                <div class="city-tag">🇩🇪 柏林</div>
+            </div>
+        </div>
+    </div>
+
+    <footer>
+        <h3>海外华人互助网</h3>
+        <p>让善良的人重新连接。</p>
+        <div class="contact-info">
+            <p>联系邮箱：contact@你的域名.com</p>
+            <p>&copy; 2025 Overseas Chinese Mutual Aid Network</p>
+        </div>
+    </footer>
+
     <script>
-        // 这里是 JavaScript：负责网页的动作 (灵魂)
-        function sayHello() {
-            alert('恭喜你！你的代码运行成功了！🎉');
+        // 这是简单的交互逻辑
+        function joinUs() {
+            // 这里以后可以改成跳转到 Google Form 或者加微信群的页面
+            alert("感谢你的热心！\n\n目前网站正在建设中，请关注我们的后续更新，或发送邮件加入志愿者团队。");
         }
     </script>
 
