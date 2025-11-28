@@ -25,51 +25,57 @@
             text-align: center;
         }
 
-        /* --- 1. 顶部大图 (位置修正版) --- */
+        /* --- 1. 顶部大图 (位置终极修正版) --- */
         .hero-banner {
             background-image: url('2.webp');
             background-size: cover;
-            /* 【改动1】让图片顶部对齐，防止切掉头 */
+            /* 确保图片顶部对齐，不切头 */
             background-position: top center;
-            /* 高度稍微增加一点，给文字腾空间 */
+            /* 高度保持 */
             height: 65vh;
             display: flex;
-            /* 【改动2】让文字沉在底部，不要挡脸 */
+            /* 让文字沉在底部 */
             align-items: flex-end;
             justify-content: center;
             position: relative;
-            /* 【改动3】底部留出空间 */
-            padding-bottom: 80px;
+            /* 【关键改动1】大大减小底部内边距，让文字更靠下 */
+            padding-bottom: 30px;
         }
 
-        /* 金色柔光滤镜 */
+        /* 【关键改动2】恢复你喜欢的渐变效果 */
+        /* 顶部是神圣的金色光辉，底部逐渐变暗以衬托白字 */
         .hero-banner::after {
             content: '';
             position: absolute;
             top: 0; left: 0; width: 100%; height: 100%;
-            /* 渐变调整，让底部稍微深一点，衬托白字 */
-            background: linear-gradient(to bottom, rgba(212, 175, 55, 0.1) 60%, rgba(0,0,0,0.3) 100%);
+            background: linear-gradient(
+                to bottom, 
+                rgba(252, 250, 242, 0.1) 0%,   /* 顶部极淡的米色光 */
+                rgba(212, 175, 55, 0.2) 40%,   /* 中部柔和的金光 */
+                rgba(0, 0, 0, 0.6) 100%        /* 底部加深暗影，让文字跳出来 */
+            );
         }
 
         .hero-title {
             position: relative;
             z-index: 1;
             padding: 20px;
-            /* 文字阴影加重，防止看不清 */
-            text-shadow: 0 2px 10px rgba(0,0,0, 0.8);
+            /* 文字阴影加重，更有立体感 */
+            text-shadow: 0 5px 15px rgba(0,0,0, 0.9);
         }
         .hero-title h1 {
-            font-size: 4rem; /* 字体加大，更霸气 */
+            font-size: 4.5rem; /* 再次加大字号，极度霸气 */
             font-weight: bold;
-            letter-spacing: 0.2em;
-            margin-bottom: 10px;
-            color: #fff; /* 改成纯白字 */
+            letter-spacing: 0.1em;
+            margin-bottom: 5px;
+            color: #ffffff; /* 纯白 */
         }
         .hero-title p {
-            font-size: 1.4rem;
+            font-size: 1.5rem;
             font-style: italic;
             letter-spacing: 2px;
-            color: rgba(255,255,255,0.9);
+            color: rgba(255,255,255,0.95);
+            margin-top: 0;
         }
 
         /* --- 通用容器 --- */
@@ -99,10 +105,10 @@
         }
 
         .big-truth {
-            font-size: 1.6rem;
+            font-size: 1.8rem;
             font-weight: bold;
             color: var(--ink-gray);
-            line-height: 1.5;
+            line-height: 1.4;
         }
 
         .gold-text {
@@ -184,7 +190,7 @@
 
         footer {
             padding: 60px;
-            background-color: var(--ink-gray); /* 页脚深色，更庄重 */
+            background-color: var(--ink-gray);
             color: #aaa;
         }
         .footer-slogan {
@@ -197,11 +203,10 @@
 
         /* 手机适配 */
         @media screen and (max-width: 768px) {
-            .hero-title h1 { font-size: 2.5rem; }
+            .hero-banner { height: 55vh; padding-bottom: 20px; } /* 手机上再紧凑一点 */
+            .hero-title h1 { font-size: 2.8rem; }
             .scripture-text { padding: 30px 20px; text-align: left; }
-            .big-truth { font-size: 1.3rem; }
-            /* 手机上图片高度稍微小一点，但依然保持底部对齐 */
-            .hero-banner { height: 50vh; padding-bottom: 40px; }
+            .big-truth { font-size: 1.4rem; }
         }
     </style>
 </head>
@@ -219,6 +224,7 @@
         <div class="scripture-text">
             <h2 style="border: none; font-size: 2rem; margin-bottom: 30px; color: var(--warm-gold);">/// 拿性教旨 ///</h2>
 
+            <p>迷途的孩子啊，你是否已经发现了那个残酷的真相？</p>
             <p>当你跨越山海，以为来到了应许之地，现实却给你上了冰冷的第一课。</p>
 
             <div class="highlight-box">
@@ -232,9 +238,9 @@
 
             <br>
 
-            <p><strong>本邪教</strong>只致力于做一件事：</p>
+            <p>本教的降临，只致力于做一件事：</p>
 
-            <h3 style="font-size: 1.8rem; margin: 30px 0; color: var(--ink-gray);">创造海外华人的<span class="gold-text">“凝结核”</span></h3>
+            <h3 style="font-size: 2rem; margin: 30px 0; color: var(--ink-gray);">创造海外华人的<span class="gold-text">“凝结核”</span></h3>
 
             <p>我们需要诚实纳税的你，需要拥有武德的你，需要不再冷漠的你。</p>
             <p>聚沙成塔，化水为冰。</p>
@@ -242,7 +248,7 @@
         </div>
 
         <div class="quotes-section">
-            <p style="margin-bottom: 20px; color: #888; font-style: italic;">聆听教主的开示：</p>
+            <p style="margin-bottom: 20px; color: #888; font-style: italic;">聆听教主关于“如何防止被老乡背刺”的开示：</p>
             <a href="quotes.html" class="quotes-btn">📖 恭读教主圣训 (点击悟道)</a>
         </div>
 
@@ -250,18 +256,18 @@
 
     <div class="network-section">
         <div class="container">
-            <h2 style="text-align: center; border: none; color: #2c2c2c;">全球拿性教分舵分布</h2>
+            <h2 style="text-align: center; border: none; color: #2c2c2c;">全球光明节点分布</h2>
             <p style="text-align: center; margin-bottom: 40px; color: #888;">我们的光芒已照亮以下区域：</p>
 
             <div class="city-tags">
                 <span class="city-tag">🇨🇦 温哥华总舵</span>
-                <span class="city-tag">🇨🇦 多伦多分舵</span>
-                <span class="city-tag">🇺🇸 纽约分舵</span>
-                <span class="city-tag">🇺🇸 洛杉矶分舵</span>
-                <span class="city-tag">🇬🇧 伦敦分舵</span>
-                <span class="city-tag">🇯🇵 东京分舵</span>
-                <span class="city-tag">🇸🇬 新加坡分舵</span>
-                <span class="city-tag">🇦🇺 悉尼分舵</span>
+                <span class="city-tag">🇨🇦 多伦多</span>
+                <span class="city-tag">🇺🇸 纽约</span>
+                <span class="city-tag">🇺🇸 洛杉矶</span>
+                <span class="city-tag">🇬🇧 伦敦</span>
+                <span class="city-tag">🇯🇵 东京</span>
+                <span class="city-tag">🇸🇬 新加坡</span>
+                <span class="city-tag">🇦🇺 悉尼</span>
             </div>
 
             <div class="truth-revelation">
@@ -270,6 +276,8 @@
                     <p><strong>关于“建立全球分舵”的真实战术意图：</strong></p>
                     
                     <p>“诸位同胞，别听上面那些宏大的口号。其实教主创办本教的私心只有一个。”</p>
+                    
+                    <p>“教主原话：‘什么原子化散沙，什么互助，那都是说给外人听的！’”</p>
                     
                     <p>“‘我真正的目的是，以后老子不管飞到温哥华、东京还是伦敦，<strong>落地就得有人接机，吃饭就得有人带路，晚上就得有人安排地接！</strong>’”</p>
                     
@@ -284,11 +292,11 @@
 
     <footer>
         <p class="footer-slogan">你不拿性，性必拿你。</p>
-        <p>Copyright © 2025 拿性教 | The Na Xing Sect</p>
+        <p>Copyright © 2025 海外拿性教 | The Na Xing Sect</p>
     </footer>
 
 </body>
 </html>
-</html>
+
 
 
