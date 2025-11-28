@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>海外新造凝结社 | The New Life Nucleus</title>
+    <title>海外拿性教 | The Na Xing Sect</title>
     <style>
         /* --- 尊者圣洁风 CSS --- */
         :root {
@@ -25,46 +25,51 @@
             text-align: center;
         }
 
-        /* --- 1. 顶部大图 (这里改成了你的图片) --- */
+        /* --- 1. 顶部大图 (位置修正版) --- */
         .hero-banner {
-            /* === 注意：这里引用了你上传的 2.webp === */
-            background-image: url('2.webp'); 
-            
+            background-image: url('2.webp');
             background-size: cover;
-            background-position: center;
-            height: 60vh; /* 占据屏幕60%高度 */
+            /* 【改动1】让图片顶部对齐，防止切掉头 */
+            background-position: top center;
+            /* 高度稍微增加一点，给文字腾空间 */
+            height: 65vh;
             display: flex;
-            align-items: center;
+            /* 【改动2】让文字沉在底部，不要挡脸 */
+            align-items: flex-end;
             justify-content: center;
             position: relative;
+            /* 【改动3】底部留出空间 */
+            padding-bottom: 80px;
         }
-        
-        /* 金色柔光滤镜 (让图片看起来更神圣) */
+
+        /* 金色柔光滤镜 */
         .hero-banner::after {
             content: '';
             position: absolute;
             top: 0; left: 0; width: 100%; height: 100%;
-            background: linear-gradient(to bottom, rgba(212, 175, 55, 0.1), var(--holy-cream));
+            /* 渐变调整，让底部稍微深一点，衬托白字 */
+            background: linear-gradient(to bottom, rgba(212, 175, 55, 0.1) 60%, rgba(0,0,0,0.3) 100%);
         }
 
         .hero-title {
             position: relative;
             z-index: 1;
             padding: 20px;
-            text-shadow: 0 0 30px rgba(255,255,255, 0.9);
+            /* 文字阴影加重，防止看不清 */
+            text-shadow: 0 2px 10px rgba(0,0,0, 0.8);
         }
         .hero-title h1 {
-            font-size: 3.5rem;
-            font-weight: normal;
+            font-size: 4rem; /* 字体加大，更霸气 */
+            font-weight: bold;
             letter-spacing: 0.2em;
-            margin-bottom: 15px;
-            color: #2c2c2c;
+            margin-bottom: 10px;
+            color: #fff; /* 改成纯白字 */
         }
         .hero-title p {
-            font-size: 1.2rem;
+            font-size: 1.4rem;
             font-style: italic;
             letter-spacing: 2px;
-            color: #444;
+            color: rgba(255,255,255,0.9);
         }
 
         /* --- 通用容器 --- */
@@ -78,7 +83,7 @@
         .scripture-text {
             font-size: 1.2rem;
             margin-bottom: 50px;
-            text-align: center; /* 居中对齐，像海报 */
+            text-align: center;
             background: white;
             padding: 60px 40px;
             border-radius: 4px;
@@ -92,7 +97,7 @@
             border-top: 1px solid #eee;
             border-bottom: 1px solid #eee;
         }
-        
+
         .big-truth {
             font-size: 1.6rem;
             font-weight: bold;
@@ -179,16 +184,24 @@
 
         footer {
             padding: 60px;
-            font-size: 0.8rem;
+            background-color: var(--ink-gray); /* 页脚深色，更庄重 */
             color: #aaa;
-            background-color: var(--light-sand);
         }
-        
+        .footer-slogan {
+            font-size: 1.5rem;
+            font-weight: bold;
+            color: var(--warm-gold);
+            margin-bottom: 20px;
+            letter-spacing: 2px;
+        }
+
         /* 手机适配 */
         @media screen and (max-width: 768px) {
-            .hero-title h1 { font-size: 2.2rem; }
+            .hero-title h1 { font-size: 2.5rem; }
             .scripture-text { padding: 30px 20px; text-align: left; }
             .big-truth { font-size: 1.3rem; }
+            /* 手机上图片高度稍微小一点，但依然保持底部对齐 */
+            .hero-banner { height: 50vh; padding-bottom: 40px; }
         }
     </style>
 </head>
@@ -196,19 +209,18 @@
 
     <header class="hero-banner">
         <div class="hero-title">
-            <h1>新造凝结社</h1>
-            <p>“告别散沙，成为磐石”</p>
+            <h1>拿性教</h1>
+            <p>“告别散沙，创造凝结核”</p>
         </div>
     </header>
 
     <div class="container">
-        
+
         <div class="scripture-text">
-            <h2 style="border: none; font-size: 2rem; margin-bottom: 30px; color: var(--warm-gold);">/// 凝结核宣言 ///</h2>
-            
-            <p>迷途的孩子啊，你是否已经发现了那个残酷的真相？</p>
+            <h2 style="border: none; font-size: 2rem; margin-bottom: 30px; color: var(--warm-gold);">/// 拿性教旨 ///</h2>
+
             <p>当你跨越山海，以为来到了应许之地，现实却给你上了冰冷的第一课。</p>
-            
+
             <div class="highlight-box">
                 <p class="big-truth">
                     "出国后，第一个骗你的，<br>往往是你的同胞。"
@@ -217,22 +229,20 @@
 
             <p>看看四周吧。</p>
             <p>在这个庞大的陌生世界里，海外华人依然是一盘<strong>原子化的散沙</strong>。</p>
-            <p>我们互不信任，我们互相提防，我们像孤立的尘埃一样被风吹散。</p>
-            
+
             <br>
-            
-            <p>本邪教 <span style="text-decoration: line-through; color: #999;">(划掉)</span>... 本社的降临，只致力于做一件事：</p>
-            
+
+            <p>本邪教只致力于做一件事：</p>
+
             <h3 style="font-size: 1.8rem; margin: 30px 0; color: var(--ink-gray);">创造海外华人的<span class="gold-text">“凝结核”</span></h3>
 
             <p>我们需要诚实纳税的你，需要拥有武德的你，需要不再冷漠的你。</p>
             <p>聚沙成塔，化水为冰。</p>
             <p>只有当你我凝结在一起，才能在异国他乡形成坚不可摧的互助结界。</p>
-            <p style="margin-top: 30px; font-weight: bold;">你不拿幸，幸必拿你。</p>
         </div>
 
         <div class="quotes-section">
-            <p style="margin-bottom: 20px; color: #888; font-style: italic;">聆听教主关于“如何防止被老乡背刺”的开示：</p>
+            <p style="margin-bottom: 20px; color: #888; font-style: italic;">聆听教主的开示：</p>
             <a href="quotes.html" class="quotes-btn">📖 恭读教主圣训 (点击悟道)</a>
         </div>
 
@@ -240,28 +250,34 @@
 
     <div class="network-section">
         <div class="container">
-            <h2 style="text-align: center; border: none; color: #2c2c2c;">全球光明节点分布</h2>
+            <h2 style="text-align: center; border: none; color: #2c2c2c;">全球拿性教分舵分布</h2>
             <p style="text-align: center; margin-bottom: 40px; color: #888;">我们的光芒已照亮以下区域：</p>
 
             <div class="city-tags">
                 <span class="city-tag">🇨🇦 温哥华总舵</span>
-                <span class="city-tag">🇨🇦 多伦多</span>
-                <span class="city-tag">🇺🇸 纽约</span>
-                <span class="city-tag">🇺🇸 洛杉矶</span>
-                <span class="city-tag">🇬🇧 伦敦</span>
-                <span class="city-tag">🇯🇵 东京</span>
-                <span class="city-tag">🇸🇬 新加坡</span>
-                <span class="city-tag">🇦🇺 悉尼</span>
+                <span class="city-tag">🇨🇦 多伦多分舵</span>
+                <span class="city-tag">🇺🇸 纽约分舵</span>
+                <span class="city-tag">🇺🇸 洛杉矶分舵</span>
+                <span class="city-tag">🇬🇧 伦敦分舵</span>
+                <span class="city-tag">🇯🇵 东京分舵</span>
+                <span class="city-tag">🇸🇬 新加坡分舵</span>
+                <span class="city-tag">🇦🇺 悉尼分舵</span>
             </div>
 
             <div class="truth-revelation">
                 <div class="truth-badge">⚠️ 绝密：教团内部备忘录 (Level 5) ⚠️</div>
                 <div class="truth-content">
-                    <p><strong>关于“凝结核”的真实战术意图：</strong></p>
-                    <p>“诸位同胞，那个...除了宏大的愿景之外，教主私下特别交代了一个核心任务。”</p>
-                    <p>“教主原话：‘我看这些地方的美食都不错。我们建立各城市凝结核的主要目的，其实是为了方便我去全球巡回布道（旅游）的时候，<strong>有人负责地接</strong>。’”</p>
-                    <p>“‘特别是懂哪里有最好吃的火锅、哪里有最正宗的洗脚城的同胞，你们就是最高级别的凝结核！大家吃好喝好，才是真的好！哈哈哈！’”</p>
-                    <p style="text-align: right; margin-top: 20px; font-weight: bold;">—— 某不愿透露姓名的核心大弟子 敬上</p>
+                    <p><strong>关于“建立全球分舵”的真实战术意图：</strong></p>
+                    
+                    <p>“诸位同胞，别听上面那些宏大的口号。其实教主创办本教的私心只有一个。”</p>
+                    
+                    <p>“教主原话：‘什么原子化散沙，什么互助，那都是说给外人听的！’”</p>
+                    
+                    <p>“‘我真正的目的是，以后老子不管飞到温哥华、东京还是伦敦，<strong>落地就得有人接机，吃饭就得有人带路，晚上就得有人安排地接！</strong>’”</p>
+                    
+                    <p>“‘这才是凝结核的终极奥义——方便我全球巡回吃喝玩乐！谁能带我玩得最开心，谁就是核心大护法！哈哈哈哈！’”</p>
+                    
+                    <p style="text-align: right; margin-top: 20px; font-weight: bold;">—— 某大彻大悟的核心大弟子 敬上</p>
                 </div>
             </div>
 
@@ -269,9 +285,11 @@
     </div>
 
     <footer>
-        <p>愿天下无诈，愿你我皆为新造的人。</p>
-        <p>Copyright © 2025 海外新造凝结社 | The Condensation Nucleus</p>
+        <p class="footer-slogan">你不拿性，性必拿你。</p>
+        <p>Copyright © 2025 拿性教 | The Na Xing Sect</p>
     </footer>
 
 </body>
 </html>
+</html>
+
