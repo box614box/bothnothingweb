@@ -1,3 +1,197 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>海外新造凝结社 | The New Life Nucleus</title>
+    <style>
+        /* --- 尊者圣洁风 CSS --- */
+        :root {
+            --holy-cream: #fcfaf2;  /* 米色背景 */
+            --warm-gold: #d4af37;   /* 暗金 */
+            --ink-gray: #333333;    /* 墨色 */
+            --light-sand: #f0eee9;  /* 沙色 */
+            --alert-red: #8b0000;   /* 警示红 */
+        }
+
+        body {
+            margin: 0;
+            padding: 0;
+            background-color: var(--holy-cream);
+            color: var(--ink-gray);
+            /* 宋体是灵魂 */
+            font-family: "Songti SC", "Noto Serif SC", "SimSun", serif;
+            line-height: 1.8;
+            text-align: center;
+        }
+
+        /* --- 1. 顶部大图 (这里改成了你的图片) --- */
+        .hero-banner {
+            /* === 注意：这里引用了你上传的 2.webp === */
+            background-image: url('2.webp'); 
+            
+            background-size: cover;
+            background-position: center;
+            height: 60vh; /* 占据屏幕60%高度 */
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            position: relative;
+        }
+        
+        /* 金色柔光滤镜 (让图片看起来更神圣) */
+        .hero-banner::after {
+            content: '';
+            position: absolute;
+            top: 0; left: 0; width: 100%; height: 100%;
+            background: linear-gradient(to bottom, rgba(212, 175, 55, 0.1), var(--holy-cream));
+        }
+
+        .hero-title {
+            position: relative;
+            z-index: 1;
+            padding: 20px;
+            text-shadow: 0 0 30px rgba(255,255,255, 0.9);
+        }
+        .hero-title h1 {
+            font-size: 3.5rem;
+            font-weight: normal;
+            letter-spacing: 0.2em;
+            margin-bottom: 15px;
+            color: #2c2c2c;
+        }
+        .hero-title p {
+            font-size: 1.2rem;
+            font-style: italic;
+            letter-spacing: 2px;
+            color: #444;
+        }
+
+        /* --- 通用容器 --- */
+        .container {
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 60px 20px;
+        }
+
+        /* --- 宣言区样式 --- */
+        .scripture-text {
+            font-size: 1.2rem;
+            margin-bottom: 50px;
+            text-align: center; /* 居中对齐，像海报 */
+            background: white;
+            padding: 60px 40px;
+            border-radius: 4px;
+            box-shadow: 0 10px 30px rgba(212, 175, 55, 0.15);
+            border-top: 5px solid var(--warm-gold);
+        }
+
+        .highlight-box {
+            margin: 40px 0;
+            padding: 30px 0;
+            border-top: 1px solid #eee;
+            border-bottom: 1px solid #eee;
+        }
+        
+        .big-truth {
+            font-size: 1.6rem;
+            font-weight: bold;
+            color: var(--ink-gray);
+            line-height: 1.5;
+        }
+
+        .gold-text {
+            color: var(--warm-gold);
+            font-weight: bold;
+        }
+
+        /* --- 按钮 --- */
+        .quotes-section {
+            margin: 60px 0;
+            text-align: center;
+        }
+        .quotes-btn {
+            display: inline-block;
+            text-decoration: none;
+            color: var(--warm-gold);
+            border: 1px solid var(--warm-gold);
+            padding: 15px 40px;
+            font-size: 1.1rem;
+            background: transparent;
+            transition: all 0.3s;
+        }
+        .quotes-btn:hover {
+            background: var(--warm-gold);
+            color: white;
+            box-shadow: 0 0 15px rgba(212, 175, 55, 0.4);
+        }
+
+        /* --- 城市节点 --- */
+        .network-section {
+            background-color: white;
+            padding: 80px 20px;
+            margin-top: 60px;
+        }
+        .city-tags {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 15px;
+        }
+        .city-tag {
+            background: var(--light-sand);
+            padding: 8px 25px;
+            border-radius: 30px;
+            color: #555;
+            font-size: 0.95rem;
+        }
+
+        /* --- 绝密档案区 --- */
+        .truth-revelation {
+            margin-top: 80px;
+            border: 2px dashed var(--warm-gold);
+            padding: 40px;
+            background: #fffdf9;
+            position: relative;
+            text-align: left;
+            max-width: 600px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+        .truth-badge {
+            position: absolute;
+            top: -15px;
+            left: 50%;
+            transform: translateX(-50%);
+            background: var(--warm-gold);
+            color: white;
+            padding: 5px 20px;
+            font-size: 0.8rem;
+            font-weight: bold;
+            letter-spacing: 1px;
+        }
+        .truth-content {
+            font-family: sans-serif;
+            color: #666;
+            font-style: italic;
+            font-size: 0.95rem;
+        }
+
+        footer {
+            padding: 60px;
+            font-size: 0.8rem;
+            color: #aaa;
+            background-color: var(--light-sand);
+        }
+        
+        /* 手机适配 */
+        @media screen and (max-width: 768px) {
+            .hero-title h1 { font-size: 2.2rem; }
+            .scripture-text { padding: 30px 20px; text-align: left; }
+            .big-truth { font-size: 1.3rem; }
+        }
+    </style>
+</head>
 <body>
 
     <header class="hero-banner">
@@ -9,16 +203,14 @@
 
     <div class="container">
         
-        <div class="scripture-text" style="text-align: center;">
-            <h2 style="border: none; font-size: 2rem; margin-bottom: 40px;">/// 凝结核宣言 ///</h2>
+        <div class="scripture-text">
+            <h2 style="border: none; font-size: 2rem; margin-bottom: 30px; color: var(--warm-gold);">/// 凝结核宣言 ///</h2>
             
             <p>迷途的孩子啊，你是否已经发现了那个残酷的真相？</p>
+            <p>当你跨越山海，以为来到了应许之地，现实却给你上了冰冷的第一课。</p>
             
-            <p>当你跨越山海，以为来到了应许之地，</p>
-            <p>现实却给你上了冰冷的第一课：</p>
-            
-            <div style="margin: 40px 0; border-top: 1px solid #eee; border-bottom: 1px solid #eee; padding: 20px 0;">
-                <p style="font-size: 1.5rem; font-weight: bold; color: var(--ink-gray);">
+            <div class="highlight-box">
+                <p class="big-truth">
                     "出国后，第一个骗你的，<br>往往是你的同胞。"
                 </p>
             </div>
@@ -26,20 +218,17 @@
             <p>看看四周吧。</p>
             <p>在这个庞大的陌生世界里，海外华人依然是一盘<strong>原子化的散沙</strong>。</p>
             <p>我们互不信任，我们互相提防，我们像孤立的尘埃一样被风吹散。</p>
-            <p>当秃鹫盘旋时，散沙只会被吞噬。</p>
-
-            <br>
-
-            <p><span class="highlight">本邪教（划掉）... 本社的降临，</span></p>
-            <p><span class="highlight">只致力于做一件事：</span></p>
             
-            <h3 style="color: var(--warm-gold); font-size: 1.8rem; margin: 30px 0;">创造海外华人的“凝结核”</h3>
+            <br>
+            
+            <p>本邪教 <span style="text-decoration: line-through; color: #999;">(划掉)</span>... 本社的降临，只致力于做一件事：</p>
+            
+            <h3 style="font-size: 1.8rem; margin: 30px 0; color: var(--ink-gray);">创造海外华人的<span class="gold-text">“凝结核”</span></h3>
 
             <p>我们需要诚实纳税的你，需要拥有武德的你，需要不再冷漠的你。</p>
             <p>聚沙成塔，化水为冰。</p>
             <p>只有当你我凝结在一起，才能在异国他乡形成坚不可摧的互助结界。</p>
-            <p><strong>你不拿幸，幸必拿你。</strong></p>
-
+            <p style="margin-top: 30px; font-weight: bold;">你不拿幸，幸必拿你。</p>
         </div>
 
         <div class="quotes-section">
@@ -85,7 +274,4 @@
     </footer>
 
 </body>
-
-
-
-
+</html>
