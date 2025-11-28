@@ -317,21 +317,17 @@
     <header class="hero-banner">
         <div class="hero-title">
             <h1>拿性教</h1>
-            <p>“告别散沙，创造凝结核”</p>
+            <p>“你不拿性，性必拿你”</p>
         </div>
     </header>
 
     <div class="container">
         <div class="scripture-text">
             <h2 style="border: none; font-size: 1.6rem; margin-bottom: 20px; color: var(--warm-gold);">/// 拿性教旨 ///</h2>
-            <p>迷途的孩子啊，你是否已经发现了那个残酷的真相？</p>
-            <div class="highlight-box">
-                <p class="big-truth">
-                    "出国后，第一个骗你的，<br>往往是你的同胞。"
-                </p>
-            </div>
-            <p>本教的降临，只致力于做一件事：</p>
-            <h3 style="font-size: 1.6rem; margin: 20px 0; color: var(--ink-gray);">创造海外华人的<span class="gold-text">“凝结核”</span></h3>
+            <p>你是否已经发现了那个残酷的真相？</p>
+            <p>"出国后，第一个骗你的，<br>往往是你的同胞。"</p>
+            <p>本邪教的降临，只致力于做一件事：</p>
+            <p>创造海外华人“凝结核”</p>
             <p>我们需要诚实纳税的你，需要拥有武德的你，需要不再冷漠的你。</p>
         </div>
 
@@ -342,10 +338,11 @@
 
     <div class="network-section">
         <div class="container">
-            <h2 style="text-align: center; border: none; color: #2c2c2c; font-size: 1.4rem;">全球分舵传音壁</h2>
+            <h2 style="text-align: center; border: none; color: #2c2c2c; font-size: 1.4rem;">全球分舵赛博传音</h2>
             <p style="text-align: center; margin-bottom: 20px; color: #888; font-size: 0.9rem;">选择大洲，进入城市留言：</p>
 
             <div class="tabs">
+                <button class="tab-btn active" onclick="showContinent('W')">全球扯淡总区</button>
                 <button class="tab-btn active" onclick="showContinent('NA')">北美</button>
                 <button class="tab-btn" onclick="showContinent('EU')">欧洲</button>
                 <button class="tab-btn" onclick="showContinent('AU_NZ')">澳新</button>
@@ -380,7 +377,7 @@
                 <div class="truth-content">
                     <p><strong>关于“建立全球分舵”的真实战术意图：</strong></p>
                     <p>“教主原话：‘我真正的目的是，以后老子不管飞到哪里，<strong>落地就得有人接机，吃饭就得有人带路！</strong>’”</p>
-                    <p>“‘这才是凝结核的终极奥义——方便我全球巡回吃喝玩乐！谁能带我玩得最开心，谁就是核心大护法！’”</p>
+                    <p>“‘这才是凝结核的终极奥义——方便我全球巡回吃喝玩乐！谁能安排明白，谁就是核心大护法！’”</p>
                     <p style="text-align: right; margin-top: 20px; font-weight: bold;">—— 某大彻大悟的核心大弟子 敬上</p>
                 </div>
             </div>
@@ -406,6 +403,11 @@
 
         // 数据扩充：全球更多城市
         const branches = {
+            "W": [
+                { name: "大火箭", desc: "性学" }, { name: "抬头望见北极光", desc: "金融" }, { name: "黄金", desc: "被囚禁的货币之王" }, 
+                { name: "子女教育", desc: "正经" }, { name: "远行三部曲", desc: "改命" }, { name: "龙虾教授", desc: "成功学" }, 
+                { name: "玄学", desc: "玄" }  
+            ],
             "NA": [
                 { name: "温哥华", desc: "总舵" }, { name: "多伦多", desc: "极寒部" }, { name: "蒙特利尔", desc: "法语区" }, 
                 { name: "卡尔加里", desc: "石油部" }, { name: "纽约", desc: "宇宙中心" }, { name: "洛杉矶", desc: "天使城" }, 
@@ -624,6 +626,7 @@
     </script>
 </body>
 </html>
+
 
 
 
