@@ -7,11 +7,11 @@
     <style>
         /* --- 尊者圣洁风 CSS --- */
         :root {
-            --holy-cream: #fcfaf2;  /* 米色背景 */
-            --warm-gold: #d4af37;   /* 暗金 */
-            --ink-gray: #333333;    /* 墨色 */
-            --light-sand: #f0eee9;  /* 沙色 */
-            --alert-red: #8b0000;   /* 警示红 */
+            --holy-cream: #fcfaf2;
+            --warm-gold: #d4af37;
+            --ink-gray: #333333;
+            --light-sand: #f0eee9;
+            --alert-red: #8b0000;
         }
 
         body {
@@ -19,38 +19,29 @@
             padding: 0;
             background-color: var(--holy-cream);
             color: var(--ink-gray);
-            /* 宋体是灵魂 */
             font-family: "Songti SC", "Noto Serif SC", "SimSun", serif;
             line-height: 1.8;
             text-align: center;
         }
 
-        /* --- 1. 顶部大图 (右下角排版) --- */
+        /* --- 1. 顶部大图 --- */
         .hero-banner {
             background-image: url('2.webp');
             background-size: cover;
-            background-position: top center; /* 保持不切头 */
+            background-position: top center;
             height: 65vh;
             display: flex;
-            
-            /* 【关键改动1】让文字沉底 */
             align-items: flex-end;
-            /* 【关键改动2】让文字靠右 */
-            justify-content: flex-end;
-            
+            justify-content: flex-end; /* 文字靠右 */
             position: relative;
-            
-            /* 【关键改动3】给右边和下边留出空隙，不贴边 */
             padding-bottom: 60px;
-            padding-right: 8%; /* 距离右边框 8% 的距离 */
+            padding-right: 8%;
         }
 
-        /* 浅色神圣渐变 */
         .hero-banner::after {
             content: '';
             position: absolute;
             top: 0; left: 0; width: 100%; height: 100%;
-            /* 图片底部融化进米色背景 */
             background: linear-gradient(to bottom, rgba(212, 175, 55, 0.1), var(--holy-cream));
         }
 
@@ -59,21 +50,20 @@
             z-index: 1;
             padding: 20px;
             text-shadow: 0 0 30px rgba(255,255,255, 0.9);
-            /* 【关键改动4】文字内容也向右对齐 */
-            text-align: right; 
+            text-align: right;
         }
         .hero-title h1 {
             font-size: 4rem;
             font-weight: bold;
             letter-spacing: 0.1em;
             margin-bottom: 5px;
-            color: #2c2c2c; /* 深色文字 */
+            color: #2c2c2c;
         }
         .hero-title p {
             font-size: 1.4rem;
             font-style: italic;
             letter-spacing: 2px;
-            color: #444; 
+            color: #444;
             margin-top: 0;
         }
 
@@ -84,7 +74,7 @@
             padding: 60px 20px;
         }
 
-        /* --- 宣言区样式 --- */
+        /* --- 宣言区 --- */
         .scripture-text {
             font-size: 1.2rem;
             margin-bottom: 50px;
@@ -102,24 +92,15 @@
             border-top: 1px solid #eee;
             border-bottom: 1px solid #eee;
         }
-
         .big-truth {
             font-size: 1.6rem;
             font-weight: bold;
             color: var(--ink-gray);
             line-height: 1.5;
         }
+        .gold-text { color: var(--warm-gold); font-weight: bold; }
 
-        .gold-text {
-            color: var(--warm-gold);
-            font-weight: bold;
-        }
-
-        /* --- 按钮 --- */
-        .quotes-section {
-            margin: 60px 0;
-            text-align: center;
-        }
+        .quotes-section { margin: 60px 0; text-align: center; }
         .quotes-btn {
             display: inline-block;
             text-decoration: none;
@@ -136,55 +117,128 @@
             box-shadow: 0 0 15px rgba(212, 175, 55, 0.4);
         }
 
-        /* --- 城市节点 --- */
+        /* --- 核心升级：分舵交互系统 --- */
         .network-section {
             background-color: white;
-            padding: 80px 20px;
+            padding: 60px 20px;
             margin-top: 60px;
-        }
-        .city-tags {
-            display: flex;
-            flex-wrap: wrap;
-            justify-content: center;
-            gap: 15px;
-        }
-        .city-tag {
-            background: var(--light-sand);
-            padding: 8px 25px;
-            border-radius: 30px;
-            color: #555;
-            font-size: 0.95rem;
+            min-height: 600px; /* 保证高度，防止跳动 */
         }
 
-        /* --- 绝密档案区 --- */
-        .truth-revelation {
-            margin-top: 80px;
-            border: 2px dashed var(--warm-gold);
-            padding: 40px;
-            background: #fffdf9;
-            position: relative;
-            text-align: left;
-            max-width: 600px;
-            margin-left: auto;
-            margin-right: auto;
+        /* 1. 标签页 (Tabs) */
+        .tabs {
+            display: flex;
+            justify-content: center;
+            gap: 10px;
+            margin-bottom: 30px;
+            flex-wrap: wrap;
         }
-        .truth-badge {
-            position: absolute;
-            top: -15px;
-            left: 50%;
-            transform: translateX(-50%);
+        .tab-btn {
+            padding: 10px 25px;
+            border: 1px solid #ccc;
+            background: white;
+            cursor: pointer;
+            font-family: inherit;
+            font-size: 1rem;
+            border-radius: 20px;
+            transition: all 0.3s;
+            color: #666;
+        }
+        .tab-btn.active {
             background: var(--warm-gold);
             color: white;
-            padding: 5px 20px;
-            font-size: 0.8rem;
-            font-weight: bold;
-            letter-spacing: 1px;
+            border-color: var(--warm-gold);
+            box-shadow: 0 5px 15px rgba(212, 175, 55, 0.3);
         }
-        .truth-content {
-            font-family: sans-serif;
-            color: #666;
-            font-style: italic;
-            font-size: 0.95rem;
+
+        /* 2. 城市列表 */
+        .branch-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+            gap: 15px;
+            margin-bottom: 40px;
+        }
+        .branch-card {
+            background: var(--light-sand);
+            padding: 20px;
+            border-radius: 8px;
+            cursor: pointer;
+            transition: transform 0.2s;
+            border: 2px solid transparent;
+        }
+        .branch-card:hover {
+            transform: translateY(-3px);
+            border-color: var(--warm-gold);
+            background: white;
+        }
+        .branch-card h3 { margin: 0; font-size: 1.1rem; color: #333; }
+        .branch-card p { margin: 5px 0 0; font-size: 0.8rem; color: #888; }
+
+        /* 3. 留言板 (初始隐藏) */
+        #message-board {
+            display: none; /* 默认隐藏 */
+            background: #fffdf9;
+            border: 2px dashed var(--warm-gold);
+            padding: 30px;
+            margin-top: 30px;
+            text-align: left;
+            animation: fadeIn 0.5s;
+        }
+        @keyframes fadeIn { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
+
+        .board-header {
+            border-bottom: 1px solid #eee;
+            padding-bottom: 10px;
+            margin-bottom: 20px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        .board-title { font-size: 1.2rem; font-weight: bold; color: var(--warm-gold); }
+        .close-board { cursor: pointer; color: #999; font-size: 0.9rem; }
+
+        /* 模拟留言列表 */
+        .message-list {
+            max-height: 300px;
+            overflow-y: auto;
+            margin-bottom: 20px;
+            background: #fff;
+            padding: 10px;
+            border: 1px solid #eee;
+        }
+        .msg-item {
+            margin-bottom: 15px;
+            border-bottom: 1px dashed #eee;
+            padding-bottom: 10px;
+        }
+        .msg-meta { font-size: 0.8rem; color: #aaa; margin-bottom: 5px; }
+        .msg-content { color: #444; font-size: 0.95rem; }
+
+        /* 发送框 */
+        .input-area { display: flex; gap: 10px; }
+        .input-area input {
+            flex: 1;
+            padding: 10px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+        }
+        .send-btn {
+            background: var(--ink-gray);
+            color: white;
+            border: none;
+            padding: 0 20px;
+            cursor: pointer;
+            border-radius: 4px;
+        }
+
+        /* 私心梗区 */
+        .truth-revelation {
+            margin-top: 60px;
+            padding: 20px;
+            background: #f9f9f9;
+            border-radius: 4px;
+            font-size: 0.9rem;
+            color: #888;
         }
 
         footer {
@@ -198,15 +252,12 @@
         @media screen and (max-width: 768px) {
             .hero-banner { 
                 height: 55vh; 
-                /* 手机上稍微居中一点，不然右边太挤 */
                 justify-content: center; 
-                align-items: flex-end;
                 padding-right: 0;
             }
             .hero-title { text-align: center; }
             .hero-title h1 { font-size: 2.8rem; }
-            .scripture-text { padding: 30px 20px; text-align: left; }
-            .big-truth { font-size: 1.4rem; }
+            .branch-grid { grid-template-columns: repeat(2, 1fr); }
         }
     </style>
 </head>
@@ -215,7 +266,7 @@
     <header class="hero-banner">
         <div class="hero-title">
             <h1>拿性教</h1>
-            <p>“你不拿性，性必拿你”</p>
+            <p>“告别散沙，创造凝结核”</p>
         </div>
     </header>
 
@@ -223,59 +274,52 @@
 
         <div class="scripture-text">
             <h2 style="border: none; font-size: 2rem; margin-bottom: 30px; color: var(--warm-gold);">/// 拿性教旨 ///</h2>
-
-            <p>当你跨越山海，以为来到了应许之地，现实却给你上了冰冷的第一课。</p>
+            <p>迷途的孩子啊，你是否已经发现了那个残酷的真相？</p>
             <p>"出国后，第一个骗你的，<br>往往是你的同胞。"</p>
-            
-            <p>看看四周吧。</p>
-            <p>在这个庞大的陌生世界里，海外华人依然是一盘<strong>原子化的散沙</strong>。</p>
-
-            <br>
-
-            <p>本教的降临，只致力于做一件事：</p>
+            <p>本邪教的降临，只致力于做一件事：</p>
             <p>创造海外华人“凝结核”</p>
-
             <p>我们需要诚实纳税的你，需要拥有武德的你，需要不再冷漠的你。</p>
-            <p>聚沙成塔，化水为冰。</p>
-
         </div>
 
         <div class="quotes-section">
-            <p style="margin-bottom: 20px; color: #888; font-style: italic;">聆听教主开示：</p>
-            <a href="quotes.html" class="quotes-btn">📖 恭读教主大老王圣训 (点击悟道)</a>
+            <a href="quotes.html" class="quotes-btn">📖 恭读教主圣训 (点击悟道)</a>
         </div>
 
     </div>
 
     <div class="network-section">
         <div class="container">
-            <h2 style="text-align: center; border: none; color: #2c2c2c;">全球光明节点分布</h2>
-            <p style="text-align: center; margin-bottom: 40px; color: #888;">我们的光芒已照亮以下区域：</p>
+            <h2 style="text-align: center; border: none; color: #2c2c2c;">全球分舵传音壁</h2>
+            <p style="text-align: center; margin-bottom: 30px; color: #888;">请选择大洲，进入分舵留言（无需注册）：</p>
 
-            <div class="city-tags">
-                <span class="city-tag">🇨🇦 温哥华总舵</span>
-                <span class="city-tag">🇨🇦 多伦多</span>
-                <span class="city-tag">🇺🇸 纽约</span>
-                <span class="city-tag">🇺🇸 洛杉矶</span>
-                <span class="city-tag">🇬🇧 伦敦</span>
-                <span class="city-tag">🇯🇵 东京</span>
-                <span class="city-tag">🇸🇬 新加坡</span>
-                <span class="city-tag">🇦🇺 悉尼</span>
+            <div class="tabs">
+                <button class="tab-btn active" onclick="showContinent('NA')">北美教区</button>
+                <button class="tab-btn" onclick="showContinent('EU_AU')">欧/澳教区</button>
+                <button class="tab-btn" onclick="showContinent('ASIA')">亚太教区 (非大陆)</button>
+            </div>
+
+            <div id="city-list" class="branch-grid">
+                </div>
+
+            <div id="message-board">
+                <div class="board-header">
+                    <span class="board-title" id="board-city-name">📍 温哥华分舵</span>
+                    <span class="close-board" onclick="closeBoard()">[关闭]</span>
+                </div>
+                
+                <div class="message-list" id="msg-container">
+                    </div>
+
+                <div class="input-area">
+                    <input type="text" id="msg-input" placeholder="匿名留言：有没有靠谱的地接？/ 曝光一个骗子...">
+                    <button class="send-btn" onclick="postMessage()">发送</button>
+                </div>
+                <p style="font-size: 0.8rem; color: #aaa; margin-top: 10px;">* 尊者提示：此处为匿名区，请文明用语。</p>
             </div>
 
             <div class="truth-revelation">
-                <div class="truth-badge">⚠️ 绝密：教团内部备忘录 (Level 5) ⚠️</div>
-                <div class="truth-content">
-                    <p><strong>关于“建立全球分舵”的真实意图：</strong></p>
-                    
-                    <p>“诸位，别听上面那些宏大的口号。其实教主创办本教的私心只有一个。”</p>
-                    
-                    <p>“‘我真正的目的是，以后老子不管飞到温哥华、东京还是伦敦，<strong>落地就得有人接机，吃饭就得有人带路，晚上就得有人安排地接！</strong>’”</p>
-                    
-                    <p>“‘这才是凝结核的终极奥义——方便我全球巡回吃喝玩乐！谁能带我玩得最开心，谁就是核心大护法！哈哈哈哈！’”</p>
-                    
-                    <p style="text-align: right; margin-top: 20px; font-weight: bold;">—— 某大彻大悟的核心大弟子 敬上</p>
-                </div>
+                <p><strong>⚠️ 教团内部备忘录 (Level 5)：</strong></p>
+                <p>“教主原话：‘我真正的目的是，以后老子不管飞到温哥华、东京还是伦敦，<strong>落地就得有人接机，吃饭就得有人带路！</strong>这才是凝结核的终极奥义！’”</p>
             </div>
 
         </div>
@@ -286,6 +330,128 @@
         <p>Copyright © 2025 海外拿性教 | The Na Xing Sect</p>
     </footer>
 
+    <script>
+        // === 1. 数据配置 ===
+        // 这里定义了所有的大洲和城市
+        const branches = {
+            "NA": [
+                { name: "温哥华总舵", desc: "教主常驻之地" },
+                { name: "多伦多", desc: "极寒互助点" },
+                { name: "纽约", desc: "华尔街分部" },
+                { name: "洛杉矶", desc: "二奶村净化点" },
+                { name: "旧金山", desc: "硅谷义人连" }
+            ],
+            "EU_AU": [
+                { name: "伦敦", desc: "大不列颠站" },
+                { name: "巴黎", desc: "老佛爷扫货团" },
+                { name: "悉尼", desc: "南半球核心" },
+                { name: "墨尔本", desc: "咖啡互助会" }
+            ],
+            "ASIA": [
+                { name: "东京", desc: "新宿案内人" },
+                { name: "大阪", desc: "关西分舵" },
+                { name: "新加坡", desc: "坡县根据地" },
+                { name: "曼谷", desc: "不割腰子只吃喝" }
+                // 严格排除中国大陆城市
+            ]
+        };
+
+        // 预设一些假留言，显得热闹
+        const fakeMessages = [
+            "test1",
+            "test2",
+            "test3",
+            "test4"
+        ];
+
+        let currentCity = "";
+
+        // === 2. 切换大洲功能 ===
+        function showContinent(region) {
+            // 1. 切换按钮样式
+            document.querySelectorAll('.tab-btn').forEach(btn => btn.classList.remove('active'));
+            event.target.classList.add('active');
+
+            // 2. 渲染城市列表
+            const cityContainer = document.getElementById('city-list');
+            cityContainer.innerHTML = ""; // 清空当前
+
+            branches[region].forEach(city => {
+                const div = document.createElement('div');
+                div.className = 'branch-card';
+                div.onclick = () => openBoard(city.name); // 点击城市打开留言板
+                div.innerHTML = `
+                    <h3>${city.name}</h3>
+                    <p>${city.desc}</p>
+                `;
+                cityContainer.appendChild(div);
+            });
+
+            // 3. 关闭留言板（切换大洲时自动关闭）
+            closeBoard();
+        }
+
+        // === 3. 打开留言板 ===
+        function openBoard(cityName) {
+            currentCity = cityName;
+            document.getElementById('board-city-name').innerText = "📍 " + cityName + "分舵 传音壁";
+            document.getElementById('message-board').style.display = 'block';
+            
+            // 每次打开，随机显示几条假留言（模拟热闹）
+            const msgContainer = document.getElementById('msg-container');
+            msgContainer.innerHTML = ""; // 清空旧的
+            
+            // 随机生成 2-3 条预设留言
+            for(let i=0; i<3; i++) {
+                const randomMsg = fakeMessages[Math.floor(Math.random() * fakeMessages.length)];
+                appendMessage("匿名教友", randomMsg);
+            }
+            
+            // 滚动到留言板位置
+            document.getElementById('message-board').scrollIntoView({behavior: "smooth"});
+        }
+
+        // === 4. 发送留言功能 ===
+        function postMessage() {
+            const input = document.getElementById('msg-input');
+            const text = input.value;
+            
+            if (text.trim() === "") {
+                alert("教友，请不要发送空想。");
+                return;
+            }
+
+            // 添加到列表
+            appendMessage("我 (刚刚)", text);
+            input.value = ""; // 清空输入框
+
+            // 滚动到底部
+            const container = document.getElementById('msg-container');
+            container.scrollTop = container.scrollHeight;
+        }
+
+        // 辅助：添加一条留言到界面
+        function appendMessage(user, text) {
+            const container = document.getElementById('msg-container');
+            const div = document.createElement('div');
+            div.className = 'msg-item';
+            div.innerHTML = `
+                <div class="msg-meta">${user}</div>
+                <div class="msg-content">${text}</div>
+            `;
+            container.appendChild(div);
+        }
+
+        // 关闭留言板
+        function closeBoard() {
+            document.getElementById('message-board').style.display = 'none';
+        }
+
+        // 页面加载时默认显示北美
+        window.onload = function() {
+            showContinent('NA');
+        };
+
+    </script>
 </body>
 </html>
-
