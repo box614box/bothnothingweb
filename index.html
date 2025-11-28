@@ -5,21 +5,190 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>海外新造凝结社 | The New Life Nucleus</title>
     <style>
-        /* --- 尊者圣洁风 CSS 核心 --- */
+        /* --- 尊者圣洁风 CSS --- */
         :root {
             --holy-cream: #fcfaf2;  /* 米色背景，棉麻感 */
             --warm-gold: #d4af37;   /* 柔和的暗金 */
             --ink-gray: #333333;    /* 墨灰，不是纯黑 */
-            --light-sand: #f0eee9;  /* 沙色，用于分割 */
+            --light-sand: #f0eee9;  /* 沙色 */
+            --blood-red: #8b0000;   /* 警示红 */
         }
 
-       <body>
+        body {
+            margin: 0;
+            padding: 0;
+            background-color: var(--holy-cream);
+            color: var(--ink-gray);
+            /* 宋体是灵魂，营造经文感 */
+            font-family: "Songti SC", "Noto Serif SC", "SimSun", serif;
+            line-height: 1.8;
+            text-align: center;
+        }
+
+        /* --- 顶部大图 --- */
+        .hero-banner {
+            /* 找了一张看起来很神圣的图 */
+            background-image: url('https://images.unsplash.com/photo-1507646227500-4d389966a613?q=80&w=1920&auto=format&fit=crop'); 
+            background-size: cover;
+            background-position: center;
+            height: 65vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            position: relative;
+        }
+        /* 金色柔光滤镜 */
+        .hero-banner::after {
+            content: '';
+            position: absolute;
+            top: 0; left: 0; width: 100%; height: 100%;
+            background: linear-gradient(to bottom, rgba(212, 175, 55, 0.1), var(--holy-cream));
+        }
+        .hero-title {
+            position: relative;
+            z-index: 1;
+            padding: 20px;
+        }
+        .hero-title h1 {
+            font-size: 3rem;
+            font-weight: normal;
+            letter-spacing: 0.5em;
+            margin-bottom: 10px;
+            color: var(--ink-gray);
+            text-shadow: 0 0 30px rgba(255,255,255,0.9);
+        }
+        .hero-title p { 
+            font-size: 1.3rem; 
+            font-style: italic; 
+            color: var(--ink-gray);
+        }
+
+        /* --- 内容容器 --- */
+        .container {
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 60px 20px;
+        }
+
+        /* --- 经文样式 --- */
+        .scripture-section h2 {
+            color: var(--warm-gold);
+            font-weight: normal;
+            font-size: 1.6rem;
+            margin-bottom: 30px;
+            display: inline-block;
+            border-bottom: 2px solid var(--warm-gold);
+            padding-bottom: 10px;
+            margin-top: 60px;
+        }
+        .scripture-text {
+            font-size: 1.1rem;
+            margin-bottom: 30px;
+            text-align: left; 
+            background: white;
+            padding: 30px;
+            border-radius: 4px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.03);
+        }
+        .highlight {
+            color: var(--blood-red);
+            font-weight: bold;
+        }
+
+        /* --- 按钮 --- */
+        .quotes-link-box {
+            margin: 60px 0;
+            padding: 40px;
+            background-color: var(--light-sand);
+            border: 1px solid var(--warm-gold);
+        }
+        .quotes-btn {
+            display: inline-block;
+            text-decoration: none;
+            color: var(--warm-gold);
+            border: 1px solid var(--warm-gold);
+            padding: 15px 40px;
+            font-size: 1.1rem;
+            transition: all 0.3s;
+            background: white;
+            font-weight: bold;
+        }
+        .quotes-btn:hover {
+            background: var(--warm-gold);
+            color: white;
+            box-shadow: 0 5px 15px rgba(212, 175, 55, 0.3);
+        }
+
+        /* --- 城市网络 & 揭秘 --- */
+        .network-section {
+            background-color: white;
+            padding: 60px 20px;
+            margin-top: 60px;
+        }
+        .city-tags {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 15px;
+            margin-bottom: 40px;
+        }
+        .city-tag {
+            background: var(--light-sand);
+            padding: 8px 20px;
+            border-radius: 20px;
+            font-size: 0.9rem;
+            color: #666;
+        }
+
+        /* 核心梗：真相揭露区 */
+        .the-truth-revelation {
+            margin-top: 80px;
+            border: 2px dashed var(--warm-gold);
+            padding: 40px;
+            background: #fffdf9;
+            position: relative;
+            text-align: left;
+        }
+        .truth-title {
+            position: absolute;
+            top: -18px;
+            left: 50%;
+            transform: translateX(-50%);
+            background: var(--warm-gold);
+            color: white;
+            padding: 5px 20px;
+            font-weight: bold;
+            font-size: 0.9rem;
+            letter-spacing: 2px;
+        }
+        .truth-content {
+            font-family: sans-serif; /* 用黑体打破神圣感 */
+            color: #555;
+            font-style: italic;
+            line-height: 1.6;
+        }
+
+        footer {
+            padding: 50px;
+            font-size: 0.8rem;
+            color: #999;
+            background-color: var(--light-sand);
+        }
+        
+        /* 手机适配 */
+        @media screen and (max-width: 768px) {
+            .hero-title h1 { font-size: 2rem; letter-spacing: 0.2em; }
+            .scripture-text { padding: 20px; }
+        }
+    </style>
+</head>
+<body>
 
     <header class="hero-banner">
         <div class="hero-title">
-            <h1>凝结核补完计划</h1>
+            <h1>新造凝结社</h1>
             <p>“你不拿幸，幸必拿你”</p>
-            <p style="font-size: 0.9rem; margin-top: 10px; opacity: 0.8;">—— 海外纳税人同胞的自我救赎</p>
+            <p style="font-size: 0.9rem; margin-top: 15px; opacity: 0.8; letter-spacing: 2px;">—— 海外纳税同胞的自我救赎计划</p>
         </div>
     </header>
 
@@ -27,76 +196,52 @@
         
         <h2>第一章：为何我们要凝结？</h2>
         <div class="scripture-text">
-            <p>看呐，温哥华的寒夜里，当一位父亲举枪保护妻女时，谁在背后捅了刀子？</p>
-            <p>是那些所谓的“华文媒体”。</p>
-            <p>他们像<strong>秃鹫</strong>一样盘旋在受害者的伤口上，用“XQ”、“炫富”这样肮脏的字眼，去羞辱一个无辜的18岁女孩。</p>
+            <p>看呐，在温哥华的寒夜里，当一位父亲举枪保护妻女，与三名持枪歹徒对峙时，谁在背后捅了刀子？</p>
+            <p>是那些所谓的<strong>“华文媒体”</strong>。</p>
+            <p>他们像秃鹫一样盘旋在受害者的伤口上，用“XQ”、“炫富”这样肮脏的字眼，去羞辱一个无辜的18岁女孩，以此换取带血的流量。</p>
             <p><span class="highlight">这是海外华人的原罪：互害。</span></p>
             <p>我们建立凝结社，就是为了在同胞受难时，给予排山倒海的支持，而不是像看客一样吃人血馒头。</p>
         </div>
 
         <h2>第二章：义人的武德</h2>
         <div class="scripture-text">
-            <p>不要相信中心化的交易所，你的KYC资料在他们眼里只是待售的价签。</p>
-            <p>不要让自己成为行走的一串私钥。</p>
+            <p>不要相信中心化的交易所，你的KYC资料在他们眼里只是待售的价签。提币，进冷钱包，这是第一道防线。</p>
             <p>真正的凝结核，必须拥有<strong>武德</strong>。</p>
-            <p>当修车行的傲慢让你等待15天时，你要学会怒吼，而不是隐忍。在这个丛林世界，<span class="highlight">温良恭俭让，是写给羊群的墓志铭。</span></p>
-        </div>
-
-        <h2>第三章：谁是凝结核？</h2>
-        <div class="scripture-text">
-            <p>我们寻找这样的人：</p>
-            <ul style="list-style-type: none; padding: 0; color: #555;">
-                <li>✦ 诚实纳税，挺直腰杆的</li>
-                <li>✦ 面对邪恶，敢于拔刀（或报警）的</li>
-                <li>✦ 看到同胞受辱，敢于发声的</li>
-            </ul>
-            <p>聚沙成塔，化水为冰。我们是海外社会的压舱石。</p>
+            <p>当修车行的傲慢让你等待15天时，你要学会怒吼，而不是隐忍。你若退缩，他们便得寸进尺。</p>
+            <p><span class="highlight">在这个丛林世界，温良恭俭让，是写给羊群的墓志铭。</span></p>
         </div>
 
         <div class="quotes-link-box">
-            <p style="margin-bottom: 20px; font-style: italic;">聆听尊者关于“半个比特币也不要想”的最高指示：</p>
+            <p style="margin-bottom: 20px; font-style: italic;">想知道教主如何看待“半个比特币”？</p>
             <a href="quotes.html" class="quotes-btn">📖 恭读教主圣训 (点击悟道)</a>
         </div>
     </div>
 
     <div class="network-section">
         <div class="container">
-            <h2>全球凝结核节点分布</h2>
-            <p style="margin-bottom: 40px; color: #666;">神圣的光芒已照亮以下区域，请各地分舵做好准备...</p>
-            
-            <div class="continent-group">
-                <div class="continent-name">🌏 北美教区 (North America)</div>
-                <div class="city-tags">
-                    <span class="city-tag">温哥华总舵</span>
-                    <span class="city-tag">多伦多</span>
-                    <span class="city-tag">纽约</span>
-                    <span class="city-tag">洛杉矶</span>
-                    <span class="city-tag">旧金山</span>
-                </div>
-            </div>
-
-            <div class="continent-group">
-                <div class="continent-name">🌍 欧洲/澳洲教区 (Global)</div>
-                <div class="city-tags">
-                    <span class="city-tag">伦敦</span>
-                    <span class="city-tag">巴黎</span>
-                    <span class="city-tag">东京</span>
-                    <span class="city-tag">悉尼</span>
-                    <span class="city-tag">新加坡</span>
-                </div>
+            <h2>全球凝结核节点</h2>
+            <p style="margin-bottom: 30px; color: #888;">光明已照亮以下区域：</p>
+            <div class="city-tags">
+                <span class="city-tag">🇨🇦 温哥华总舵</span>
+                <span class="city-tag">🇨🇦 多伦多</span>
+                <span class="city-tag">🇺🇸 纽约</span>
+                <span class="city-tag">🇺🇸 洛杉矶</span>
+                <span class="city-tag">🇬🇧 伦敦</span>
+                <span class="city-tag">🇯🇵 东京</span>
+                <span class="city-tag">🇦🇺 悉尼</span>
+                <span class="city-tag">🇸🇬 新加坡</span>
             </div>
 
             <div class="the-truth-revelation">
                 <div class="truth-title">⚠️ 绝密：教团内部备忘录 (Level 5) ⚠️</div>
                 <div class="truth-content">
-                    <p><strong>关于“凝结核”功能的真实说明：</strong></p>
+                    <p><strong>关于“建立城市节点”的真实意图说明：</strong></p>
                     <p>“诸位同胞，那个...除了反诈和互助之外，教主私下特别交代了一个核心任务。”</p>
-                    <p>“教主原话：‘我最近看这些城市的美食都不错。建立各城市凝结核的主要目的，是为了方便我去全球巡回布道（旅游）的时候，<strong>有人负责地接</strong>。’”</p>
+                    <p>“教主原话：‘我看这些地方的美食都不错。我们建立各城市凝结核的主要目的，其实是为了方便我去全球巡回布道（旅游）的时候，<strong>有人负责地接</strong>。’”</p>
                     <p>“‘特别是懂哪里有最好吃的火锅、哪里有最正宗的洗脚城的同胞，你们就是最高级别的凝结核！大家吃好喝好，才是真的好！哈哈哈！’”</p>
-                    <p style="text-align: right; margin-top: 20px;">—— 某不愿透露姓名的核心大弟子 敬上</p>
+                    <p style="text-align: right; margin-top: 20px; font-weight: bold;">—— 某不愿透露姓名的核心大弟子 敬上</p>
                 </div>
             </div>
-
         </div>
     </div>
 
@@ -106,90 +251,7 @@
     </footer>
 
 </body>
-
-    <header class="hero-banner">
-        <div class="hero-title">
-            <h1>新造凝结社</h1>
-            <p>“在混沌的海外，寻找应许之地”</p>
-        </div>
-    </header>
-
-    <div class="container scripture-section">
-        <h2>苦难的根源</h2>
-        <div class="scripture-text">
-            <p>迷途的孩子啊，你是否感到困惑？为何跨越了山海，却在异国他乡遭遇最深的背叛？</p>
-            <p>经书（大数据）显示：<span class="highlight">伤害海外华人最深的，往往是我们血脉相连的同胞。</span></p>
-            <p>这是旧世界的业障，是原子化生存的诅咒。坑蒙拐骗，让我们的社区如散沙般脆弱。</p>
-        </div>
-
-        <h2>救赎之道：凝结核补完计划</h2>
-        <div class="scripture-text">
-            <p>本社的降临，旨在终结这一切。</p>
-            <p>我们需要寻找那些<span class="highlight">诚实纳税、勤恳生活</span>的“义人”。</p>
-            <p>你们不是散沙，你们是珍贵的**“社会凝结核”**。只有当凝结核相互连接，才能在荒漠中降下甘霖，形成坚不可摧的互助结界。</p>
-            <p>加入我们，断舍离掉那些欺诈的杂质，成为新造的人。</p>
-        </div>
-
-        <div class="quotes-link-box">
-            <p style="margin-bottom: 20px; font-style: italic;">想聆听智慧的源头？想知晓尊者如何看待汇率？</p>
-            <a href="quotes.html" class="quotes-btn">📖 恭读教主圣训 (点击悟道)</a>
-        </div>
-    </div>
-
-    <div class="network-section">
-        <div class="container">
-            <h2>光明节点的全球分布</h2>
-            <p style="margin-bottom: 40px; color: #666;">我们的光芒已照亮以下区域，互助网络正在形成...</p>
-            
-            <div class="continent-group">
-                <div class="continent-name">🌏 北美教区 (North America)</div>
-                <div class="city-tags">
-                    <span class="city-tag">纽约圣殿</span>
-                    <span class="city-tag">洛杉矶分舵</span>
-                    <span class="city-tag">多伦多核心</span>
-                    <span class="city-tag">温哥华净土</span>
-                </div>
-            </div>
-
-            <div class="continent-group">
-                <div class="continent-name">🌍 欧洲教区 (Europe)</div>
-                <div class="city-tags">
-                    <span class="city-tag">伦敦</span>
-                    <span class="city-tag">巴黎</span>
-                    <span class="city-tag">柏林</span>
-                    <span class="city-tag">阿姆斯特丹</span>
-                </div>
-            </div>
-            
-            <div class="continent-group">
-                <div class="continent-name">🌏 亚太教区 (Asia-Pacific)</div>
-                <div class="city-tags">
-                    <span class="city-tag">东京</span>
-                    <span class="city-tag">新加坡</span>
-                    <span class="city-tag">悉尼</span>
-                    <span class="city-tag">墨尔本</span>
-                </div>
-            </div>
-
-            <div class="the-truth-revelation">
-                <div class="truth-title">⚠️ 绝密：教团内部通讯 (已解密) ⚠️</div>
-                <div class="truth-content">
-                    <p>（咳咳...把麦克风关一下。）</p>
-                    <p>“那个...其实列这么多城市，主要是因为教主他老人家最近想搞个全球巡回...呃...‘布道’。”</p>
-                    <p>“教主原话是：‘我看这些地方的美食都不错，急需各地纳税人同胞提供高质量的地接、陪吃、陪玩服务。特别是懂哪里有好酒的，这才是真正的凝结核嘛！哈哈哈！’”</p>
-                    <p style="text-align: right;">—— 某不愿透露姓名的核心大弟子</p>
-                </div>
-            </div>
-
-        </div>
-    </div>
-
-    <footer>
-        <p>愿天下无诈，愿你我皆为新造的人。</p>
-        <p>Copyright © 2025 海外新造凝结社 | The New Life Condensation Society</p>
-    </footer>
-
-</body>
 </html>
+
 
 
