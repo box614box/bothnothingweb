@@ -3,232 +3,234 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>凝结核补完计划 | The Core Instrumentality</title>
+    <title>海外新造社 | The New Life Society</title>
     <style>
-        /* --- 赛博邪教风 CSS --- */
+        /* --- 尊者灵修风 CSS --- */
         :root {
-            --neon-green: #0f0;
-            --neon-red: #f00;
-            --void-black: #000;
-            --matrix-dark: #0a0a0a;
+            --holy-white: #fcfcfc;
+            --linen: #f0eee9; /* 棉麻色 */
+            --ink: #2c2c2c;   /* 墨色 */
+            --gold: #d4af37;  /* 极其克制的暗金 */
         }
         
         body {
-            background-color: var(--void-black);
-            color: var(--neon-green);
-            font-family: 'Courier New', Courier, monospace; /* 黑客字体 */
+            background-color: var(--holy-white);
+            color: var(--ink);
+            font-family: "Songti SC", "Noto Serif SC", "SimSun", serif; /* 必须是宋体，才有经文感 */
             margin: 0;
             padding: 0;
+            line-height: 2;
             overflow-x: hidden;
-            line-height: 1.5;
-        }
-
-        /* 闪烁光标效果 */
-        .cursor {
-            display: inline-block;
-            width: 10px;
-            height: 1em;
-            background-color: var(--neon-green);
-            animation: blink 1s infinite;
-        }
-        @keyframes blink { 50% { opacity: 0; } }
-
-        /* 容器 */
-        .container {
-            max-width: 800px;
-            margin: 0 auto;
-            padding: 20px;
-            position: relative;
-            z-index: 10;
-        }
-
-        /* 头部：神秘的凝结核 */
-        header {
-            height: 90vh;
-            display: flex;
-            flex-direction: column;
-            justify-content: center;
-            align-items: center;
             text-align: center;
         }
 
-        /* 那个“核心”动画 */
-        .core {
-            width: 150px;
-            height: 150px;
-            border-radius: 50%;
-            background: radial-gradient(circle, #fff, #0f0, #000);
-            box-shadow: 0 0 50px var(--neon-green), inset 0 0 20px #fff;
-            animation: pulse 3s infinite ease-in-out;
-            margin-bottom: 40px;
-            cursor: pointer;
+        /* 缓慢的淡入动画，营造神圣感 */
+        .fade-in {
+            animation: fadeIn 3s ease-in-out;
         }
-        @keyframes pulse {
-            0% { transform: scale(1); box-shadow: 0 0 20px var(--neon-green); opacity: 0.8; }
-            50% { transform: scale(1.1); box-shadow: 0 0 80px var(--neon-green); opacity: 1; }
-            100% { transform: scale(1); box-shadow: 0 0 20px var(--neon-green); opacity: 0.8; }
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        /* 头部：极其简单的Logo */
+        header {
+            padding: 80px 20px;
+            background: linear-gradient(to bottom, #fff, var(--linen));
+        }
+
+        .symbol {
+            width: 80px;
+            height: 80px;
+            margin: 0 auto 30px;
+            border: 1px solid var(--ink);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 2rem;
+            position: relative;
+        }
+        /* 尊者的光环 */
+        .symbol::after {
+            content: '';
+            position: absolute;
+            width: 100%; height: 100%;
+            border-radius: 50%;
+            box-shadow: 0 0 20px rgba(212, 175, 55, 0.3);
+            animation: breathe 5s infinite ease-in-out;
+        }
+        @keyframes breathe {
+            0%, 100% { transform: scale(1); opacity: 0.5; }
+            50% { transform: scale(1.1); opacity: 1; }
         }
 
         h1 {
-            font-size: 2rem;
-            text-transform: uppercase;
-            letter-spacing: 5px;
-            text-shadow: 0 0 10px var(--neon-green);
+            font-weight: normal;
+            letter-spacing: 0.5em;
             margin-bottom: 10px;
+            font-size: 1.8rem;
         }
         
-        .subtitle {
-            font-size: 1rem;
-            color: #fff;
-            opacity: 0.7;
-            margin-bottom: 30px;
+        .verse {
+            color: #666;
+            font-style: italic;
+            margin-bottom: 40px;
+            font-size: 0.9rem;
         }
 
-        /* 警告框风格 */
-        .warning-box {
-            border: 2px solid var(--neon-red);
-            color: var(--neon-red);
-            padding: 20px;
-            margin: 40px 0;
-            text-align: left;
-            box-shadow: 0 0 15px var(--neon-red);
-            background: rgba(20, 0, 0, 0.8);
+        /* 经文容器 */
+        .scripture-container {
+            max-width: 600px;
+            margin: 0 auto;
+            padding: 40px 20px;
+            text-align: left; /* 左对齐更有书信感 */
         }
 
-        .section-title {
-            border-bottom: 1px solid var(--neon-green);
-            padding-bottom: 10px;
-            margin-top: 50px;
-            font-size: 1.5rem;
-        }
-
-        /* 教义列表 */
-        ul.dogma {
-            list-style: none;
-            padding: 0;
-            text-align: left;
-        }
-        ul.dogma li {
-            margin: 20px 0;
+        .chapter {
+            margin-bottom: 60px;
+            border-left: 2px solid var(--gold);
             padding-left: 20px;
-            border-left: 3px solid var(--neon-green);
-        }
-        ul.dogma li strong {
-            font-size: 1.2rem;
-            display: block;
-            margin-bottom: 5px;
         }
 
-        /* 按钮 */
-        .btn {
-            background: black;
-            color: var(--neon-green);
-            border: 1px solid var(--neon-green);
+        .chapter h2 {
+            font-weight: normal;
+            font-size: 1.2rem;
+            color: var(--gold);
+            margin-top: 0;
+        }
+
+        /* 歌词般的排版 */
+        .lyrics {
+            text-align: center;
+            margin: 60px 0;
+            color: #555;
+        }
+
+        /* 按钮：极其克制 */
+        .btn-group {
+            margin: 60px 0;
+        }
+        
+        button {
+            background: transparent;
+            border: 1px solid var(--ink);
             padding: 15px 40px;
             font-family: inherit;
-            font-size: 1.2rem;
+            font-size: 1rem;
             cursor: pointer;
-            transition: 0.3s;
-            margin-top: 20px;
-            text-transform: uppercase;
-        }
-        .btn:hover {
-            background: var(--neon-green);
-            color: black;
-            box-shadow: 0 0 30px var(--neon-green);
+            transition: all 0.5s;
+            margin: 10px;
+            border-radius: 2px;
         }
 
-        /* 背景网格线 */
-        .grid-bg {
+        button:hover {
+            background: var(--ink);
+            color: var(--holy-white);
+            box-shadow: 0 10px 20px rgba(0,0,0,0.1);
+        }
+
+        /* 隐藏的惩罚模式 */
+        .punishment {
+            display: none;
             position: fixed;
             top: 0; left: 0; width: 100%; height: 100%;
-            background: 
-                linear-gradient(rgba(0, 255, 0, 0.05) 1px, transparent 1px),
-                linear-gradient(90deg, rgba(0, 255, 0, 0.05) 1px, transparent 1px);
-            background-size: 30px 30px;
-            z-index: 1;
-            pointer-events: none;
+            background-color: #8b0000; /* 血红 */
+            color: white;
+            z-index: 999;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
         }
+        .punishment h1 { font-size: 3rem; letter-spacing: 0; font-weight: bold; }
 
-        /* 页脚 */
         footer {
-            margin-top: 100px;
-            border-top: 1px dashed #333;
-            padding: 20px;
-            color: #555;
+            padding: 40px;
             font-size: 0.8rem;
+            color: #999;
+            background-color: var(--linen);
         }
-
     </style>
 </head>
 <body>
 
-    <div class="grid-bg"></div>
+    <header class="fade-in">
+        <div class="symbol">核</div>
+        <h1>海外凝结社</h1>
+        <div class="verse">"一尘不染，方得始终"</div>
+    </header>
 
-    <div class="container">
-        <header>
-            <div class="core" onclick="cultAction()"></div>
-            <h1>凝结核补完委员会</h1>
-            <div class="subtitle">PROJECT: CONDENSATION NUCLEI</div>
-            <p>> 正在扫描区域内的散沙状同胞...<span class="cursor"></span></p>
-        </header>
-
-        <div class="warning-box">
-            <h3>⚠ 警告：侦测到高浓度“杀猪盘”反应</h3>
-            <p>在这个黑暗森林般的海外世界，如果你依然选择做一颗孤立的原子，你将被“收割者”（Scammers）吞噬。</p>
-            <p><strong>唯一生存法则：寻找你的凝结核。</strong></p>
-        </div>
-
-        <h2 class="section-title">/// 最高指令 (THE PROTOCOLS)</h2>
-        <ul class="dogma">
-            <li>
-                <strong>指令 01：同胞不噬同胞</strong>
-                <p>Scamming a compatriot is the Original Sin. 凡坑害同胞者，必将被踢出核心，流放至虚空。</p>
-            </li>
-            <li>
-                <strong>指令 02：互为化学键</strong>
-                <p>在机场接机、租房避坑、紧急就医时，不仅要提供帮助，更要建立强相互作用力。我们不仅是老乡，我们是共生体。</p>
-            </li>
-            <li>
-                <strong>指令 03：信息熵减</strong>
-                <p>拒绝无效社交，拒绝虚假汇率。我们致力于传播绝对真实的生存情报。</p>
-            </li>
-        </ul>
-
-        <h2 class="section-title">/// 加入连接 (INITIATE LINK)</h2>
-        <p>你准备好不再做一粒沙子了吗？</p>
-        <p>点击下方按钮，签署《反欺诈灵魂契约》。</p>
+    <div class="scripture-container fade-in">
         
-        <div style="text-align: center;">
-            <button class="btn" onclick="joinCult()">建立神经连接</button>
+        <div class="chapter">
+            <h2>第一章：贪</h2>
+            <p>你在这个陌生的国度，为何总是感到不安？</p>
+            <p>是因为汇率的波动吗？是因为低价租房的诱惑吗？</p>
+            <p>那不是机会，那是<strong>业障</strong>。</p>
+            <p>那些试图用高汇率诱惑你的人，他们是被贪欲吞噬的蛇。我们要远离蛇，而不是成为蛇。</p>
         </div>
 
-        <footer>
-            <p>Transmission Origin: [LOCAL_HOST]</p>
-            <p>© 2025 泛华人凝结核互助阵线 | 这是一个致力于“不坑人”的社会实验</p>
-        </footer>
+        <div class="chapter">
+            <h2>第二章：痴</h2>
+            <p>为何不看攻略？为何轻信他人？</p>
+            <p>不做功课的信任，不是善良，是<strong>愚痴</strong>。</p>
+            <p>在凝结社，我们将赋予你智慧的双眼（防骗指南），让你看清世间的虚妄。</p>
+        </div>
+
+        <div class="lyrics">
+            <p>🎵</p>
+            <p>曾经我茫然前行，暗夜的路上</p>
+            <p>只要不做换汇的局，就无所谓</p>
+            <p>尘世的杀猪盘，看作云烟</p>
+            <p>我已是，不被骗的人</p>
+            <p>🎵</p>
+        </div>
+
+        <div class="chapter">
+            <h2>第三章：归零与互助</h2>
+            <p>我们是散落在海外的尘埃。</p>
+            <p>只有凝结，才能降下甘霖。</p>
+            <p>如果你愿意放下心中的贪念，如果你愿意在同胞受难时伸出援手。</p>
+            <p>欢迎你，成为我们的一员。</p>
+        </div>
+
+        <div class="btn-group" style="text-align: center;">
+            <p style="margin-bottom: 20px; font-size: 0.9rem;">请选择你的道路：</p>
+            <button onclick="confess()">我是迷途羔羊 (寻求帮助)</button>
+            <button onclick="join()">我是护法者 (提供帮助)</button>
+            <button onclick="punish()" style="border-color: #ddd; color: #ddd;">我想搞点快钱 (骗人)</button>
+        </div>
+
+    </div>
+
+    <footer>
+        <p>感谢天地，感谢同胞。</p>
+        <p>Copyright © 2025 海外凝结社 | The Condensation Society</p>
+    </footer>
+
+    <div class="punishment" id="punishment-layer">
+        <h1>时间差不多咯</h1>
+        <p>（砰！）</p>
+        <p>我们这里不收“害虫”。</p>
+        <button onclick="location.reload()" style="border-color: white; color: white; margin-top: 50px;">我错了，我想重新做人</button>
     </div>
 
     <script>
-        // 简单的打字机效果
-        const text = ">> 正在建立安全信道...";
-        let i = 0;
-        
-        function typeWriter() {
-            // 这里可以加更多复杂的特效
+        function confess() {
+            alert("尊者指示：\n\n放下你的焦虑。\n\n我们已经为你准备了《防骗真经》和《互助通讯录》。\n点击确定，开始净化心灵（跳转到资源页）。");
         }
 
-        function cultAction() {
-            alert("核心能量充能中... [██████░░░]");
+        function join() {
+            alert("善哉。\n\n你已迈出了成为“新造的人”的第一步。\n请谨记：不坑人，不冷漠，不作恶。");
         }
 
-        function joinCult() {
-            const confirmed = confirm("你发誓：\n\n1. 不做杀猪盘\n2. 不做换汇骗子\n3. 在同胞需要时提供力所能及的帮助\n\n你愿意建立连接吗？");
-            if (confirmed) {
-                alert("连接成功。\n\n欢迎回到集体，第 1024 号观测者。\n(请等待后续组织暗号)");
-            } else {
-                alert("连接断开。\n\n你选择继续在黑暗森林中流浪。祝你好运。");
-            }
+        function punish() {
+            // 播放陈桂林BGM (脑补)
+            document.getElementById('punishment-layer').style.display = 'flex';
+            
+            // 可以尝试播放声音（浏览器通常会拦截自动播放，需要用户交互）
+            // var audio = new Audio('gunshot.mp3');
+            // audio.play();
         }
     </script>
 </body>
