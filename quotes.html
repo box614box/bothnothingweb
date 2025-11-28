@@ -3,13 +3,14 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>教主圣训录 | Words of The Leader</title>
+    <title>连接核心 | Connect to The Core</title>
     <style>
-        /* 沿用主页的风格变量 */
+        /* --- 沿用主页的圣洁风格 --- */
         :root {
             --holy-cream: #fcfaf2;
             --warm-gold: #d4af37;
             --ink-gray: #333333;
+            --light-sand: #f0eee9;
         }
 
         body {
@@ -17,12 +18,13 @@
             padding: 40px 20px;
             background-color: var(--holy-cream);
             color: var(--ink-gray);
+            /* 宋体是灵魂 */
             font-family: "Songti SC", "Noto Serif SC", "SimSun", serif;
-            line-height: 2;
+            line-height: 1.8;
             text-align: center;
         }
 
-        /* 返回按钮 */
+        /* 返回链接 */
         .back-link {
             display: inline-block;
             margin-bottom: 40px;
@@ -42,98 +44,112 @@
             letter-spacing: 0.2em;
             margin-bottom: 60px;
             color: var(--warm-gold);
+            font-size: 2rem;
         }
 
-        /* 名言卡片容器 */
-        .quotes-container {
-            max-width: 700px;
+        .container {
+            max-width: 600px;
             margin: 0 auto;
         }
 
-        /* 单条名言样式 */
-        .quote-card {
+        /* 卡片样式 */
+        .link-card {
             background: white;
-            padding: 40px;
+            padding: 50px 30px;
             margin-bottom: 40px;
-            border-radius: 8px;
-            box-shadow: 0 5px 20px rgba(212, 175, 55, 0.1);
-            position: relative;
-            border-top: 3px solid var(--warm-gold);
+            border-radius: 4px;
+            box-shadow: 0 10px 30px rgba(212, 175, 55, 0.1);
+            border-top: 4px solid var(--warm-gold);
+            transition: transform 0.3s ease;
         }
         
-        /* 巨大的引号装饰 */
-        .quote-card::before {
-            content: '“';
-            position: absolute;
-            top: -20px;
-            left: 20px;
-            font-size: 5rem;
-            color: var(--warm-gold);
-            opacity: 0.2;
-            font-family: serif;
+        /* 鼠标悬停微微浮起 */
+        .link-card:hover {
+            transform: translateY(-5px);
         }
 
-        .quote-text {
-            font-size: 1.4rem;
+        .card-icon {
+            font-size: 3rem;
             margin-bottom: 20px;
+            display: block;
+        }
+
+        .card-title {
+            font-size: 1.5rem;
+            font-weight: bold;
+            margin-bottom: 15px;
+            color: var(--ink-gray);
+        }
+
+        .card-desc {
+            color: #666;
+            margin-bottom: 30px;
+            font-style: italic;
+        }
+
+        /* 按钮样式 */
+        .action-btn {
+            display: inline-block;
+            background-color: var(--warm-gold);
+            color: white;
+            padding: 15px 40px;
+            text-decoration: none;
+            font-size: 1.1rem;
+            border-radius: 2px;
+            transition: background 0.3s;
+            font-weight: bold;
+        }
+        .action-btn:hover {
+            background-color: #b59020; /* 深一点的金色 */
         }
         
-        .quote-meaning {
-            font-size: 1rem;
-            color: #666;
-            font-style: italic;
-            border-top: 1px solid #eee;
-            padding-top: 20px;
+        .email-text {
+            font-family: sans-serif;
+            font-size: 1.2rem;
+            font-weight: bold;
+            margin-bottom: 20px;
+            color: var(--ink-gray);
+            letter-spacing: 1px;
         }
 
     </style>
 </head>
 <body>
 
-    <a href="index.html" class="back-link">← 返回新造社主页</a>
+    <a href="index.html" class="back-link">← 返回拿性教大殿</a>
 
-    <h1>教主圣训录</h1>
-    <p style="margin-bottom: 60px; color: #666;">（每日恭读，防骗入心）</p>
+    <h1>连接核心</h1>
+    <p style="margin-bottom: 50px; color: #888;">（直接聆听教主肉身布道，或呈递你的投名状）</p>
 
-    <div class="quotes-container">
+    <div class="container">
         
-        <div class="quote-card">
-            <div class="quote-text">
-                "切勿贪恋他人手中的高汇率，那不是馅饼，那是通往地狱的诱饵。"
-            </div>
-            <div class="quote-meaning">
-                【尊者开示】：别私下换汇，会被骗钱还会洗钱坐牢。
-            </div>
+        <div class="link-card">
+            <span class="card-icon">📺</span>
+            <div class="card-title">教主肉身布道场</div>
+            <p class="card-desc">"这是我在凡间的化身频道。想听真话，想看教主如何怒斥秃鹫？点击这里，直达核心。"</p>
+            
+            <a href="https://www.youtube.com/@dlw2023" target="_blank" class="action-btn">
+                前往 YouTube 道场
+            </a>
         </div>
 
-        <div class="quote-card">
-            <div class="quote-text">
-                "真正的凝结核，从不轻易交付自己的验证码。守住它，便是守住了灵魂的最后防线。"
-            </div>
-            <div class="quote-meaning">
-                【尊者开示】：任何要你手机验证码的都是骗子。
-            </div>
-        </div>
+        <div class="link-card">
+            <span class="card-icon">✉️</span>
+            <div class="card-title">呈递投名状 / 寻求庇护</div>
+            <p class="card-desc">"你有冤屈？你有关于骗子的情报？或者...你是某个城市最懂吃喝玩乐的地接？"</p>
+            
+            <div class="email-text">wjz5788@gmail.com</div>
 
-        <div class="quote-card">
-            <div class="quote-text">
-                "当有人自称使馆或公安，要你断绝与外界的联系时，那便是恶魔在低语。"
-            </div>
-            <div class="quote-meaning">
-                【尊者开示】：典型的冒充公检法诈骗，让你甚至无法求证。
-            </div>
-        </div>
-
-        <div class="quote-card">
-            <div class="quote-text">
-                "所谓'杀猪盘'，不过是利用了你心中渴望被爱的贪念。新造的人，应当学会享受孤独。"
-            </div>
-            <div class="quote-meaning">
-                【尊者开示】：网恋那个带你投资理财的高富帅/白富美，是假的。
-            </div>
+            <a href="mailto:wjz5788@gmail.com" class="action-btn">
+                发送加密邮件
+            </a>
         </div>
 
     </div>
+
+    <footer style="margin-top: 60px; color: #aaa; font-size: 0.8rem;">
+        <p>Copyright © 2025 海外拿性教</p>
+    </footer>
 
 </body>
 </html>
