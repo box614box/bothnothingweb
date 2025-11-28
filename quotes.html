@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>教主圣训录 | Words of The Leader</title>
+    <style>
+        /* 沿用主页的风格变量 */
+        :root {
+            --holy-cream: #fcfaf2;
+            --warm-gold: #d4af37;
+            --ink-gray: #333333;
+        }
+
+        body {
+            margin: 0;
+            padding: 40px 20px;
+            background-color: var(--holy-cream);
+            color: var(--ink-gray);
+            font-family: "Songti SC", "Noto Serif SC", "SimSun", serif;
+            line-height: 2;
+            text-align: center;
+        }
+
+        /* 返回按钮 */
+        .back-link {
+            display: inline-block;
+            margin-bottom: 40px;
+            text-decoration: none;
+            color: #999;
+            font-size: 0.9rem;
+            border-bottom: 1px solid transparent;
+            transition: all 0.3s;
+        }
+        .back-link:hover {
+            color: var(--warm-gold);
+            border-bottom-color: var(--warm-gold);
+        }
+
+        h1 {
+            font-weight: normal;
+            letter-spacing: 0.2em;
+            margin-bottom: 60px;
+            color: var(--warm-gold);
+        }
+
+        /* 名言卡片容器 */
+        .quotes-container {
+            max-width: 700px;
+            margin: 0 auto;
+        }
+
+        /* 单条名言样式 */
+        .quote-card {
+            background: white;
+            padding: 40px;
+            margin-bottom: 40px;
+            border-radius: 8px;
+            box-shadow: 0 5px 20px rgba(212, 175, 55, 0.1);
+            position: relative;
+            border-top: 3px solid var(--warm-gold);
+        }
+        
+        /* 巨大的引号装饰 */
+        .quote-card::before {
+            content: '“';
+            position: absolute;
+            top: -20px;
+            left: 20px;
+            font-size: 5rem;
+            color: var(--warm-gold);
+            opacity: 0.2;
+            font-family: serif;
+        }
+
+        .quote-text {
+            font-size: 1.4rem;
+            margin-bottom: 20px;
+        }
+        
+        .quote-meaning {
+            font-size: 1rem;
+            color: #666;
+            font-style: italic;
+            border-top: 1px solid #eee;
+            padding-top: 20px;
+        }
+
+    </style>
+</head>
+<body>
+
+    <a href="index.html" class="back-link">← 返回新造社主页</a>
+
+    <h1>教主圣训录</h1>
+    <p style="margin-bottom: 60px; color: #666;">（每日恭读，防骗入心）</p>
+
+    <div class="quotes-container">
+        
+        <div class="quote-card">
+            <div class="quote-text">
+                "切勿贪恋他人手中的高汇率，那不是馅饼，那是通往地狱的诱饵。"
+            </div>
+            <div class="quote-meaning">
+                【尊者开示】：别私下换汇，会被骗钱还会洗钱坐牢。
+            </div>
+        </div>
+
+        <div class="quote-card">
+            <div class="quote-text">
+                "真正的凝结核，从不轻易交付自己的验证码。守住它，便是守住了灵魂的最后防线。"
+            </div>
+            <div class="quote-meaning">
+                【尊者开示】：任何要你手机验证码的都是骗子。
+            </div>
+        </div>
+
+        <div class="quote-card">
+            <div class="quote-text">
+                "当有人自称使馆或公安，要你断绝与外界的联系时，那便是恶魔在低语。"
+            </div>
+            <div class="quote-meaning">
+                【尊者开示】：典型的冒充公检法诈骗，让你甚至无法求证。
+            </div>
+        </div>
+
+        <div class="quote-card">
+            <div class="quote-text">
+                "所谓'杀猪盘'，不过是利用了你心中渴望被爱的贪念。新造的人，应当学会享受孤独。"
+            </div>
+            <div class="quote-meaning">
+                【尊者开示】：网恋那个带你投资理财的高富帅/白富美，是假的。
+            </div>
+        </div>
+
+    </div>
+
+</body>
+</html>
