@@ -2,12 +2,21 @@
 <html lang="zh-CN">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
     <title>海外拿性教 | The Na Xing Sect</title>
     <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
     
     <style>
-        /* --- 尊者圣洁风 CSS --- */
+        /* --- 全局重置 (解决手机左右滑动问题) --- */
+        * { box-sizing: border-box; }
+        html, body {
+            overflow-x: hidden; /* 禁止横向滚动 */
+            width: 100%;
+            margin: 0;
+            padding: 0;
+        }
+
+        /* --- 尊者圣洁风 CSS (极度紧凑版) --- */
         :root {
             --holy-cream: #fcfaf2;
             --warm-gold: #d4af37;
@@ -17,30 +26,30 @@
         }
 
         body {
-            margin: 0;
-            padding: 0;
             background-color: var(--holy-cream);
             color: var(--ink-gray);
             font-family: "Songti SC", "Noto Serif SC", "SimSun", serif;
-            line-height: 1.8;
+            /* 【改动】极致紧凑行高 */
+            line-height: 1.4;
+            /* 【改动】字间距收紧 */
+            letter-spacing: -0.03em; 
             text-align: center;
         }
 
-        /* --- 1. 顶部大图 (右下角排版 + 浅色渐变) --- */
+        /* --- 顶部大图 --- */
         .hero-banner {
             background-image: url('2.webp');
             background-size: cover;
-            background-position: top center; /* 保持不切头 */
-            height: 65vh;
+            background-position: top center;
+            height: 60vh;
             display: flex;
-            align-items: flex-end; /* 文字沉底 */
-            justify-content: flex-end; /* 文字靠右 */
+            align-items: flex-end;
+            justify-content: flex-end;
             position: relative;
-            padding-bottom: 60px;
-            padding-right: 8%; /* 右侧留白 */
+            padding-bottom: 40px;
+            padding-right: 5%; /* 手机上留白减少 */
         }
 
-        /* 浅色神圣渐变：图片底部融化进米色背景 */
         .hero-banner::after {
             content: '';
             position: absolute;
@@ -56,208 +65,250 @@
             text-align: right;
         }
         .hero-title h1 {
-            font-size: 4rem;
+            font-size: 3.5rem;
             font-weight: bold;
-            letter-spacing: 0.1em;
+            letter-spacing: -0.05em;
             margin-bottom: 5px;
-            color: #2c2c2c; /* 深色文字 */
+            color: #2c2c2c;
         }
         .hero-title p {
-            font-size: 1.4rem;
+            font-size: 1.2rem;
             font-style: italic;
-            letter-spacing: 2px;
-            color: #444; 
+            letter-spacing: 1px;
+            color: #444;
             margin-top: 0;
         }
 
         /* --- 容器 --- */
         .container {
-            max-width: 800px;
+            max-width: 900px;
             margin: 0 auto;
-            padding: 60px 20px;
+            padding: 40px 15px; /* 减少内边距 */
         }
 
         /* --- 宣言区 --- */
         .scripture-text {
-            font-size: 1.2rem;
-            margin-bottom: 50px;
+            font-size: 1.1rem;
+            margin-bottom: 30px;
             text-align: center;
             background: white;
-            padding: 60px 40px;
+            padding: 40px 20px;
             border-radius: 4px;
-            box-shadow: 0 10px 30px rgba(212, 175, 55, 0.15);
-            border-top: 5px solid var(--warm-gold);
+            box-shadow: 0 5px 20px rgba(212, 175, 55, 0.1);
+            border-top: 4px solid var(--warm-gold);
         }
         .highlight-box {
-            margin: 40px 0;
-            padding: 30px 0;
+            margin: 25px 0;
+            padding: 15px 0;
             border-top: 1px solid #eee;
             border-bottom: 1px solid #eee;
         }
         .big-truth {
-            font-size: 1.6rem;
+            font-size: 1.4rem;
             font-weight: bold;
             color: var(--ink-gray);
-            line-height: 1.5;
+            line-height: 1.3;
         }
         .gold-text { color: var(--warm-gold); font-weight: bold; }
 
-        .quotes-section { margin: 60px 0; }
+        .quotes-section { margin: 30px 0; }
         .quotes-btn {
             display: inline-block;
             text-decoration: none;
             color: var(--warm-gold);
             border: 1px solid var(--warm-gold);
-            padding: 15px 40px;
-            font-size: 1.1rem;
+            padding: 10px 30px;
+            font-size: 1rem;
             background: transparent;
             transition: all 0.3s;
         }
         .quotes-btn:hover {
             background: var(--warm-gold);
             color: white;
-            box-shadow: 0 0 15px rgba(212, 175, 55, 0.4);
         }
 
         /* --- 分舵交互区 --- */
         .network-section {
             background-color: white;
-            padding: 60px 20px;
-            margin-top: 60px;
+            padding: 40px 10px; /* 手机边缘留白减少 */
+            margin-top: 40px;
             min-height: 800px;
         }
 
+        /* 标签页 */
         .tabs {
             display: flex;
             justify-content: center;
-            gap: 10px;
-            margin-bottom: 30px;
+            gap: 5px; /* 间距更紧 */
+            margin-bottom: 20px;
             flex-wrap: wrap;
         }
         .tab-btn {
-            padding: 10px 25px;
+            padding: 8px 15px;
             border: 1px solid #ccc;
             background: white;
             cursor: pointer;
             font-family: inherit;
-            font-size: 1rem;
-            border-radius: 20px;
+            font-size: 0.9rem;
+            border-radius: 4px;
             transition: all 0.3s;
             color: #666;
+            margin-bottom: 5px; /* 防止换行粘连 */
         }
         .tab-btn.active {
             background: var(--warm-gold);
             color: white;
             border-color: var(--warm-gold);
-            box-shadow: 0 5px 15px rgba(212, 175, 55, 0.3);
         }
 
+        /* 城市网格 */
         .branch-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
-            gap: 15px;
-            margin-bottom: 40px;
+            grid-template-columns: repeat(auto-fill, minmax(110px, 1fr)); /* 更小的卡片 */
+            gap: 8px;
+            margin-bottom: 30px;
         }
         .branch-card {
             background: var(--light-sand);
-            padding: 20px;
-            border-radius: 8px;
+            padding: 10px 5px;
+            border-radius: 4px;
             cursor: pointer;
             transition: transform 0.2s;
-            border: 2px solid transparent;
+            border: 1px solid transparent;
         }
         .branch-card:hover {
-            transform: translateY(-3px);
             border-color: var(--warm-gold);
             background: white;
         }
-        .branch-card h3 { margin: 0; font-size: 1.1rem; color: #333; }
-        .branch-card p { margin: 5px 0 0; font-size: 0.8rem; color: #888; }
+        .branch-card h3 { margin: 0; font-size: 0.95rem; color: #333; font-weight: bold; }
+        .branch-card p { margin: 2px 0 0; font-size: 0.7rem; color: #888; }
 
-        /* --- 留言板样式 --- */
+        /* --- 留言板 (升级版) --- */
         #supabase-board {
             display: none;
-            margin-top: 40px;
+            margin-top: 20px;
             text-align: left;
-            animation: fadeIn 0.5s;
+            animation: fadeIn 0.3s;
         }
         @keyframes fadeIn { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
 
         .board-header {
             background: #fffdf9;
             border: 2px dashed var(--warm-gold);
-            padding: 20px;
-            margin-bottom: 20px;
+            padding: 15px;
+            margin-bottom: 15px;
             display: flex;
             justify-content: space-between;
             align-items: center;
         }
-        .board-title { font-size: 1.2rem; font-weight: bold; color: var(--warm-gold); }
-        .close-board { cursor: pointer; color: #999; font-size: 0.9rem; border-bottom: 1px solid #999; }
+        .board-title { font-size: 1.1rem; font-weight: bold; color: var(--warm-gold); }
+        .close-board { cursor: pointer; color: #999; font-size: 0.85rem; border-bottom: 1px solid #999; }
 
         .message-container {
-            max-height: 400px;
+            max-height: 500px;
             overflow-y: auto;
             border: 1px solid #eee;
-            padding: 15px;
+            padding: 10px;
             background: #fff;
-            margin-bottom: 20px;
+            margin-bottom: 15px;
             border-radius: 4px;
         }
-        .msg-item {
-            margin-bottom: 15px;
-            border-bottom: 1px dashed #eee;
-            padding-bottom: 10px;
-        }
-        .msg-meta { font-size: 0.8rem; color: #aaa; margin-bottom: 5px; }
-        .msg-content { color: #444; font-size: 1rem; line-height: 1.5; }
         
-        .input-area { display: flex; gap: 10px; }
+        /* 单条消息样式 */
+        .msg-item {
+            margin-bottom: 10px;
+            border-bottom: 1px dashed #eee;
+            padding-bottom: 8px;
+            position: relative;
+        }
+        .msg-item.reply {
+            margin-left: 20px; /* 回复缩进 */
+            background: #fafafa;
+            padding: 8px;
+            border-left: 3px solid #eee;
+            border-bottom: none;
+            margin-bottom: 5px;
+        }
+        .msg-meta { 
+            font-size: 0.75rem; 
+            color: #aaa; 
+            margin-bottom: 4px; 
+            display: flex;
+            justify-content: space-between;
+        }
+        .msg-content { color: #444; font-size: 0.95rem; line-height: 1.4; word-wrap: break-word; }
+        
+        /* 互动按钮 */
+        .action-bar {
+            margin-top: 5px;
+            font-size: 0.75rem;
+            color: #888;
+            display: flex;
+            gap: 15px;
+        }
+        .act-btn { cursor: pointer; display: flex; align-items: center; gap: 3px; }
+        .act-btn:hover { color: var(--warm-gold); }
+        .liked { color: var(--alert-red) !important; }
+
+        /* 输入框区域 */
+        .input-area-wrapper {
+            background: #f9f9f9;
+            padding: 10px;
+            border-radius: 4px;
+        }
+        .reply-tag {
+            font-size: 0.8rem;
+            color: var(--warm-gold);
+            margin-bottom: 5px;
+            display: none;
+        }
+        .input-area { display: flex; gap: 8px; }
         .input-area input {
             flex: 1;
-            padding: 12px;
+            padding: 10px;
             border: 1px solid #ccc;
-            border-radius: 4px;
+            border-radius: 2px;
             font-family: inherit;
+            font-size: 0.9rem;
         }
         .send-btn {
             background: var(--warm-gold);
             color: white;
             border: none;
-            padding: 0 25px;
+            padding: 0 20px;
             cursor: pointer;
-            border-radius: 4px;
+            border-radius: 2px;
             font-weight: bold;
+            font-size: 0.9rem;
+            white-space: nowrap;
         }
         .send-btn:hover { background: #b59020; }
         .send-btn:disabled { background: #ccc; cursor: not-allowed; }
 
         .truth-revelation {
-            margin-top: 60px;
+            margin-top: 50px;
             padding: 20px;
             background: #f9f9f9;
             border-radius: 4px;
-            font-size: 0.9rem;
+            font-size: 0.85rem;
             color: #888;
         }
 
         footer {
-            padding: 60px;
-            font-size: 0.9rem;
+            padding: 40px 20px;
+            font-size: 0.85rem;
             color: #aaa;
             background-color: var(--light-sand);
         }
 
+        /* --- 手机特定优化 --- */
         @media screen and (max-width: 768px) {
-            .hero-banner { 
-                height: 55vh; 
-                justify-content: center; 
-                align-items: flex-end;
-                padding-right: 0;
-            }
-            .hero-title { text-align: center; }
-            .hero-title h1 { font-size: 2.8rem; }
-            .branch-grid { grid-template-columns: repeat(2, 1fr); }
+            .hero-banner { height: 50vh; justify-content: center; padding-right: 0; align-items: flex-end; }
+            .hero-title { text-align: center; padding: 15px; }
+            .hero-title h1 { font-size: 2.5rem; }
+            .scripture-text { padding: 30px 15px; text-align: left; }
+            .branch-grid { grid-template-columns: repeat(3, 1fr); gap: 5px; }
+            .tab-btn { padding: 6px 12px; font-size: 0.85rem; }
         }
     </style>
 </head>
@@ -272,7 +323,7 @@
 
     <div class="container">
         <div class="scripture-text">
-            <h2 style="border: none; font-size: 2rem; margin-bottom: 30px; color: var(--warm-gold);">/// 拿性教旨 ///</h2>
+            <h2 style="border: none; font-size: 1.6rem; margin-bottom: 20px; color: var(--warm-gold);">/// 拿性教旨 ///</h2>
             <p>迷途的孩子啊，你是否已经发现了那个残酷的真相？</p>
             <div class="highlight-box">
                 <p class="big-truth">
@@ -280,7 +331,7 @@
                 </p>
             </div>
             <p>本教的降临，只致力于做一件事：</p>
-            <h3 style="font-size: 2rem; margin: 30px 0; color: var(--ink-gray);">创造海外华人的<span class="gold-text">“凝结核”</span></h3>
+            <h3 style="font-size: 1.6rem; margin: 20px 0; color: var(--ink-gray);">创造海外华人的<span class="gold-text">“凝结核”</span></h3>
             <p>我们需要诚实纳税的你，需要拥有武德的你，需要不再冷漠的你。</p>
         </div>
 
@@ -291,13 +342,15 @@
 
     <div class="network-section">
         <div class="container">
-            <h2 style="text-align: center; border: none; color: #2c2c2c;">全球分舵传音壁</h2>
-            <p style="text-align: center; margin-bottom: 30px; color: #888;">请选择大洲，进入城市留言（美国 Supabase 数据库直连）：</p>
+            <h2 style="text-align: center; border: none; color: #2c2c2c; font-size: 1.4rem;">全球分舵传音壁</h2>
+            <p style="text-align: center; margin-bottom: 20px; color: #888; font-size: 0.9rem;">选择大洲，进入城市留言：</p>
 
             <div class="tabs">
-                <button class="tab-btn active" onclick="showContinent('NA')">北美教区</button>
-                <button class="tab-btn" onclick="showContinent('EU_AU')">欧/澳教区</button>
-                <button class="tab-btn" onclick="showContinent('ASIA')">亚太教区 (非大陆)</button>
+                <button class="tab-btn active" onclick="showContinent('NA')">北美</button>
+                <button class="tab-btn" onclick="showContinent('EU')">欧洲</button>
+                <button class="tab-btn" onclick="showContinent('AU_NZ')">澳新</button>
+                <button class="tab-btn" onclick="showContinent('ASIA')">亚太/中东</button>
+                <button class="tab-btn" onclick="showContinent('SA_AF')">南美/非洲</button>
             </div>
 
             <div id="city-list" class="branch-grid"></div>
@@ -312,19 +365,22 @@
                     <p style="text-align: center; color: #ccc;">正在连接至服务器...</p>
                 </div>
 
-                <div class="input-area">
-                    <input type="text" id="msg-input" placeholder="匿名留言：有没有靠谱的地接？/ 曝光骗子...">
-                    <button class="send-btn" id="send-btn" onclick="postMessage()">发送</button>
+                <div class="input-area-wrapper">
+                    <div id="reply-indicator" class="reply-tag">正在回复 #... <span style="cursor:pointer" onclick="cancelReply()">[取消]</span></div>
+                    <div class="input-area">
+                        <input type="text" id="msg-input" placeholder="匿名留言：有靠谱地接吗？/ 曝光骗子...">
+                        <button class="send-btn" id="send-btn" onclick="postMessage()">发送</button>
+                    </div>
                 </div>
-                <p style="font-size: 0.8rem; color: #aaa; margin-top: 10px; text-align: center;">* 无需注册，IP不记录。请勿发表垃圾广告。</p>
+                <p style="font-size: 0.75rem; color: #aaa; margin-top: 10px; text-align: center;">* 无需注册，IP不记录。点击“回复”可互动。</p>
             </div>
 
             <div class="truth-revelation">
                 <div class="truth-badge">⚠️ 绝密：教团内部备忘录 (Level 5) ⚠️</div>
                 <div class="truth-content">
                     <p><strong>关于“建立全球分舵”的真实战术意图：</strong></p>
-                    <p>“教主原话：‘我真正的目的是，以后老子不管飞到温哥华、东京还是伦敦，<strong>落地就得有人接机，吃饭就得有人带路！</strong>’”</p>
-                    <p>“‘这才是凝结核的终极奥义——方便我全球巡回吃喝玩乐！谁能带我玩得最开心，谁就是核心大护法！哈哈哈哈！’”</p>
+                    <p>“教主原话：‘我真正的目的是，以后老子不管飞到哪里，<strong>落地就得有人接机，吃饭就得有人带路！</strong>’”</p>
+                    <p>“‘这才是凝结核的终极奥义——方便我全球巡回吃喝玩乐！谁能带我玩得最开心，谁就是核心大护法！’”</p>
                     <p style="text-align: right; margin-top: 20px; font-weight: bold;">—— 某大彻大悟的核心大弟子 敬上</p>
                 </div>
             </div>
@@ -340,40 +396,48 @@
     <script>
         // ============================================
         // ⚠️ 必填：Supabase 配置 
-        // 去 Supabase 后台 -> Settings -> API 复制
         // ============================================
-        const SUPABASE_URL = 'https://iqwslygbcydjnimtzcql.supabase.co';
-        const SUPABASE_KEY = 'sb_publishable_VefKicDVpy9mHZFp4WQYaQ_ls5tkQhn';
+        const SUPABASE_URL = '在此处填入你的Project URL';
+        const SUPABASE_KEY = '在此处填入你的Anon Public Key';
         // ============================================
         
-        // 初始化 Supabase
         const { createClient } = supabase;
         const _supabase = createClient(SUPABASE_URL, SUPABASE_KEY);
 
-        // 城市数据配置
+        // 数据扩充：全球更多城市
         const branches = {
             "NA": [
-                { name: "温哥华总舵", desc: "教主常驻之地" },
-                { name: "多伦多", desc: "极寒互助点" },
-                { name: "纽约", desc: "华尔街分部" },
-                { name: "洛杉矶", desc: "天使之城" },
-                { name: "旧金山", desc: "硅谷义人连" }
+                { name: "温哥华", desc: "总舵" }, { name: "多伦多", desc: "极寒部" }, { name: "蒙特利尔", desc: "法语区" }, 
+                { name: "卡尔加里", desc: "石油部" }, { name: "纽约", desc: "宇宙中心" }, { name: "洛杉矶", desc: "天使城" }, 
+                { name: "旧金山", desc: "硅谷" }, { name: "西雅图", desc: "雨城" }, { name: "波士顿", desc: "学院派" }, 
+                { name: "芝加哥", desc: "风城" }, { name: "休斯顿", desc: "航天城" }, { name: "拉斯维加斯", desc: "赌部" },
+                { name: "夏威夷", desc: "度假部" }
             ],
-            "EU_AU": [
-                { name: "伦敦", desc: "大不列颠站" },
-                { name: "巴黎", desc: "老佛爷扫货团" },
-                { name: "悉尼", desc: "南半球核心" },
-                { name: "墨尔本", desc: "咖啡互助会" }
+            "EU": [
+                { name: "伦敦", desc: "雾都" }, { name: "曼彻斯特", desc: "工业部" }, { name: "巴黎", desc: "老佛爷" }, 
+                { name: "柏林", desc: "电音部" }, { name: "法兰克福", desc: "金融部" }, { name: "慕尼黑", desc: "啤酒部" },
+                { name: "阿姆斯特丹", desc: "红灯区" }, { name: "米兰", desc: "时尚部" }, { name: "巴塞罗那", desc: "高迪部" }, 
+                { name: "马德里", desc: "斗牛部" }, { name: "苏黎世", desc: "金库" }, { name: "里斯本", desc: "蛋挞部" }
+            ],
+            "AU_NZ": [
+                { name: "悉尼", desc: "歌剧院" }, { name: "墨尔本", desc: "咖啡部" }, { name: "布里斯班", desc: "阳光部" }, 
+                { name: "珀斯", desc: "孤独部" }, { name: "阿德莱德", desc: "红酒部" }, { name: "奥克兰", desc: "帆船部" }, 
+                { name: "基督城", desc: "花园部" }, { name: "惠灵顿", desc: "风都" }
             ],
             "ASIA": [
-                { name: "东京", desc: "新宿案内人" },
-                { name: "大阪", desc: "关西分舵" },
-                { name: "新加坡", desc: "坡县根据地" },
-                { name: "曼谷", desc: "只吃喝不割腰" }
+                { name: "东京", desc: "案内人" }, { name: "大阪", desc: "关西" }, { name: "名古屋", desc: "中京" }, 
+                { name: "首尔", desc: "整容部" }, { name: "新加坡", desc: "坡县" }, { name: "曼谷", desc: "享乐部" }, 
+                { name: "清迈", desc: "养老部" }, { name: "普吉岛", desc: "潜水部" }, { name: "吉隆坡", desc: "双塔" }, 
+                { name: "迪拜", desc: "土豪部" }
+            ],
+            "SA_AF": [
+                { name: "墨西哥城", desc: "毒枭部" }, { name: "圣保罗", desc: "桑巴部" }, { name: "布宜诺斯艾利斯", desc: "探戈部" },
+                { name: "开普敦", desc: "好望角" }, { name: "约翰内斯堡", desc: "黄金部" }
             ]
         };
 
         let currentCity = "";
+        let replyToId = null; // 当前回复的父ID
 
         // === 切换大洲 ===
         function showContinent(region) {
@@ -394,46 +458,124 @@
             closeBoard();
         }
 
-        // === 打开留言板 & 拉取数据 ===
+        // === 打开留言板 ===
         async function openBoard(cityName) {
             currentCity = cityName;
+            cancelReply();
             document.getElementById('board-city-name').innerText = "📍 " + cityName + " 传音壁";
             document.getElementById('supabase-board').style.display = 'block';
-            document.getElementById('msg-container').innerHTML = '<p style="text-align: center; color: #ccc;">正在连接服务器...</p>';
-            
+            document.getElementById('msg-container').innerHTML = '<p style="text-align: center; color: #ccc;">正在连接至服务器...</p>';
             document.getElementById('supabase-board').scrollIntoView({behavior: "smooth"});
 
-            // 从 Supabase 获取数据
+            fetchMessages();
+        }
+
+        // === 拉取并渲染消息 (含回复逻辑) ===
+        async function fetchMessages() {
             const { data, error } = await _supabase
                 .from('messages')
                 .select('*')
-                .eq('city', cityName)
+                .eq('city', currentCity)
                 .order('created_at', { ascending: true });
 
             const container = document.getElementById('msg-container');
             container.innerHTML = ""; 
 
             if (error) {
-                console.error(error);
-                container.innerHTML = '<p style="color:red; text-align:center;">无法连接至数据库，请检查 URL 和 Key 是否填入代码中。</p>';
+                container.innerHTML = '<p style="color:red; text-align:center;">无法连接至数据库。</p>';
                 return;
             }
 
-            if (data.length === 0) {
+            if (!data || data.length === 0) {
                 container.innerHTML = '<p style="text-align: center; color: #ccc;">此处尚无声音，成为第一个传音者吧。</p>';
             } else {
+                // 渲染逻辑：先渲染主楼，再在主楼下面渲染回复
+                const rootMap = {}; // 存储所有消息
+                
+                // 1. 先把所有消息存起来
                 data.forEach(msg => {
-                    const div = document.createElement('div');
-                    div.className = 'msg-item';
-                    const date = new Date(msg.created_at).toLocaleString();
-                    div.innerHTML = `
-                        <div class="msg-meta">匿名教友 • ${date}</div>
-                        <div class="msg-content">${escapeHtml(msg.content)}</div>
-                    `;
-                    container.appendChild(div);
+                    msg.children = [];
+                    rootMap[msg.id] = msg;
                 });
+
+                // 2. 组装父子关系
+                const rootMessages = [];
+                data.forEach(msg => {
+                    if (msg.parent_id && rootMap[msg.parent_id]) {
+                        rootMap[msg.parent_id].children.push(msg);
+                    } else {
+                        rootMessages.push(msg);
+                    }
+                });
+
+                // 3. 渲染 DOM
+                rootMessages.forEach(msg => {
+                    container.appendChild(createMessageElement(msg, false));
+                    // 渲染子回复
+                    if (msg.children.length > 0) {
+                        msg.children.forEach(child => {
+                            container.appendChild(createMessageElement(child, true));
+                        });
+                    }
+                });
+
                 container.scrollTop = container.scrollHeight;
             }
+        }
+
+        // 创建消息 DOM
+        function createMessageElement(msg, isReply) {
+            const div = document.createElement('div');
+            div.className = isReply ? 'msg-item reply' : 'msg-item';
+            const date = new Date(msg.created_at).toLocaleString();
+            
+            // 喜欢数处理
+            const likes = msg.likes ? msg.likes : 0;
+
+            div.innerHTML = `
+                <div class="msg-meta">
+                    <span>${isReply ? '↳ 回复' : '匿名教友'} • ${date}</span>
+                    <span>#${msg.id}</span>
+                </div>
+                <div class="msg-content">${escapeHtml(msg.content)}</div>
+                <div class="action-bar">
+                    <span class="act-btn" onclick="likeMessage(${msg.id}, ${likes}, this)">
+                        ❤️ <span class="like-count">${likes}</span>
+                    </span>
+                    <span class="act-btn" onclick="prepareReply(${msg.id})">
+                        💬 回复
+                    </span>
+                </div>
+            `;
+            return div;
+        }
+
+        // === 点赞功能 ===
+        async function likeMessage(id, currentLikes, btn) {
+            // 视觉优化：立即+1
+            const countSpan = btn.querySelector('.like-count');
+            const newLikes = currentLikes + 1;
+            countSpan.innerText = newLikes;
+            btn.classList.add('liked');
+            btn.onclick = null; // 防止连点
+
+            // 数据库更新
+            await _supabase.from('messages').update({ likes: newLikes }).eq('id', id);
+        }
+
+        // === 准备回复 ===
+        function prepareReply(id) {
+            replyToId = id;
+            document.getElementById('reply-indicator').style.display = 'block';
+            document.getElementById('reply-indicator').innerHTML = `正在回复 #${id} <span style="cursor:pointer" onclick="cancelReply()">[取消]</span>`;
+            document.getElementById('msg-input').focus();
+            document.getElementById('msg-input').placeholder = "请输入回复内容...";
+        }
+
+        function cancelReply() {
+            replyToId = null;
+            document.getElementById('reply-indicator').style.display = 'none';
+            document.getElementById('msg-input').placeholder = "匿名留言：有靠谱地接吗？/ 曝光骗子...";
         }
 
         // === 发送留言 ===
@@ -447,31 +589,25 @@
             btn.disabled = true;
             btn.innerText = "发送中...";
 
-            const { error } = await _supabase
-                .from('messages')
-                .insert({ city: currentCity, content: text });
+            const payload = { 
+                city: currentCity, 
+                content: text,
+                parent_id: replyToId // 带上父ID
+            };
+
+            const { error } = await _supabase.from('messages').insert(payload);
 
             if (error) {
                 alert("发送失败：" + error.message);
-                btn.disabled = false;
-                btn.innerText = "发送";
             } else {
-                const container = document.getElementById('msg-container');
-                if(container.innerText.includes("此处尚无声音")) container.innerHTML = "";
-                
-                const div = document.createElement('div');
-                div.className = 'msg-item';
-                div.innerHTML = `
-                    <div class="msg-meta">我 (刚刚)</div>
-                    <div class="msg-content">${escapeHtml(text)}</div>
-                `;
-                container.appendChild(div);
-                container.scrollTop = container.scrollHeight;
-
                 input.value = "";
-                btn.disabled = false;
-                btn.innerText = "发送";
+                cancelReply();
+                // 重新拉取列表以显示新消息
+                await fetchMessages();
             }
+            
+            btn.disabled = false;
+            btn.innerText = "发送";
         }
 
         function closeBoard() {
