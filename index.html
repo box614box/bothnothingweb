@@ -4,6 +4,8 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>海外拿性教 | The Na Xing Sect</title>
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+    
     <style>
         /* --- 尊者圣洁风 CSS --- */
         :root {
@@ -24,20 +26,21 @@
             text-align: center;
         }
 
-        /* --- 1. 顶部大图 --- */
+        /* --- 1. 顶部大图 (右下角排版 + 浅色渐变) --- */
         .hero-banner {
             background-image: url('2.webp');
             background-size: cover;
-            background-position: top center;
+            background-position: top center; /* 保持不切头 */
             height: 65vh;
             display: flex;
-            align-items: flex-end;
+            align-items: flex-end; /* 文字沉底 */
             justify-content: flex-end; /* 文字靠右 */
             position: relative;
             padding-bottom: 60px;
-            padding-right: 8%;
+            padding-right: 8%; /* 右侧留白 */
         }
 
+        /* 浅色神圣渐变：图片底部融化进米色背景 */
         .hero-banner::after {
             content: '';
             position: absolute;
@@ -57,17 +60,17 @@
             font-weight: bold;
             letter-spacing: 0.1em;
             margin-bottom: 5px;
-            color: #2c2c2c;
+            color: #2c2c2c; /* 深色文字 */
         }
         .hero-title p {
             font-size: 1.4rem;
             font-style: italic;
             letter-spacing: 2px;
-            color: #444;
+            color: #444; 
             margin-top: 0;
         }
 
-        /* --- 通用容器 --- */
+        /* --- 容器 --- */
         .container {
             max-width: 800px;
             margin: 0 auto;
@@ -85,7 +88,6 @@
             box-shadow: 0 10px 30px rgba(212, 175, 55, 0.15);
             border-top: 5px solid var(--warm-gold);
         }
-
         .highlight-box {
             margin: 40px 0;
             padding: 30px 0;
@@ -100,7 +102,7 @@
         }
         .gold-text { color: var(--warm-gold); font-weight: bold; }
 
-        .quotes-section { margin: 60px 0; text-align: center; }
+        .quotes-section { margin: 60px 0; }
         .quotes-btn {
             display: inline-block;
             text-decoration: none;
@@ -117,15 +119,14 @@
             box-shadow: 0 0 15px rgba(212, 175, 55, 0.4);
         }
 
-        /* --- 核心升级：分舵交互系统 --- */
+        /* --- 分舵交互区 --- */
         .network-section {
             background-color: white;
             padding: 60px 20px;
             margin-top: 60px;
-            min-height: 600px; /* 保证高度，防止跳动 */
+            min-height: 800px;
         }
 
-        /* 1. 标签页 (Tabs) */
         .tabs {
             display: flex;
             justify-content: center;
@@ -151,7 +152,6 @@
             box-shadow: 0 5px 15px rgba(212, 175, 55, 0.3);
         }
 
-        /* 2. 城市列表 */
         .branch-grid {
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
@@ -174,37 +174,35 @@
         .branch-card h3 { margin: 0; font-size: 1.1rem; color: #333; }
         .branch-card p { margin: 5px 0 0; font-size: 0.8rem; color: #888; }
 
-        /* 3. 留言板 (初始隐藏) */
-        #message-board {
-            display: none; /* 默认隐藏 */
-            background: #fffdf9;
-            border: 2px dashed var(--warm-gold);
-            padding: 30px;
-            margin-top: 30px;
+        /* --- 留言板样式 --- */
+        #supabase-board {
+            display: none;
+            margin-top: 40px;
             text-align: left;
             animation: fadeIn 0.5s;
         }
         @keyframes fadeIn { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
 
         .board-header {
-            border-bottom: 1px solid #eee;
-            padding-bottom: 10px;
+            background: #fffdf9;
+            border: 2px dashed var(--warm-gold);
+            padding: 20px;
             margin-bottom: 20px;
             display: flex;
             justify-content: space-between;
             align-items: center;
         }
         .board-title { font-size: 1.2rem; font-weight: bold; color: var(--warm-gold); }
-        .close-board { cursor: pointer; color: #999; font-size: 0.9rem; }
+        .close-board { cursor: pointer; color: #999; font-size: 0.9rem; border-bottom: 1px solid #999; }
 
-        /* 模拟留言列表 */
-        .message-list {
-            max-height: 300px;
+        .message-container {
+            max-height: 400px;
             overflow-y: auto;
-            margin-bottom: 20px;
-            background: #fff;
-            padding: 10px;
             border: 1px solid #eee;
+            padding: 15px;
+            background: #fff;
+            margin-bottom: 20px;
+            border-radius: 4px;
         }
         .msg-item {
             margin-bottom: 15px;
@@ -212,26 +210,28 @@
             padding-bottom: 10px;
         }
         .msg-meta { font-size: 0.8rem; color: #aaa; margin-bottom: 5px; }
-        .msg-content { color: #444; font-size: 0.95rem; }
-
-        /* 发送框 */
+        .msg-content { color: #444; font-size: 1rem; line-height: 1.5; }
+        
         .input-area { display: flex; gap: 10px; }
         .input-area input {
             flex: 1;
-            padding: 10px;
+            padding: 12px;
             border: 1px solid #ccc;
             border-radius: 4px;
+            font-family: inherit;
         }
         .send-btn {
-            background: var(--ink-gray);
+            background: var(--warm-gold);
             color: white;
             border: none;
-            padding: 0 20px;
+            padding: 0 25px;
             cursor: pointer;
             border-radius: 4px;
+            font-weight: bold;
         }
+        .send-btn:hover { background: #b59020; }
+        .send-btn:disabled { background: #ccc; cursor: not-allowed; }
 
-        /* 私心梗区 */
         .truth-revelation {
             margin-top: 60px;
             padding: 20px;
@@ -248,11 +248,11 @@
             background-color: var(--light-sand);
         }
 
-        /* 手机适配 */
         @media screen and (max-width: 768px) {
             .hero-banner { 
                 height: 55vh; 
                 justify-content: center; 
+                align-items: flex-end;
                 padding-right: 0;
             }
             .hero-title { text-align: center; }
@@ -271,26 +271,28 @@
     </header>
 
     <div class="container">
-
         <div class="scripture-text">
             <h2 style="border: none; font-size: 2rem; margin-bottom: 30px; color: var(--warm-gold);">/// 拿性教旨 ///</h2>
             <p>迷途的孩子啊，你是否已经发现了那个残酷的真相？</p>
-            <p>"出国后，第一个骗你的，<br>往往是你的同胞。"</p>
-            <p>本邪教的降临，只致力于做一件事：</p>
-            <p>创造海外华人“凝结核”</p>
+            <div class="highlight-box">
+                <p class="big-truth">
+                    "出国后，第一个骗你的，<br>往往是你的同胞。"
+                </p>
+            </div>
+            <p>本教的降临，只致力于做一件事：</p>
+            <h3 style="font-size: 2rem; margin: 30px 0; color: var(--ink-gray);">创造海外华人的<span class="gold-text">“凝结核”</span></h3>
             <p>我们需要诚实纳税的你，需要拥有武德的你，需要不再冷漠的你。</p>
         </div>
 
         <div class="quotes-section">
             <a href="quotes.html" class="quotes-btn">📖 恭读教主圣训 (点击悟道)</a>
         </div>
-
     </div>
 
     <div class="network-section">
         <div class="container">
             <h2 style="text-align: center; border: none; color: #2c2c2c;">全球分舵传音壁</h2>
-            <p style="text-align: center; margin-bottom: 30px; color: #888;">请选择大洲，进入分舵留言（无需注册）：</p>
+            <p style="text-align: center; margin-bottom: 30px; color: #888;">请选择大洲，进入城市留言（美国 Supabase 数据库直连）：</p>
 
             <div class="tabs">
                 <button class="tab-btn active" onclick="showContinent('NA')">北美教区</button>
@@ -298,28 +300,33 @@
                 <button class="tab-btn" onclick="showContinent('ASIA')">亚太教区 (非大陆)</button>
             </div>
 
-            <div id="city-list" class="branch-grid">
-                </div>
+            <div id="city-list" class="branch-grid"></div>
 
-            <div id="message-board">
+            <div id="supabase-board">
                 <div class="board-header">
-                    <span class="board-title" id="board-city-name">📍 温哥华分舵</span>
+                    <span class="board-title" id="board-city-name">📍 分舵留言板</span>
                     <span class="close-board" onclick="closeBoard()">[关闭]</span>
                 </div>
                 
-                <div class="message-list" id="msg-container">
-                    </div>
+                <div class="message-container" id="msg-container">
+                    <p style="text-align: center; color: #ccc;">正在连接至服务器...</p>
+                </div>
 
                 <div class="input-area">
-                    <input type="text" id="msg-input" placeholder="匿名留言：有没有靠谱的地接？/ 曝光一个骗子...">
-                    <button class="send-btn" onclick="postMessage()">发送</button>
+                    <input type="text" id="msg-input" placeholder="匿名留言：有没有靠谱的地接？/ 曝光骗子...">
+                    <button class="send-btn" id="send-btn" onclick="postMessage()">发送</button>
                 </div>
-                <p style="font-size: 0.8rem; color: #aaa; margin-top: 10px;">* 尊者提示：此处为匿名区，请文明用语。</p>
+                <p style="font-size: 0.8rem; color: #aaa; margin-top: 10px; text-align: center;">* 无需注册，IP不记录。请勿发表垃圾广告。</p>
             </div>
 
             <div class="truth-revelation">
-                <p><strong>⚠️ 教团内部备忘录 (Level 5)：</strong></p>
-                <p>“教主原话：‘我真正的目的是，以后老子不管飞到温哥华、东京还是伦敦，<strong>落地就得有人接机，吃饭就得有人带路！</strong>这才是凝结核的终极奥义！’”</p>
+                <div class="truth-badge">⚠️ 绝密：教团内部备忘录 (Level 5) ⚠️</div>
+                <div class="truth-content">
+                    <p><strong>关于“建立全球分舵”的真实战术意图：</strong></p>
+                    <p>“教主原话：‘我真正的目的是，以后老子不管飞到温哥华、东京还是伦敦，<strong>落地就得有人接机，吃饭就得有人带路！</strong>’”</p>
+                    <p>“‘这才是凝结核的终极奥义——方便我全球巡回吃喝玩乐！谁能带我玩得最开心，谁就是核心大护法！哈哈哈哈！’”</p>
+                    <p style="text-align: right; margin-top: 20px; font-weight: bold;">—— 某大彻大悟的核心大弟子 敬上</p>
+                </div>
             </div>
 
         </div>
@@ -331,14 +338,25 @@
     </footer>
 
     <script>
-        // === 1. 数据配置 ===
-        // 这里定义了所有的大洲和城市
+        // ============================================
+        // ⚠️ 必填：Supabase 配置 
+        // 去 Supabase 后台 -> Settings -> API 复制
+        // ============================================
+        const SUPABASE_URL = '在此处填入你的Project URL';
+        const SUPABASE_KEY = '在此处填入你的Anon Public Key';
+        // ============================================
+        
+        // 初始化 Supabase
+        const { createClient } = supabase;
+        const _supabase = createClient(SUPABASE_URL, SUPABASE_KEY);
+
+        // 城市数据配置
         const branches = {
             "NA": [
                 { name: "温哥华总舵", desc: "教主常驻之地" },
                 { name: "多伦多", desc: "极寒互助点" },
                 { name: "纽约", desc: "华尔街分部" },
-                { name: "洛杉矶", desc: "二奶村净化点" },
+                { name: "洛杉矶", desc: "天使之城" },
                 { name: "旧金山", desc: "硅谷义人连" }
             ],
             "EU_AU": [
@@ -351,107 +369,123 @@
                 { name: "东京", desc: "新宿案内人" },
                 { name: "大阪", desc: "关西分舵" },
                 { name: "新加坡", desc: "坡县根据地" },
-                { name: "曼谷", desc: "不割腰子只吃喝" }
-                // 严格排除中国大陆城市
+                { name: "曼谷", desc: "只吃喝不割腰" }
             ]
         };
 
-        // 预设一些假留言，显得热闹
-        const fakeMessages = [
-            "test1",
-            "test2",
-            "test3",
-            "test4"
-        ];
-
         let currentCity = "";
 
-        // === 2. 切换大洲功能 ===
+        // === 切换大洲 ===
         function showContinent(region) {
-            // 1. 切换按钮样式
             document.querySelectorAll('.tab-btn').forEach(btn => btn.classList.remove('active'));
             event.target.classList.add('active');
 
-            // 2. 渲染城市列表
             const cityContainer = document.getElementById('city-list');
-            cityContainer.innerHTML = ""; // 清空当前
+            cityContainer.innerHTML = "";
 
             branches[region].forEach(city => {
                 const div = document.createElement('div');
                 div.className = 'branch-card';
-                div.onclick = () => openBoard(city.name); // 点击城市打开留言板
-                div.innerHTML = `
-                    <h3>${city.name}</h3>
-                    <p>${city.desc}</p>
-                `;
+                div.onclick = () => openBoard(city.name);
+                div.innerHTML = `<h3>${city.name}</h3><p>${city.desc}</p>`;
                 cityContainer.appendChild(div);
             });
-
-            // 3. 关闭留言板（切换大洲时自动关闭）
+            
             closeBoard();
         }
 
-        // === 3. 打开留言板 ===
-        function openBoard(cityName) {
+        // === 打开留言板 & 拉取数据 ===
+        async function openBoard(cityName) {
             currentCity = cityName;
-            document.getElementById('board-city-name').innerText = "📍 " + cityName + "分舵 传音壁";
-            document.getElementById('message-board').style.display = 'block';
+            document.getElementById('board-city-name').innerText = "📍 " + cityName + " 传音壁";
+            document.getElementById('supabase-board').style.display = 'block';
+            document.getElementById('msg-container').innerHTML = '<p style="text-align: center; color: #ccc;">正在连接服务器...</p>';
             
-            // 每次打开，随机显示几条假留言（模拟热闹）
-            const msgContainer = document.getElementById('msg-container');
-            msgContainer.innerHTML = ""; // 清空旧的
-            
-            // 随机生成 2-3 条预设留言
-            for(let i=0; i<3; i++) {
-                const randomMsg = fakeMessages[Math.floor(Math.random() * fakeMessages.length)];
-                appendMessage("匿名教友", randomMsg);
-            }
-            
-            // 滚动到留言板位置
-            document.getElementById('message-board').scrollIntoView({behavior: "smooth"});
-        }
+            document.getElementById('supabase-board').scrollIntoView({behavior: "smooth"});
 
-        // === 4. 发送留言功能 ===
-        function postMessage() {
-            const input = document.getElementById('msg-input');
-            const text = input.value;
-            
-            if (text.trim() === "") {
-                alert("教友，请不要发送空想。");
+            // 从 Supabase 获取数据
+            const { data, error } = await _supabase
+                .from('messages')
+                .select('*')
+                .eq('city', cityName)
+                .order('created_at', { ascending: true });
+
+            const container = document.getElementById('msg-container');
+            container.innerHTML = ""; 
+
+            if (error) {
+                console.error(error);
+                container.innerHTML = '<p style="color:red; text-align:center;">无法连接至数据库，请检查 URL 和 Key 是否填入代码中。</p>';
                 return;
             }
 
-            // 添加到列表
-            appendMessage("我 (刚刚)", text);
-            input.value = ""; // 清空输入框
-
-            // 滚动到底部
-            const container = document.getElementById('msg-container');
-            container.scrollTop = container.scrollHeight;
+            if (data.length === 0) {
+                container.innerHTML = '<p style="text-align: center; color: #ccc;">此处尚无声音，成为第一个传音者吧。</p>';
+            } else {
+                data.forEach(msg => {
+                    const div = document.createElement('div');
+                    div.className = 'msg-item';
+                    const date = new Date(msg.created_at).toLocaleString();
+                    div.innerHTML = `
+                        <div class="msg-meta">匿名教友 • ${date}</div>
+                        <div class="msg-content">${escapeHtml(msg.content)}</div>
+                    `;
+                    container.appendChild(div);
+                });
+                container.scrollTop = container.scrollHeight;
+            }
         }
 
-        // 辅助：添加一条留言到界面
-        function appendMessage(user, text) {
-            const container = document.getElementById('msg-container');
-            const div = document.createElement('div');
-            div.className = 'msg-item';
-            div.innerHTML = `
-                <div class="msg-meta">${user}</div>
-                <div class="msg-content">${text}</div>
-            `;
-            container.appendChild(div);
+        // === 发送留言 ===
+        async function postMessage() {
+            const input = document.getElementById('msg-input');
+            const btn = document.getElementById('send-btn');
+            const text = input.value.trim();
+            
+            if (!text) return;
+
+            btn.disabled = true;
+            btn.innerText = "发送中...";
+
+            const { error } = await _supabase
+                .from('messages')
+                .insert({ city: currentCity, content: text });
+
+            if (error) {
+                alert("发送失败：" + error.message);
+                btn.disabled = false;
+                btn.innerText = "发送";
+            } else {
+                const container = document.getElementById('msg-container');
+                if(container.innerText.includes("此处尚无声音")) container.innerHTML = "";
+                
+                const div = document.createElement('div');
+                div.className = 'msg-item';
+                div.innerHTML = `
+                    <div class="msg-meta">我 (刚刚)</div>
+                    <div class="msg-content">${escapeHtml(text)}</div>
+                `;
+                container.appendChild(div);
+                container.scrollTop = container.scrollHeight;
+
+                input.value = "";
+                btn.disabled = false;
+                btn.innerText = "发送";
+            }
         }
 
-        // 关闭留言板
         function closeBoard() {
-            document.getElementById('message-board').style.display = 'none';
+            document.getElementById('supabase-board').style.display = 'none';
         }
 
-        // 页面加载时默认显示北美
+        function escapeHtml(text) {
+            return text.replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, "&gt;").replace(/"/g, "&quot;").replace(/'/g, "&#039;");
+        }
+
         window.onload = function() {
             showContinent('NA');
         };
-
     </script>
 </body>
 </html>
+
