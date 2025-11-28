@@ -3,235 +3,257 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>海外新造社 | The New Life Society</title>
+    <title>海外新造凝结社 | The New Life Nucleus</title>
     <style>
-        /* --- 尊者灵修风 CSS --- */
+        /* --- 尊者圣洁风 CSS 核心 --- */
         :root {
-            --holy-white: #fcfcfc;
-            --linen: #f0eee9; /* 棉麻色 */
-            --ink: #2c2c2c;   /* 墨色 */
-            --gold: #d4af37;  /* 极其克制的暗金 */
+            --holy-cream: #fcfaf2;  /* 米色背景，棉麻感 */
+            --warm-gold: #d4af37;   /* 柔和的暗金 */
+            --ink-gray: #333333;    /* 墨灰，不是纯黑 */
+            --light-sand: #f0eee9;  /* 沙色，用于分割 */
         }
-        
+
         body {
-            background-color: var(--holy-white);
-            color: var(--ink);
-            font-family: "Songti SC", "Noto Serif SC", "SimSun", serif; /* 必须是宋体，才有经文感 */
             margin: 0;
             padding: 0;
-            line-height: 2;
-            overflow-x: hidden;
+            background-color: var(--holy-cream);
+            color: var(--ink-gray);
+            /* 核心：使用宋体/衬线体营造庄重、经文感 */
+            font-family: "Songti SC", "Noto Serif SC", "SimSun", serif;
+            line-height: 1.8;
             text-align: center;
         }
 
-        /* 缓慢的淡入动画，营造神圣感 */
-        .fade-in {
-            animation: fadeIn 3s ease-in-out;
-        }
-        @keyframes fadeIn {
-            from { opacity: 0; transform: translateY(20px); }
-            to { opacity: 1; transform: translateY(0); }
-        }
-
-        /* 头部：极其简单的Logo */
-        header {
-            padding: 80px 20px;
-            background: linear-gradient(to bottom, #fff, var(--linen));
-        }
-
-        .symbol {
-            width: 80px;
-            height: 80px;
-            margin: 0 auto 30px;
-            border: 1px solid var(--ink);
-            border-radius: 50%;
+        /* --- 顶部大图 Banner --- */
+        .hero-banner {
+            /* 这里换成一张看起来很神圣、有阳光的图片 */
+            background-image: url('https://images.unsplash.com/photo-1507646227500-4d389966a613?q=80&w=1920&auto=format&fit=crop'); 
+            background-size: cover;
+            background-position: center;
+            height: 60vh; /* 占据屏幕60%高度 */
             display: flex;
             align-items: center;
             justify-content: center;
-            font-size: 2rem;
             position: relative;
         }
-        /* 尊者的光环 */
-        .symbol::after {
+        /* 给图片加一层暖色滤镜罩子 */
+        .hero-banner::after {
             content: '';
             position: absolute;
-            width: 100%; height: 100%;
-            border-radius: 50%;
-            box-shadow: 0 0 20px rgba(212, 175, 55, 0.3);
-            animation: breathe 5s infinite ease-in-out;
+            top: 0; left: 0; width: 100%; height: 100%;
+            background: linear-gradient(to bottom, rgba(212, 175, 55, 0.2), var(--holy-cream));
         }
-        @keyframes breathe {
-            0%, 100% { transform: scale(1); opacity: 0.5; }
-            50% { transform: scale(1.1); opacity: 1; }
+        .hero-title {
+            position: relative;
+            z-index: 1;
+            color: var(--ink-gray);
+            text-shadow: 0 0 20px rgba(255,255,255,0.8);
         }
-
-        h1 {
+        .hero-title h1 {
+            font-size: 3rem;
             font-weight: normal;
             letter-spacing: 0.5em;
             margin-bottom: 10px;
-            font-size: 1.8rem;
         }
-        
-        .verse {
-            color: #666;
-            font-style: italic;
+        .hero-title p { font-size: 1.2rem; font-style: italic; }
+
+        /* --- 通用容器 --- */
+        .container {
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 60px 20px;
+        }
+
+        /* --- 经文/主要信息区 --- */
+        .scripture-section h2 {
+            color: var(--warm-gold);
+            font-weight: normal;
+            font-size: 1.8rem;
             margin-bottom: 40px;
+            display: inline-block;
+            border-bottom: 2px solid var(--warm-gold);
+            padding-bottom: 10px;
+        }
+        .scripture-text {
+            font-size: 1.1rem;
+            margin-bottom: 30px;
+            text-align: left; /* 左对齐更有书信感 */
+        }
+        .highlight {
+            color: var(--warm-gold);
+            font-weight: bold;
+        }
+
+        /* --- 教主名言入口按钮 --- */
+        .quotes-link-box {
+            margin: 60px 0;
+            padding: 30px;
+            background-color: var(--light-sand);
+            border-radius: 4px;
+            border: 1px solid var(--warm-gold);
+        }
+        .quotes-btn {
+            display: inline-block;
+            text-decoration: none;
+            color: var(--warm-gold);
+            border: 1px solid var(--warm-gold);
+            padding: 15px 40px;
+            font-size: 1.1rem;
+            transition: all 0.3s;
+            background: white;
+        }
+        .quotes-btn:hover {
+            background: var(--warm-gold);
+            color: white;
+            box-shadow: 0 5px 15px rgba(212, 175, 55, 0.3);
+        }
+
+        /* --- 城市网络区 --- */
+        .network-section {
+            background-color: white;
+            padding: 60px 20px;
+            margin-top: 60px;
+        }
+        .continent-group {
+            margin-bottom: 40px;
+            text-align: left;
+        }
+        .continent-name {
+            font-size: 1.4rem;
+            color: var(--warm-gold);
+            margin-bottom: 20px;
+        }
+        .city-tags {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+        }
+        .city-tag {
+            background: var(--light-sand);
+            padding: 8px 20px;
+            border-radius: 20px;
             font-size: 0.9rem;
         }
 
-        /* 经文容器 */
-        .scripture-container {
-            max-width: 600px;
-            margin: 0 auto;
-            padding: 40px 20px;
-            text-align: left; /* 左对齐更有书信感 */
+        /* --- 核心梗：真相揭露区 --- */
+        .the-truth-revelation {
+            margin-top: 60px;
+            border: 2px dashed var(--warm-gold);
+            padding: 30px;
+            background: #fffdf9;
+            position: relative;
         }
-
-        .chapter {
-            margin-bottom: 60px;
-            border-left: 2px solid var(--gold);
-            padding-left: 20px;
-        }
-
-        .chapter h2 {
-            font-weight: normal;
-            font-size: 1.2rem;
-            color: var(--gold);
-            margin-top: 0;
-        }
-
-        /* 歌词般的排版 */
-        .lyrics {
-            text-align: center;
-            margin: 60px 0;
-            color: #555;
-        }
-
-        /* 按钮：极其克制 */
-        .btn-group {
-            margin: 60px 0;
-        }
-        
-        button {
-            background: transparent;
-            border: 1px solid var(--ink);
-            padding: 15px 40px;
-            font-family: inherit;
-            font-size: 1rem;
-            cursor: pointer;
-            transition: all 0.5s;
-            margin: 10px;
-            border-radius: 2px;
-        }
-
-        button:hover {
-            background: var(--ink);
-            color: var(--holy-white);
-            box-shadow: 0 10px 20px rgba(0,0,0,0.1);
-        }
-
-        /* 隐藏的惩罚模式 */
-        .punishment {
-            display: none;
-            position: fixed;
-            top: 0; left: 0; width: 100%; height: 100%;
-            background-color: #8b0000; /* 血红 */
+        /* 一个像封条一样的标题 */
+        .truth-title {
+            position: absolute;
+            top: -15px;
+            left: 50%;
+            transform: translateX(-50%);
+            background: var(--warm-gold);
             color: white;
-            z-index: 999;
-            flex-direction: column;
-            justify-content: center;
-            align-items: center;
+            padding: 5px 20px;
+            font-weight: bold;
+            font-size: 0.9rem;
         }
-        .punishment h1 { font-size: 3rem; letter-spacing: 0; font-weight: bold; }
+        .truth-content {
+            font-family: sans-serif; /* 故意用黑体，打破神圣感 */
+            color: #666;
+            font-style: italic;
+        }
 
         footer {
             padding: 40px;
             font-size: 0.8rem;
             color: #999;
-            background-color: var(--linen);
+            background-color: var(--light-sand);
+            margin-top: 60px;
         }
     </style>
 </head>
 <body>
 
-    <header class="fade-in">
-        <div class="symbol">核</div>
-        <h1>海外凝结社</h1>
-        <div class="verse">"一尘不染，方得始终"</div>
+    <header class="hero-banner">
+        <div class="hero-title">
+            <h1>新造凝结社</h1>
+            <p>“在混沌的海外，寻找应许之地”</p>
+        </div>
     </header>
 
-    <div class="scripture-container fade-in">
-        
-        <div class="chapter">
-            <h2>第一章：贪</h2>
-            <p>你在这个陌生的国度，为何总是感到不安？</p>
-            <p>是因为汇率的波动吗？是因为低价租房的诱惑吗？</p>
-            <p>那不是机会，那是<strong>业障</strong>。</p>
-            <p>那些试图用高汇率诱惑你的人，他们是被贪欲吞噬的蛇。我们要远离蛇，而不是成为蛇。</p>
+    <div class="container scripture-section">
+        <h2>苦难的根源</h2>
+        <div class="scripture-text">
+            <p>迷途的孩子啊，你是否感到困惑？为何跨越了山海，却在异国他乡遭遇最深的背叛？</p>
+            <p>经书（大数据）显示：<span class="highlight">伤害海外华人最深的，往往是我们血脉相连的同胞。</span></p>
+            <p>这是旧世界的业障，是原子化生存的诅咒。坑蒙拐骗，让我们的社区如散沙般脆弱。</p>
         </div>
 
-        <div class="chapter">
-            <h2>第二章：痴</h2>
-            <p>为何不看攻略？为何轻信他人？</p>
-            <p>不做功课的信任，不是善良，是<strong>愚痴</strong>。</p>
-            <p>在凝结社，我们将赋予你智慧的双眼（防骗指南），让你看清世间的虚妄。</p>
+        <h2>救赎之道：凝结核补完计划</h2>
+        <div class="scripture-text">
+            <p>本社的降临，旨在终结这一切。</p>
+            <p>我们需要寻找那些<span class="highlight">诚实纳税、勤恳生活</span>的“义人”。</p>
+            <p>你们不是散沙，你们是珍贵的**“社会凝结核”**。只有当凝结核相互连接，才能在荒漠中降下甘霖，形成坚不可摧的互助结界。</p>
+            <p>加入我们，断舍离掉那些欺诈的杂质，成为新造的人。</p>
         </div>
 
-        <div class="lyrics">
-            <p>🎵</p>
-            <p>曾经我茫然前行，暗夜的路上</p>
-            <p>只要不做换汇的局，就无所谓</p>
-            <p>尘世的杀猪盘，看作云烟</p>
-            <p>我已是，不被骗的人</p>
-            <p>🎵</p>
+        <div class="quotes-link-box">
+            <p style="margin-bottom: 20px; font-style: italic;">想聆听智慧的源头？想知晓尊者如何看待汇率？</p>
+            <a href="quotes.html" class="quotes-btn">📖 恭读教主圣训 (点击悟道)</a>
         </div>
+    </div>
 
-        <div class="chapter">
-            <h2>第三章：归零与互助</h2>
-            <p>我们是散落在海外的尘埃。</p>
-            <p>只有凝结，才能降下甘霖。</p>
-            <p>如果你愿意放下心中的贪念，如果你愿意在同胞受难时伸出援手。</p>
-            <p>欢迎你，成为我们的一员。</p>
+    <div class="network-section">
+        <div class="container">
+            <h2>光明节点的全球分布</h2>
+            <p style="margin-bottom: 40px; color: #666;">我们的光芒已照亮以下区域，互助网络正在形成...</p>
+            
+            <div class="continent-group">
+                <div class="continent-name">🌏 北美教区 (North America)</div>
+                <div class="city-tags">
+                    <span class="city-tag">纽约圣殿</span>
+                    <span class="city-tag">洛杉矶分舵</span>
+                    <span class="city-tag">多伦多核心</span>
+                    <span class="city-tag">温哥华净土</span>
+                </div>
+            </div>
+
+            <div class="continent-group">
+                <div class="continent-name">🌍 欧洲教区 (Europe)</div>
+                <div class="city-tags">
+                    <span class="city-tag">伦敦</span>
+                    <span class="city-tag">巴黎</span>
+                    <span class="city-tag">柏林</span>
+                    <span class="city-tag">阿姆斯特丹</span>
+                </div>
+            </div>
+            
+            <div class="continent-group">
+                <div class="continent-name">🌏 亚太教区 (Asia-Pacific)</div>
+                <div class="city-tags">
+                    <span class="city-tag">东京</span>
+                    <span class="city-tag">新加坡</span>
+                    <span class="city-tag">悉尼</span>
+                    <span class="city-tag">墨尔本</span>
+                </div>
+            </div>
+
+            <div class="the-truth-revelation">
+                <div class="truth-title">⚠️ 绝密：教团内部通讯 (已解密) ⚠️</div>
+                <div class="truth-content">
+                    <p>（咳咳...把麦克风关一下。）</p>
+                    <p>“那个...其实列这么多城市，主要是因为教主他老人家最近想搞个全球巡回...呃...‘布道’。”</p>
+                    <p>“教主原话是：‘我看这些地方的美食都不错，急需各地纳税人同胞提供高质量的地接、陪吃、陪玩服务。特别是懂哪里有好酒的，这才是真正的凝结核嘛！哈哈哈！’”</p>
+                    <p style="text-align: right;">—— 某不愿透露姓名的核心大弟子</p>
+                </div>
+            </div>
+
         </div>
-
-        <div class="btn-group" style="text-align: center;">
-            <p style="margin-bottom: 20px; font-size: 0.9rem;">请选择你的道路：</p>
-            <button onclick="confess()">我是迷途羔羊 (寻求帮助)</button>
-            <button onclick="join()">我是护法者 (提供帮助)</button>
-            <button onclick="punish()" style="border-color: #ddd; color: #ddd;">我想搞点快钱 (骗人)</button>
-        </div>
-
     </div>
 
     <footer>
-        <p>感谢天地，感谢同胞。</p>
-        <p>Copyright © 2025 海外凝结社 | The Condensation Society</p>
+        <p>愿天下无诈，愿你我皆为新造的人。</p>
+        <p>Copyright © 2025 海外新造凝结社 | The New Life Condensation Society</p>
     </footer>
 
-    <div class="punishment" id="punishment-layer">
-        <h1>时间差不多咯</h1>
-        <p>（砰！）</p>
-        <p>我们这里不收“害虫”。</p>
-        <button onclick="location.reload()" style="border-color: white; color: white; margin-top: 50px;">我错了，我想重新做人</button>
-    </div>
-
-    <script>
-        function confess() {
-            alert("尊者指示：\n\n放下你的焦虑。\n\n我们已经为你准备了《防骗真经》和《互助通讯录》。\n点击确定，开始净化心灵（跳转到资源页）。");
-        }
-
-        function join() {
-            alert("善哉。\n\n你已迈出了成为“新造的人”的第一步。\n请谨记：不坑人，不冷漠，不作恶。");
-        }
-
-        function punish() {
-            // 播放陈桂林BGM (脑补)
-            document.getElementById('punishment-layer').style.display = 'flex';
-            
-            // 可以尝试播放声音（浏览器通常会拦截自动播放，需要用户交互）
-            // var audio = new Audio('gunshot.mp3');
-            // audio.play();
-        }
-    </script>
 </body>
 </html>
+
