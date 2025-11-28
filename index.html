@@ -25,56 +25,51 @@
             text-align: center;
         }
 
-        /* --- 1. 顶部大图 (位置终极修正版) --- */
+        /* --- 1. 顶部大图 (位置修正 + 浅色渐变) --- */
         .hero-banner {
             background-image: url('2.webp');
             background-size: cover;
-            /* 确保图片顶部对齐，不切头 */
+            /* 【关键1】图片顶部对齐，保住人头 */
             background-position: top center;
-            /* 高度保持 */
             height: 65vh;
             display: flex;
-            /* 让文字沉在底部 */
+            /* 【关键2】让文字沉到底部 */
             align-items: flex-end;
             justify-content: center;
             position: relative;
-            /* 【关键改动1】大大减小底部内边距，让文字更靠下 */
+            /* 【关键3】底部留白，防止文字贴边 */
             padding-bottom: 30px;
         }
 
-        /* 【关键改动2】恢复你喜欢的渐变效果 */
-        /* 顶部是神圣的金色光辉，底部逐渐变暗以衬托白字 */
+        /* 【关键4】恢复你喜欢的浅色渐变 */
+        /* 图片底部会慢慢变成米色，和网页背景融为一体，非常神圣 */
         .hero-banner::after {
             content: '';
             position: absolute;
             top: 0; left: 0; width: 100%; height: 100%;
-            background: linear-gradient(
-                to bottom, 
-                rgba(252, 250, 242, 0.1) 0%,   /* 顶部极淡的米色光 */
-                rgba(212, 175, 55, 0.2) 40%,   /* 中部柔和的金光 */
-                rgba(0, 0, 0, 0.6) 100%        /* 底部加深暗影，让文字跳出来 */
-            );
+            background: linear-gradient(to bottom, rgba(212, 175, 55, 0.1), var(--holy-cream));
         }
 
         .hero-title {
             position: relative;
             z-index: 1;
             padding: 20px;
-            /* 文字阴影加重，更有立体感 */
-            text-shadow: 0 5px 15px rgba(0,0,0, 0.9);
+            /* 因为背景是浅色，所以文字周围加白色光晕，而不是黑影 */
+            text-shadow: 0 0 30px rgba(255,255,255, 0.9);
         }
         .hero-title h1 {
-            font-size: 4.5rem; /* 再次加大字号，极度霸气 */
+            font-size: 4rem;
             font-weight: bold;
             letter-spacing: 0.1em;
-            margin-bottom: 5px;
-            color: #ffffff; /* 纯白 */
+            margin-bottom: 10px;
+            /* 【关键5】文字改回深色，否则在浅色渐变上看不见 */
+            color: #2c2c2c; 
         }
         .hero-title p {
-            font-size: 1.5rem;
+            font-size: 1.4rem;
             font-style: italic;
             letter-spacing: 2px;
-            color: rgba(255,255,255,0.95);
+            color: #444; /* 深灰色副标题 */
             margin-top: 0;
         }
 
@@ -105,10 +100,10 @@
         }
 
         .big-truth {
-            font-size: 1.8rem;
+            font-size: 1.6rem;
             font-weight: bold;
             color: var(--ink-gray);
-            line-height: 1.4;
+            line-height: 1.5;
         }
 
         .gold-text {
@@ -190,20 +185,14 @@
 
         footer {
             padding: 60px;
-            background-color: var(--ink-gray);
+            font-size: 0.9rem; /* 小字 */
             color: #aaa;
-        }
-        .footer-slogan {
-            font-size: 1.5rem;
-            font-weight: bold;
-            color: var(--warm-gold);
-            margin-bottom: 20px;
-            letter-spacing: 2px;
+            background-color: var(--light-sand);
         }
 
         /* 手机适配 */
         @media screen and (max-width: 768px) {
-            .hero-banner { height: 55vh; padding-bottom: 20px; } /* 手机上再紧凑一点 */
+            .hero-banner { height: 55vh; }
             .hero-title h1 { font-size: 2.8rem; }
             .scripture-text { padding: 30px 20px; text-align: left; }
             .big-truth { font-size: 1.4rem; }
@@ -215,7 +204,7 @@
     <header class="hero-banner">
         <div class="hero-title">
             <h1>拿性教</h1>
-            <p>“告别散沙，创造凝结核”</p>
+            <p>“创造凝结核”</p>
         </div>
     </header>
 
@@ -224,7 +213,6 @@
         <div class="scripture-text">
             <h2 style="border: none; font-size: 2rem; margin-bottom: 30px; color: var(--warm-gold);">/// 拿性教旨 ///</h2>
 
-            <p>迷途的孩子啊，你是否已经发现了那个残酷的真相？</p>
             <p>当你跨越山海，以为来到了应许之地，现实却给你上了冰冷的第一课。</p>
 
             <div class="highlight-box">
@@ -233,18 +221,15 @@
                 </p>
             </div>
 
-            <p>看看四周吧。</p>
             <p>在这个庞大的陌生世界里，海外华人依然是一盘<strong>原子化的散沙</strong>。</p>
 
             <br>
 
-            <p>本教的降临，只致力于做一件事：</p>
-
-            <h3 style="font-size: 2rem; margin: 30px 0; color: var(--ink-gray);">创造海外华人的<span class="gold-text">“凝结核”</span></h3>
+            <p>本邪教的降临，只致力于做一件事：</p>
+            <p>创造海外华人“凝结核”</p>
 
             <p>我们需要诚实纳税的你，需要拥有武德的你，需要不再冷漠的你。</p>
             <p>聚沙成塔，化水为冰。</p>
-            <p>只有当你我凝结在一起，才能在异国他乡形成坚不可摧的互助结界。</p>
         </div>
 
         <div class="quotes-section">
@@ -256,30 +241,28 @@
 
     <div class="network-section">
         <div class="container">
-            <h2 style="text-align: center; border: none; color: #2c2c2c;">全球光明节点分布</h2>
+            <h2 style="text-align: center; border: none; color: #2c2c2c;">全球分舵分布（测试）</h2>
             <p style="text-align: center; margin-bottom: 40px; color: #888;">我们的光芒已照亮以下区域：</p>
 
             <div class="city-tags">
                 <span class="city-tag">🇨🇦 温哥华总舵</span>
-                <span class="city-tag">🇨🇦 多伦多</span>
-                <span class="city-tag">🇺🇸 纽约</span>
-                <span class="city-tag">🇺🇸 洛杉矶</span>
-                <span class="city-tag">🇬🇧 伦敦</span>
-                <span class="city-tag">🇯🇵 东京</span>
-                <span class="city-tag">🇸🇬 新加坡</span>
-                <span class="city-tag">🇦🇺 悉尼</span>
+                <span class="city-tag">🇨🇦 多伦多分舵</span>
+                <span class="city-tag">🇺🇸 纽约分舵</span>
+                <span class="city-tag">🇺🇸 洛杉矶分舵</span>
+                <span class="city-tag">🇬🇧 伦敦分舵</span>
+                <span class="city-tag">🇯🇵 东京分舵</span>
+                <span class="city-tag">🇸🇬 新加坡分舵</span>
+                <span class="city-tag">🇦🇺 悉尼分舵</span>
             </div>
 
             <div class="truth-revelation">
                 <div class="truth-badge">⚠️ 绝密：教团内部备忘录 (Level 5) ⚠️</div>
                 <div class="truth-content">
-                    <p><strong>关于“建立全球分舵”的真实战术意图：</strong></p>
+                    <p><strong>关于“建立全球分舵”的真实意图：</strong></p>
                     
                     <p>“诸位同胞，别听上面那些宏大的口号。其实教主创办本教的私心只有一个。”</p>
                     
-                    <p>“教主原话：‘什么原子化散沙，什么互助，那都是说给外人听的！’”</p>
-                    
-                    <p>“‘我真正的目的是，以后老子不管飞到温哥华、东京还是伦敦，<strong>落地就得有人接机，吃饭就得有人带路，晚上就得有人安排地接！</strong>’”</p>
+                    <p>“‘我真正的目的是，以后老子不管飞到纽约、东京还是伦敦，<strong>落地就得有人接机，吃饭就得有人带路，晚上就得有人安排地接！</strong>’”</p>
                     
                     <p>“‘这才是凝结核的终极奥义——方便我全球巡回吃喝玩乐！谁能带我玩得最开心，谁就是核心大护法！哈哈哈哈！’”</p>
                     
@@ -291,12 +274,9 @@
     </div>
 
     <footer>
-        <p class="footer-slogan">你不拿性，性必拿你。</p>
+        <p>你不拿性，性必拿你。</p>
         <p>Copyright © 2025 海外拿性教 | The Na Xing Sect</p>
     </footer>
 
 </body>
 </html>
-
-
-
