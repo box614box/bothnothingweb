@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>我的个人主页</title>
+    <style>
+        /* 这里是 CSS：负责网页长什么样 (皮肤) */
+        body {
+            font-family: '微软雅黑', sans-serif;
+            background-color: #f0f2f5;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+        }
+        .card {
+            background: white;
+            padding: 40px;
+            border-radius: 15px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+            text-align: center;
+            width: 300px;
+        }
+        h1 { color: #333; margin-bottom: 10px; }
+        p { color: #666; }
+        button {
+            background-color: #007bff;
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 5px;
+            cursor: pointer;
+            margin-top: 20px;
+            font-size: 16px;
+        }
+        button:hover { background-color: #0056b3; }
+    </style>
+</head>
+<body>
+
+    <div class="card">
+        <h1>你好，世界！</h1>
+        <p>这是我完全用代码写的第一个网站。</p>
+        <button onclick="sayHello()">点我一下</button>
+    </div>
+
+    <script>
+        // 这里是 JavaScript：负责网页的动作 (灵魂)
+        function sayHello() {
+            alert('恭喜你！你的代码运行成功了！🎉');
+        }
+    </script>
+
+</body>
+</html>
