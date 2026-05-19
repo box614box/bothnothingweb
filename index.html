@@ -5,18 +5,17 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
     <title>海外拿性教 | The Na Xing Sect</title>
     <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
-    
+
     <style>
         /* --- 全局重置 (解决手机左右滑动问题) --- */
         * { box-sizing: border-box; }
         html, body {
-            overflow-x: hidden; /* 禁止横向滚动 */
+            overflow-x: hidden;
             width: 100%;
             margin: 0;
             padding: 0;
         }
 
-        /* --- 尊者圣洁风 CSS (极度紧凑版) --- */
         :root {
             --holy-cream: #fcfaf2;
             --warm-gold: #d4af37;
@@ -29,11 +28,163 @@
             background-color: var(--holy-cream);
             color: var(--ink-gray);
             font-family: "Songti SC", "Noto Serif SC", "SimSun", serif;
-            /* 【改动】极致紧凑行高 */
             line-height: 1.4;
-            /* 【改动】字间距收紧 */
-            letter-spacing: -0.03em; 
+            letter-spacing: -0.03em;
             text-align: center;
+        }
+
+        /* --- 顶部 Auth 栏 --- */
+        #auth-bar {
+            position: fixed;
+            top: 12px;
+            right: 15px;
+            z-index: 1000;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            font-family: "Songti SC", "Noto Serif SC", serif;
+        }
+        .auth-bar-btn {
+            background: rgba(252, 250, 242, 0.92);
+            border: 1px solid var(--warm-gold);
+            color: var(--warm-gold);
+            padding: 5px 14px;
+            font-size: 0.82rem;
+            cursor: pointer;
+            border-radius: 2px;
+            font-family: inherit;
+            backdrop-filter: blur(4px);
+            transition: all 0.2s;
+        }
+        .auth-bar-btn:hover { background: var(--warm-gold); color: white; }
+        .auth-bar-btn.solid { background: var(--warm-gold); color: white; }
+        .auth-bar-btn.solid:hover { background: #b59020; }
+        #auth-username {
+            font-size: 0.82rem;
+            color: var(--ink-gray);
+            background: rgba(252, 250, 242, 0.92);
+            padding: 5px 10px;
+            border-radius: 2px;
+            backdrop-filter: blur(4px);
+            border: 1px solid #ddd;
+        }
+
+        /* --- Auth 弹窗 --- */
+        #auth-modal {
+            display: none;
+            position: fixed;
+            inset: 0;
+            z-index: 2000;
+        }
+        .modal-overlay {
+            position: absolute;
+            inset: 0;
+            background: rgba(0,0,0,0.45);
+        }
+        .modal-box {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            background: var(--holy-cream);
+            width: 360px;
+            max-width: 92vw;
+            border-top: 4px solid var(--warm-gold);
+            border-radius: 4px;
+            padding: 28px 28px 24px;
+            box-shadow: 0 10px 40px rgba(0,0,0,0.2);
+        }
+        .modal-tabs {
+            display: flex;
+            border-bottom: 1px solid #e0d8c0;
+            margin-bottom: 22px;
+        }
+        .modal-tab {
+            flex: 1;
+            padding: 8px 0;
+            background: none;
+            border: none;
+            font-family: inherit;
+            font-size: 1rem;
+            cursor: pointer;
+            color: #aaa;
+            border-bottom: 2px solid transparent;
+            margin-bottom: -1px;
+            transition: all 0.2s;
+        }
+        .modal-tab.active { color: var(--warm-gold); border-bottom-color: var(--warm-gold); font-weight: bold; }
+        .modal-close {
+            position: absolute;
+            top: 10px; right: 14px;
+            background: none; border: none;
+            font-size: 1.3rem; cursor: pointer; color: #bbb;
+        }
+        .modal-close:hover { color: #666; }
+        .auth-form { display: flex; flex-direction: column; gap: 10px; }
+        .auth-form input {
+            padding: 10px 12px;
+            border: 1px solid #d0c8a8;
+            border-radius: 2px;
+            font-family: inherit;
+            font-size: 0.92rem;
+            background: white;
+            outline: none;
+        }
+        .auth-form input:focus { border-color: var(--warm-gold); }
+        .auth-submit {
+            background: var(--warm-gold);
+            color: white;
+            border: none;
+            padding: 11px;
+            font-family: inherit;
+            font-size: 0.95rem;
+            font-weight: bold;
+            cursor: pointer;
+            border-radius: 2px;
+            margin-top: 4px;
+            transition: background 0.2s;
+        }
+        .auth-submit:hover { background: #b59020; }
+        .auth-divider {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            color: #bbb;
+            font-size: 0.8rem;
+            margin: 4px 0;
+        }
+        .auth-divider::before, .auth-divider::after {
+            content: '';
+            flex: 1;
+            height: 1px;
+            background: #e0d8c0;
+        }
+        .google-btn {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+            padding: 10px;
+            border: 1px solid #d0c8a8;
+            background: white;
+            border-radius: 2px;
+            cursor: pointer;
+            font-family: inherit;
+            font-size: 0.9rem;
+            color: #444;
+            transition: background 0.2s;
+        }
+        .google-btn:hover { background: #f5f5f5; }
+        .google-btn svg { width: 18px; height: 18px; }
+        .auth-msg { font-size: 0.8rem; color: #888; text-align: center; margin-top: 4px; }
+        .auth-err { font-size: 0.82rem; color: var(--alert-red); text-align: center; min-height: 18px; }
+
+        /* --- 昵称补全弹窗 (Google 登录后) --- */
+        #nickname-modal {
+            display: none;
+            position: fixed;
+            inset: 0;
+            z-index: 3000;
         }
 
         /* --- 顶部大图 --- */
@@ -47,16 +198,14 @@
             justify-content: flex-end;
             position: relative;
             padding-bottom: 40px;
-            padding-right: 5%; /* 手机上留白减少 */
+            padding-right: 5%;
         }
-
         .hero-banner::after {
             content: '';
             position: absolute;
             top: 0; left: 0; width: 100%; height: 100%;
             background: linear-gradient(to bottom, rgba(212, 175, 55, 0.1), var(--holy-cream));
         }
-
         .hero-title {
             position: relative;
             z-index: 1;
@@ -79,14 +228,12 @@
             margin-top: 0;
         }
 
-        /* --- 容器 --- */
         .container {
             max-width: 900px;
             margin: 0 auto;
-            padding: 40px 15px; /* 减少内边距 */
+            padding: 40px 15px;
         }
 
-        /* --- 宣言区 --- */
         .scripture-text {
             font-size: 1.1rem;
             margin-bottom: 30px;
@@ -122,24 +269,19 @@
             background: transparent;
             transition: all 0.3s;
         }
-        .quotes-btn:hover {
-            background: var(--warm-gold);
-            color: white;
-        }
+        .quotes-btn:hover { background: var(--warm-gold); color: white; }
 
-        /* --- 分舵交互区 --- */
         .network-section {
             background-color: white;
-            padding: 40px 10px; /* 手机边缘留白减少 */
+            padding: 40px 10px;
             margin-top: 40px;
             min-height: 800px;
         }
 
-        /* 标签页 */
         .tabs {
             display: flex;
             justify-content: center;
-            gap: 5px; /* 间距更紧 */
+            gap: 5px;
             margin-bottom: 20px;
             flex-wrap: wrap;
         }
@@ -153,18 +295,13 @@
             border-radius: 4px;
             transition: all 0.3s;
             color: #666;
-            margin-bottom: 5px; /* 防止换行粘连 */
+            margin-bottom: 5px;
         }
-        .tab-btn.active {
-            background: var(--warm-gold);
-            color: white;
-            border-color: var(--warm-gold);
-        }
+        .tab-btn.active { background: var(--warm-gold); color: white; border-color: var(--warm-gold); }
 
-        /* 城市网格 */
         .branch-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(110px, 1fr)); /* 更小的卡片 */
+            grid-template-columns: repeat(auto-fill, minmax(110px, 1fr));
             gap: 8px;
             margin-bottom: 30px;
         }
@@ -176,14 +313,11 @@
             transition: transform 0.2s;
             border: 1px solid transparent;
         }
-        .branch-card:hover {
-            border-color: var(--warm-gold);
-            background: white;
-        }
+        .branch-card:hover { border-color: var(--warm-gold); background: white; }
         .branch-card h3 { margin: 0; font-size: 0.95rem; color: #333; font-weight: bold; }
         .branch-card p { margin: 2px 0 0; font-size: 0.7rem; color: #888; }
 
-        /* --- 留言板 (升级版) --- */
+        /* --- 留言板 --- */
         #supabase-board {
             display: none;
             margin-top: 20px;
@@ -213,8 +347,7 @@
             margin-bottom: 15px;
             border-radius: 4px;
         }
-        
-        /* 单条消息样式 */
+
         .msg-item {
             margin-bottom: 10px;
             border-bottom: 1px dashed #eee;
@@ -222,23 +355,24 @@
             position: relative;
         }
         .msg-item.reply {
-            margin-left: 20px; /* 回复缩进 */
+            margin-left: 20px;
             background: #fafafa;
             padding: 8px;
             border-left: 3px solid #eee;
             border-bottom: none;
             margin-bottom: 5px;
         }
-        .msg-meta { 
-            font-size: 0.75rem; 
-            color: #aaa; 
-            margin-bottom: 4px; 
+        .msg-meta {
+            font-size: 0.75rem;
+            color: #aaa;
+            margin-bottom: 4px;
             display: flex;
             justify-content: space-between;
         }
+        .msg-author { font-weight: bold; color: #888; }
+        .msg-author.named { color: var(--warm-gold); }
         .msg-content { color: #444; font-size: 0.95rem; line-height: 1.4; word-wrap: break-word; }
-        
-        /* 互动按钮 */
+
         .action-bar {
             margin-top: 5px;
             font-size: 0.75rem;
@@ -250,7 +384,6 @@
         .act-btn:hover { color: var(--warm-gold); }
         .liked { color: var(--alert-red) !important; }
 
-        /* 输入框区域 */
         .input-area-wrapper {
             background: #f9f9f9;
             padding: 10px;
@@ -301,7 +434,6 @@
             background-color: var(--light-sand);
         }
 
-        /* --- 手机特定优化 --- */
         @media screen and (max-width: 768px) {
             .hero-banner { height: 50vh; justify-content: center; padding-right: 0; align-items: flex-end; }
             .hero-title { text-align: center; padding: 15px; }
@@ -309,15 +441,93 @@
             .scripture-text { padding: 30px 15px; text-align: left; }
             .branch-grid { grid-template-columns: repeat(3, 1fr); gap: 5px; }
             .tab-btn { padding: 6px 12px; font-size: 0.85rem; }
+            .modal-box { padding: 22px 18px 20px; }
         }
     </style>
 </head>
 <body>
 
+    <!-- 顶部 Auth 栏 -->
+    <div id="auth-bar">
+        <div id="auth-logged-out" style="display:flex;gap:6px;">
+            <button class="auth-bar-btn" onclick="openModal('login')">登录</button>
+            <button class="auth-bar-btn solid" onclick="openModal('register')">注册</button>
+        </div>
+        <div id="auth-logged-in" style="display:none;align-items:center;gap:8px;">
+            <span id="auth-username"></span>
+            <button class="auth-bar-btn" onclick="signOut()">退出</button>
+        </div>
+    </div>
+
+    <!-- Auth 弹窗 -->
+    <div id="auth-modal">
+        <div class="modal-overlay" onclick="closeModal()"></div>
+        <div class="modal-box">
+            <button class="modal-close" onclick="closeModal()">✕</button>
+            <div class="modal-tabs">
+                <button class="modal-tab active" id="tab-login" onclick="switchTab('login')">登录</button>
+                <button class="modal-tab" id="tab-register" onclick="switchTab('register')">注册</button>
+            </div>
+
+            <!-- 登录表单 -->
+            <div id="form-login" class="auth-form">
+                <input id="login-email" type="email" placeholder="邮箱" autocomplete="email">
+                <input id="login-password" type="password" placeholder="密码" autocomplete="current-password">
+                <div class="auth-err" id="login-err"></div>
+                <button class="auth-submit" onclick="signIn()">登录</button>
+                <div class="auth-divider">或</div>
+                <button class="google-btn" onclick="signInWithGoogle()">
+                    <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                        <path d="M22.56 12.25c0-.78-.07-1.53-.2-2.25H12v4.26h5.92c-.26 1.37-1.04 2.53-2.21 3.31v2.77h3.57c2.08-1.92 3.28-4.74 3.28-8.09z" fill="#4285F4"/>
+                        <path d="M12 23c2.97 0 5.46-.98 7.28-2.66l-3.57-2.77c-.98.66-2.23 1.06-3.71 1.06-2.86 0-5.29-1.93-6.16-4.53H2.18v2.84C3.99 20.53 7.7 23 12 23z" fill="#34A853"/>
+                        <path d="M5.84 14.09c-.22-.66-.35-1.36-.35-2.09s.13-1.43.35-2.09V7.07H2.18C1.43 8.55 1 10.22 1 12s.43 3.45 1.18 4.93l3.66-2.84z" fill="#FBBC05"/>
+                        <path d="M12 5.38c1.62 0 3.06.56 4.21 1.64l3.15-3.15C17.45 2.09 14.97 1 12 1 7.7 1 3.99 3.47 2.18 7.07l3.66 2.84c.87-2.6 3.3-4.53 6.16-4.53z" fill="#EA4335"/>
+                    </svg>
+                    使用 Google 登录
+                </button>
+                <p class="auth-msg">还没账号？<span style="color:var(--warm-gold);cursor:pointer" onclick="switchTab('register')">立即注册</span></p>
+            </div>
+
+            <!-- 注册表单 -->
+            <div id="form-register" class="auth-form" style="display:none">
+                <input id="reg-username" type="text" placeholder="昵称（显示在留言中）" maxlength="20">
+                <input id="reg-email" type="email" placeholder="邮箱" autocomplete="email">
+                <input id="reg-password" type="password" placeholder="密码（至少6位）" autocomplete="new-password">
+                <div class="auth-err" id="register-err"></div>
+                <button class="auth-submit" onclick="signUp()">注册</button>
+                <div class="auth-divider">或</div>
+                <button class="google-btn" onclick="signInWithGoogle()">
+                    <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                        <path d="M22.56 12.25c0-.78-.07-1.53-.2-2.25H12v4.26h5.92c-.26 1.37-1.04 2.53-2.21 3.31v2.77h3.57c2.08-1.92 3.28-4.74 3.28-8.09z" fill="#4285F4"/>
+                        <path d="M12 23c2.97 0 5.46-.98 7.28-2.66l-3.57-2.77c-.98.66-2.23 1.06-3.71 1.06-2.86 0-5.29-1.93-6.16-4.53H2.18v2.84C3.99 20.53 7.7 23 12 23z" fill="#34A853"/>
+                        <path d="M5.84 14.09c-.22-.66-.35-1.36-.35-2.09s.13-1.43.35-2.09V7.07H2.18C1.43 8.55 1 10.22 1 12s.43 3.45 1.18 4.93l3.66-2.84z" fill="#FBBC05"/>
+                        <path d="M12 5.38c1.62 0 3.06.56 4.21 1.64l3.15-3.15C17.45 2.09 14.97 1 12 1 7.7 1 3.99 3.47 2.18 7.07l3.66 2.84c.87-2.6 3.3-4.53 6.16-4.53z" fill="#EA4335"/>
+                    </svg>
+                    使用 Google 注册
+                </button>
+                <p class="auth-msg">已有账号？<span style="color:var(--warm-gold);cursor:pointer" onclick="switchTab('login')">直接登录</span></p>
+            </div>
+        </div>
+    </div>
+
+    <!-- Google 登录后补填昵称弹窗 -->
+    <div id="nickname-modal">
+        <div class="modal-overlay"></div>
+        <div class="modal-box" style="text-align:center;">
+            <p style="font-size:1.05rem;font-weight:bold;margin-bottom:6px;">设置你的昵称</p>
+            <p style="font-size:0.85rem;color:#888;margin-bottom:18px;">此昵称将显示在你的留言中</p>
+            <div class="auth-form">
+                <input id="nickname-input" type="text" placeholder="昵称（最多20字）" maxlength="20">
+                <div class="auth-err" id="nickname-err"></div>
+                <button class="auth-submit" onclick="saveNickname()">确认</button>
+            </div>
+        </div>
+    </div>
+
     <header class="hero-banner">
         <div class="hero-title">
             <h1>拿性教</h1>
-            <p>“你不拿性，性必拿你”</p>
+            <p>"你不拿性，性必拿你"</p>
         </div>
     </header>
 
@@ -326,7 +536,7 @@
             <p>你是否已经发现了那个残酷的真相？</p>
             <p>"出国后，第一个骗你的，<br>往往是你的同胞。"</p>
             <p>本邪教的降临，只致力于做一件事：</p>
-            <p>创造海外华人“凝结核”</p>
+            <p>创造海外华人"凝结核"</p>
             <p>我们需要诚实纳税的你，需要拥有武德的你，需要不再冷漠的你。</p>
         </div>
 
@@ -356,7 +566,7 @@
                     <span class="board-title" id="board-city-name">📍 分舵留言板</span>
                     <span class="close-board" onclick="closeBoard()">[关闭]</span>
                 </div>
-                
+
                 <div class="message-container" id="msg-container">
                     <p style="text-align: center; color: #ccc;">正在连接至服务器...</p>
                 </div>
@@ -368,15 +578,15 @@
                         <button class="send-btn" id="send-btn" onclick="postMessage()">发送</button>
                     </div>
                 </div>
-                <p style="font-size: 0.75rem; color: #aaa; margin-top: 10px; text-align: center;">* 无需注册，IP不记录。点击“回复”可互动。</p>
+                <p style="font-size: 0.75rem; color: #aaa; margin-top: 10px; text-align: center;">* 游客可匿名留言，登录后显示昵称。</p>
             </div>
 
             <div class="truth-revelation">
                 <div class="truth-badge">⚠️ 绝密：教团内部备忘录 (Level 5) ⚠️</div>
                 <div class="truth-content">
-                    <p><strong>关于“建立全球分舵”的真实战术意图：</strong></p>
-                    <p>“教主：‘我真正的目的是，以后老子不管飞到哪里，<strong>落地就得有人接机，吃饭就得有人带路！</strong>’”</p>
-                    <p>“‘这才是凝结核的终极奥义——方便我全球巡回吃喝玩乐！谁能安排明白，谁就是核心大护法！’”</p>
+                    <p><strong>关于"建立全球分舵"的真实战术意图：</strong></p>
+                    <p>"教主：'我真正的目的是，以后老子不管飞到哪里，<strong>落地就得有人接机，吃饭就得有人带路！</strong>'"</p>
+                    <p>"'这才是凝结核的终极奥义——方便我全球巡回吃喝玩乐！谁能安排明白，谁就是核心大护法！'"</p>
                     <p style="text-align: right; margin-top: 20px; font-weight: bold;">—— 某大彻大悟的核心大弟子 敬上</p>
                 </div>
             </div>
@@ -390,45 +600,178 @@
     </footer>
 
     <script>
-        // ============================================
-        // ⚠️ 必填：Supabase 配置 
-        // ============================================
         const SUPABASE_URL = 'https://iqwslygbcydjnimtzcql.supabase.co';
         const SUPABASE_KEY = 'sb_publishable_VefKicDVpy9mHZFp4WQYaQ_ls5tkQhn';
-        // ============================================
-        
         const { createClient } = supabase;
         const _supabase = createClient(SUPABASE_URL, SUPABASE_KEY);
 
-        // 数据扩充：全球更多城市
+        let currentUser = null;
+        let currentUsername = null;
+        let currentCity = "";
+        let replyToId = null;
+
+        // ============ Auth 初始化 ============
+        async function initAuth() {
+            const { data: { session } } = await _supabase.auth.getSession();
+            if (session) await handleSession(session);
+
+            _supabase.auth.onAuthStateChange(async (event, session) => {
+                if (session) {
+                    await handleSession(session);
+                } else {
+                    currentUser = null;
+                    currentUsername = null;
+                    updateAuthUI();
+                }
+            });
+        }
+
+        async function handleSession(session) {
+            currentUser = session.user;
+            const meta = session.user.user_metadata || {};
+            currentUsername = meta.username || meta.full_name || null;
+
+            // Google 登录但没设昵称，弹出补填框
+            if (!meta.username && meta.full_name) {
+                // 用 Google 显示名作为默认
+                currentUsername = meta.full_name;
+            } else if (!currentUsername) {
+                document.getElementById('nickname-modal').style.display = 'block';
+            }
+            updateAuthUI();
+        }
+
+        function updateAuthUI() {
+            const loggedOut = document.getElementById('auth-logged-out');
+            const loggedIn = document.getElementById('auth-logged-in');
+            if (currentUser) {
+                loggedOut.style.display = 'none';
+                loggedIn.style.display = 'flex';
+                document.getElementById('auth-username').innerText = '✦ ' + (currentUsername || '教友');
+            } else {
+                loggedOut.style.display = 'flex';
+                loggedIn.style.display = 'none';
+            }
+        }
+
+        // ============ Auth 弹窗 ============
+        function openModal(tab) {
+            document.getElementById('auth-modal').style.display = 'block';
+            switchTab(tab);
+        }
+        function closeModal() {
+            document.getElementById('auth-modal').style.display = 'none';
+            document.getElementById('login-err').innerText = '';
+            document.getElementById('register-err').innerText = '';
+        }
+        function switchTab(tab) {
+            document.getElementById('form-login').style.display = tab === 'login' ? 'flex' : 'none';
+            document.getElementById('form-register').style.display = tab === 'register' ? 'flex' : 'none';
+            document.getElementById('tab-login').classList.toggle('active', tab === 'login');
+            document.getElementById('tab-register').classList.toggle('active', tab === 'register');
+        }
+
+        // ============ 注册 ============
+        async function signUp() {
+            const username = document.getElementById('reg-username').value.trim();
+            const email = document.getElementById('reg-email').value.trim();
+            const password = document.getElementById('reg-password').value;
+            const errEl = document.getElementById('register-err');
+
+            if (!username) { errEl.innerText = '请填写昵称'; return; }
+            if (!email) { errEl.innerText = '请填写邮箱'; return; }
+            if (password.length < 6) { errEl.innerText = '密码至少6位'; return; }
+
+            errEl.innerText = '';
+            const { error } = await _supabase.auth.signUp({
+                email, password,
+                options: { data: { username } }
+            });
+
+            if (error) {
+                errEl.innerText = error.message;
+            } else {
+                errEl.style.color = 'green';
+                errEl.innerText = '注册成功！请查收验证邮件后登录。';
+                setTimeout(() => { errEl.style.color = ''; switchTab('login'); }, 2500);
+            }
+        }
+
+        // ============ 登录 ============
+        async function signIn() {
+            const email = document.getElementById('login-email').value.trim();
+            const password = document.getElementById('login-password').value;
+            const errEl = document.getElementById('login-err');
+
+            if (!email || !password) { errEl.innerText = '请填写邮箱和密码'; return; }
+            errEl.innerText = '';
+
+            const { error } = await _supabase.auth.signInWithPassword({ email, password });
+            if (error) {
+                errEl.innerText = '邮箱或密码错误';
+            } else {
+                closeModal();
+            }
+        }
+
+        // ============ Google 登录 ============
+        async function signInWithGoogle() {
+            await _supabase.auth.signInWithOAuth({
+                provider: 'google',
+                options: { redirectTo: window.location.origin }
+            });
+        }
+
+        // ============ 退出 ============
+        async function signOut() {
+            await _supabase.auth.signOut();
+        }
+
+        // ============ 补填昵称（Google 用户） ============
+        async function saveNickname() {
+            const username = document.getElementById('nickname-input').value.trim();
+            const errEl = document.getElementById('nickname-err');
+            if (!username) { errEl.innerText = '昵称不能为空'; return; }
+
+            const { error } = await _supabase.auth.updateUser({ data: { username } });
+            if (error) {
+                errEl.innerText = '保存失败，请重试';
+            } else {
+                currentUsername = username;
+                updateAuthUI();
+                document.getElementById('nickname-modal').style.display = 'none';
+            }
+        }
+
+        // ============ 城市数据 ============
         const branches = {
             "W": [
-                { name: "大火箭", desc: "性学" }, { name: "抬头望见北极光", desc: "金融" }, { name: "黄金", desc: "被囚禁的货币之王" }, 
-                { name: "子女教育", desc: "正经" }, { name: "远行三部曲", desc: "改命" }, { name: "龙虾教授", desc: "成功学" }, 
-                { name: "玄学", desc: "玄" }  
+                { name: "大火箭", desc: "性学" }, { name: "抬头望见北极光", desc: "金融" }, { name: "黄金", desc: "被囚禁的货币之王" },
+                { name: "子女教育", desc: "正经" }, { name: "远行三部曲", desc: "改命" }, { name: "龙虾教授", desc: "成功学" },
+                { name: "玄学", desc: "玄" }
             ],
             "NA": [
-                { name: "温哥华", desc: "总舵" }, { name: "多伦多", desc: "极寒部" }, { name: "蒙特利尔", desc: "法语区" }, 
-                { name: "卡尔加里", desc: "石油部" }, { name: "纽约", desc: "宇宙中心" }, { name: "洛杉矶", desc: "天使城" }, 
-                { name: "旧金山", desc: "硅谷" }, { name: "西雅图", desc: "雨城" }, { name: "波士顿", desc: "学院派" }, 
+                { name: "温哥华", desc: "总舵" }, { name: "多伦多", desc: "极寒部" }, { name: "蒙特利尔", desc: "法语区" },
+                { name: "卡尔加里", desc: "石油部" }, { name: "纽约", desc: "宇宙中心" }, { name: "洛杉矶", desc: "天使城" },
+                { name: "旧金山", desc: "硅谷" }, { name: "西雅图", desc: "雨城" }, { name: "波士顿", desc: "学院派" },
                 { name: "芝加哥", desc: "风城" }, { name: "休斯顿", desc: "航天城" }, { name: "拉斯维加斯", desc: "赌部" },
                 { name: "夏威夷", desc: "度假部" }
             ],
             "EU": [
-                { name: "伦敦", desc: "雾都" }, { name: "曼彻斯特", desc: "工业部" }, { name: "巴黎", desc: "老佛爷" }, 
+                { name: "伦敦", desc: "雾都" }, { name: "曼彻斯特", desc: "工业部" }, { name: "巴黎", desc: "老佛爷" },
                 { name: "柏林", desc: "电音部" }, { name: "法兰克福", desc: "金融部" }, { name: "慕尼黑", desc: "啤酒部" },
-                { name: "阿姆斯特丹", desc: "红灯区" }, { name: "米兰", desc: "时尚部" }, { name: "巴塞罗那", desc: "高迪部" }, 
+                { name: "阿姆斯特丹", desc: "红灯区" }, { name: "米兰", desc: "时尚部" }, { name: "巴塞罗那", desc: "高迪部" },
                 { name: "马德里", desc: "斗牛部" }, { name: "苏黎世", desc: "金库" }, { name: "里斯本", desc: "蛋挞部" }
             ],
             "AU_NZ": [
-                { name: "悉尼", desc: "歌剧院" }, { name: "墨尔本", desc: "咖啡部" }, { name: "布里斯班", desc: "阳光部" }, 
-                { name: "珀斯", desc: "孤独部" }, { name: "阿德莱德", desc: "红酒部" }, { name: "奥克兰", desc: "帆船部" }, 
+                { name: "悉尼", desc: "歌剧院" }, { name: "墨尔本", desc: "咖啡部" }, { name: "布里斯班", desc: "阳光部" },
+                { name: "珀斯", desc: "孤独部" }, { name: "阿德莱德", desc: "红酒部" }, { name: "奥克兰", desc: "帆船部" },
                 { name: "基督城", desc: "花园部" }, { name: "惠灵顿", desc: "风都" }
             ],
             "ASIA": [
-                { name: "东京", desc: "案内人" }, { name: "大阪", desc: "关西" }, { name: "名古屋", desc: "中京" }, 
-                { name: "首尔", desc: "整容部" }, { name: "新加坡", desc: "坡县" }, { name: "曼谷", desc: "享乐部" }, 
-                { name: "清迈", desc: "养老部" }, { name: "普吉岛", desc: "潜水部" }, { name: "吉隆坡", desc: "双塔" }, 
+                { name: "东京", desc: "案内人" }, { name: "大阪", desc: "关西" }, { name: "名古屋", desc: "中京" },
+                { name: "首尔", desc: "整容部" }, { name: "新加坡", desc: "坡县" }, { name: "曼谷", desc: "享乐部" },
+                { name: "清迈", desc: "养老部" }, { name: "普吉岛", desc: "潜水部" }, { name: "吉隆坡", desc: "双塔" },
                 { name: "迪拜", desc: "土豪部" }
             ],
             "SA_AF": [
@@ -437,17 +780,12 @@
             ]
         };
 
-        let currentCity = "";
-        let replyToId = null; // 当前回复的父ID
-
-        // === 切换大洲 ===
+        // ============ 切换大洲 ============
         function showContinent(region) {
             document.querySelectorAll('.tab-btn').forEach(btn => btn.classList.remove('active'));
             event.target.classList.add('active');
-
             const cityContainer = document.getElementById('city-list');
             cityContainer.innerHTML = "";
-
             branches[region].forEach(city => {
                 const div = document.createElement('div');
                 div.className = 'branch-card';
@@ -455,11 +793,10 @@
                 div.innerHTML = `<h3>${city.name}</h3><p>${city.desc}</p>`;
                 cityContainer.appendChild(div);
             });
-            
             closeBoard();
         }
 
-        // === 打开留言板 ===
+        // ============ 留言板 ============
         async function openBoard(cityName) {
             currentCity = cityName;
             cancelReply();
@@ -467,11 +804,9 @@
             document.getElementById('supabase-board').style.display = 'block';
             document.getElementById('msg-container').innerHTML = '<p style="text-align: center; color: #ccc;">正在连接至服务器...</p>';
             document.getElementById('supabase-board').scrollIntoView({behavior: "smooth"});
-
             fetchMessages();
         }
 
-        // === 拉取并渲染消息 (含回复逻辑) ===
         async function fetchMessages() {
             const { data, error } = await _supabase
                 .from('messages')
@@ -480,7 +815,7 @@
                 .order('created_at', { ascending: true });
 
             const container = document.getElementById('msg-container');
-            container.innerHTML = ""; 
+            container.innerHTML = "";
 
             if (error) {
                 container.innerHTML = '<p style="color:red; text-align:center;">无法连接至数据库。</p>';
@@ -490,16 +825,8 @@
             if (!data || data.length === 0) {
                 container.innerHTML = '<p style="text-align: center; color: #ccc;">此处尚无声音，成为第一个传音者吧。</p>';
             } else {
-                // 渲染逻辑：先渲染主楼，再在主楼下面渲染回复
-                const rootMap = {}; // 存储所有消息
-                
-                // 1. 先把所有消息存起来
-                data.forEach(msg => {
-                    msg.children = [];
-                    rootMap[msg.id] = msg;
-                });
-
-                // 2. 组装父子关系
+                const rootMap = {};
+                data.forEach(msg => { msg.children = []; rootMap[msg.id] = msg; });
                 const rootMessages = [];
                 data.forEach(msg => {
                     if (msg.parent_id && rootMap[msg.parent_id]) {
@@ -508,34 +835,26 @@
                         rootMessages.push(msg);
                     }
                 });
-
-                // 3. 渲染 DOM
                 rootMessages.forEach(msg => {
                     container.appendChild(createMessageElement(msg, false));
-                    // 渲染子回复
-                    if (msg.children.length > 0) {
-                        msg.children.forEach(child => {
-                            container.appendChild(createMessageElement(child, true));
-                        });
-                    }
+                    msg.children.forEach(child => container.appendChild(createMessageElement(child, true)));
                 });
-
                 container.scrollTop = container.scrollHeight;
             }
         }
 
-        // 创建消息 DOM
         function createMessageElement(msg, isReply) {
             const div = document.createElement('div');
             div.className = isReply ? 'msg-item reply' : 'msg-item';
             const date = new Date(msg.created_at).toLocaleString();
-            
-            // 喜欢数处理
-            const likes = msg.likes ? msg.likes : 0;
+            const likes = msg.likes || 0;
+            const authorName = msg.username || '匿名教友';
+            const isNamed = !!msg.username;
+            const prefix = isReply ? '↳ ' : '';
 
             div.innerHTML = `
                 <div class="msg-meta">
-                    <span>${isReply ? '↳ 回复' : '匿名教友'} • ${date}</span>
+                    <span>${prefix}<span class="msg-author ${isNamed ? 'named' : ''}">${escapeHtml(authorName)}</span> • ${date}</span>
                     <span>#${msg.id}</span>
                 </div>
                 <div class="msg-content">${escapeHtml(msg.content)}</div>
@@ -543,28 +862,21 @@
                     <span class="act-btn" onclick="likeMessage(${msg.id}, ${likes}, this)">
                         ❤️ <span class="like-count">${likes}</span>
                     </span>
-                    <span class="act-btn" onclick="prepareReply(${msg.id})">
-                        💬 回复
-                    </span>
+                    <span class="act-btn" onclick="prepareReply(${msg.id})">💬 回复</span>
                 </div>
             `;
             return div;
         }
 
-        // === 点赞功能 ===
         async function likeMessage(id, currentLikes, btn) {
-            // 视觉优化：立即+1
             const countSpan = btn.querySelector('.like-count');
             const newLikes = currentLikes + 1;
             countSpan.innerText = newLikes;
             btn.classList.add('liked');
-            btn.onclick = null; // 防止连点
-
-            // 数据库更新
+            btn.onclick = null;
             await _supabase.from('messages').update({ likes: newLikes }).eq('id', id);
         }
 
-        // === 准备回复 ===
         function prepareReply(id) {
             replyToId = id;
             document.getElementById('reply-indicator').style.display = 'block';
@@ -576,37 +888,35 @@
         function cancelReply() {
             replyToId = null;
             document.getElementById('reply-indicator').style.display = 'none';
-            document.getElementById('msg-input').placeholder = "匿名留言：有靠谱地接吗？/ 曝光骗子...";
+            document.getElementById('msg-input').placeholder = "匿名留言...";
         }
 
-        // === 发送留言 ===
         async function postMessage() {
             const input = document.getElementById('msg-input');
             const btn = document.getElementById('send-btn');
             const text = input.value.trim();
-            
             if (!text) return;
 
             btn.disabled = true;
             btn.innerText = "发送中...";
 
-            const payload = { 
-                city: currentCity, 
+            const payload = {
+                city: currentCity,
                 content: text,
-                parent_id: replyToId // 带上父ID
+                parent_id: replyToId,
+                user_id: currentUser ? currentUser.id : null,
+                username: currentUser ? currentUsername : null
             };
 
             const { error } = await _supabase.from('messages').insert(payload);
-
             if (error) {
                 alert("发送失败：" + error.message);
             } else {
                 input.value = "";
                 cancelReply();
-                // 重新拉取列表以显示新消息
                 await fetchMessages();
             }
-            
+
             btn.disabled = false;
             btn.innerText = "发送";
         }
@@ -620,15 +930,9 @@
         }
 
         window.onload = function() {
+            initAuth();
             showContinent('NA');
         };
     </script>
 </body>
 </html>
-
-
-
-
-
-
-
