@@ -67,7 +67,9 @@
             border-radius: 2px;
             backdrop-filter: blur(4px);
             border: 1px solid #ddd;
+            cursor: pointer;
         }
+        #auth-username:hover { border-color: var(--warm-gold); color: var(--warm-gold); }
 
         /* --- Auth 弹窗 --- */
         #auth-modal {
@@ -454,7 +456,7 @@
             <button class="auth-bar-btn solid" onclick="openModal('register')">注册</button>
         </div>
         <div id="auth-logged-in" style="display:none;align-items:center;gap:8px;">
-            <span id="auth-username"></span>
+            <span id="auth-username" onclick="openNicknameModal()" title="点击修改昵称"></span>
             <button class="auth-bar-btn" onclick="signOut()">退出</button>
         </div>
     </div>
@@ -510,16 +512,17 @@
         </div>
     </div>
 
-    <!-- Google 登录后补填昵称弹窗 -->
+    <!-- 设置/修改昵称弹窗 -->
     <div id="nickname-modal">
-        <div class="modal-overlay"></div>
+        <div class="modal-overlay" onclick="closeNicknameModal()"></div>
         <div class="modal-box" style="text-align:center;">
-            <p style="font-size:1.05rem;font-weight:bold;margin-bottom:6px;">设置你的昵称</p>
+            <button class="modal-close" onclick="closeNicknameModal()">✕</button>
+            <p style="font-size:1.05rem;font-weight:bold;margin-bottom:6px;" id="nickname-modal-title">设置你的昵称</p>
             <p style="font-size:0.85rem;color:#888;margin-bottom:18px;">此昵称将显示在你的留言中</p>
             <div class="auth-form">
                 <input id="nickname-input" type="text" placeholder="昵称（最多20字）" maxlength="20">
                 <div class="auth-err" id="nickname-err"></div>
-                <button class="auth-submit" onclick="saveNickname()">确认</button>
+                <button class="auth-submit" onclick="saveNickname()">保存</button>
             </div>
         </div>
     </div>
@@ -727,7 +730,18 @@
             await _supabase.auth.signOut();
         }
 
-        // ============ 补填昵称（Google 用户） ============
+        // ============ 设置/修改昵称 ============
+        function openNicknameModal() {
+            document.getElementById('nickname-modal-title').innerText = '修改昵称';
+            document.getElementById('nickname-input').value = currentUsername || '';
+            document.getElementById('nickname-err').innerText = '';
+            document.getElementById('nickname-modal').style.display = 'block';
+        }
+
+        function closeNicknameModal() {
+            document.getElementById('nickname-modal').style.display = 'none';
+        }
+
         async function saveNickname() {
             const username = document.getElementById('nickname-input').value.trim();
             const errEl = document.getElementById('nickname-err');
@@ -739,7 +753,7 @@
             } else {
                 currentUsername = username;
                 updateAuthUI();
-                document.getElementById('nickname-modal').style.display = 'none';
+                closeNicknameModal();
             }
         }
 
